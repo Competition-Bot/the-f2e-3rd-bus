@@ -1,11 +1,9 @@
 import Home from '../pages/Home';
 import News from '../pages/News';
-import NewsDetail from '../components/News/NewDetail';
+import NewsDetail from '../pages/NewDetail';
 import BusSearch from '../pages/BusSearch';
 import RouteSearch from '../pages/RouteSearch';
 import { renderRoutes } from "react-router-config";
-import { Redirect } from 'react-router';
-const num = 1;
 
 export const routes = [
   {

@@ -1,5 +1,5 @@
 export default function NewsDetail(){
     return(
-        <div>最新消息item</div>
+        <div>最新消息</div>
     )
 }

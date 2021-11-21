@@ -1,26 +1,26 @@
 import {
-    SET_ROUTES,
-    SET_REALTIME_CITY_All_ROUTES,
-    SET_REALTIME_SINGLE_ROUTE,
-    SET_CITY_All_ROUTES
-}from '../utils/constants'
+    SET_CITY,
+    SET_ROUTE_RESULT
+} from '../utils/actionType/BusActionType'
 
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 
 const initialState = {
-    city : "Taipei",
-    cityRoutes : {}
+    city: "Taipei"
 }
 
-export const reducer = (state = initialState, action ) => {
-    switch(action.type){
-        case SET_CITY_All_ROUTES :
-            state = {
-                city : action.payload.city,
-                cityRoutes: action.payload.cityRoutes
+export const BuseReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case SET_CITY:
+
+            return {
+                city: action.payload.city,
             }
-            return{
-                state
+        case SET_ROUTE_RESULT:
+            return {
+                routeName: action.payload.routename,
+                goRoute: action.payload.goRoute,
+                backRoute: action.payload.backRoute
             }
         default:
             return state
@@ -28,7 +28,7 @@ export const reducer = (state = initialState, action ) => {
 }
 
 const reducerApp = combineReducers({
-    reducer
-  })
+    BuseReducer
+})
 
 export default reducerApp;

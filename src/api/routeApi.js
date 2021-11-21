@@ -24,16 +24,16 @@ export const getRouteResult = async (cityName) => {
   }
 };
 
-export const getRealTimeRoute = async(city,routeName,search) => {
+//$filter=RouteName/Zh_tw eq '${routeName}'
+export const getEstimatedTimeOfRoute = async(city,routeName) => {
   try{
-    let url = "";
-    if(!search){
-      url = `${baseUrl}/EstimatedTimeOfArrival/City/${city}/${routeName}?$filter=contains(RouteName/Zh_te,'${search}')&$format=JSON`;
-    }else{
-      url = `${baseUrl}/EstimatedTimeOfArrival/City/${city}/${routeName}?$format=JSON`;
-    }
+    const url = `${baseUrl}/EstimatedTimeOfArrival/City/${city}/${routeName}?$filter=RouteName/Zh_tw eq '${routeName}'&$orderby=StopSequence,Direction&$format=JSON`;
     let result = await axios.get(url);
-    console.log(result)
+    let routedata = {}
+    result.data.sort(function(a,b){
+      return a.Direction - b.Direction
+    })
+    console.log(result.data)
     return result.data;
     
   }catch(err){
@@ -51,11 +51,10 @@ export const getCityAllRoute = async(city) => {
       routedata = {
         RouteName:item.RouteName.Zh_tw,
         RouteID:item.RouteID,
-        ZoneDescription:item.FareBufferZoneDescriptionZh
+        ZoneDescription:item.FareBufferZoneDescriptionZh,
       }
       data.push(routedata)
     })
-    console.log(data)
     return data;
     
   }catch(err){

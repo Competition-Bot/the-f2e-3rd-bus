@@ -1,9 +1,9 @@
 import {
-    SET_ROUTES,
+    SET_ROUTE_RESULT,
     SET_REALTIME_CITY_All_ROUTES,
     SET_REALTIME_SINGLE_ROUTE,
-    SET_CITY_All_ROUTES
-} from '../utils/constants'
+    SET_CITY
+} from '../utils/actionType/BusActionType'
 
 
 export function SetRealtimeCityAllRoute(city, data) {
@@ -22,14 +22,24 @@ export function SetRealtimeSingleRoute(routeName) {
     }
 }
 
-export function setCityAllRoute(city, data) {
-    console.log(data)
+export function setCity(city) {
+
     return {
-        type: SET_CITY_All_ROUTES,
+        type: SET_CITY,
         payload: {
-            city: city,
-            cityRoutes: data
+            city: city
         }
 
     }
+}
+export function setRouteResult(routename,goRoute,backRoute) {
+    return {
+        type: SET_ROUTE_RESULT,
+        payload: {
+            routeName: routename,
+            goRoute:goRoute,
+            backRoute:backRoute
+        }
+    }
+
 }

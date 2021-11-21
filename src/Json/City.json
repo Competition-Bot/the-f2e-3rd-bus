@@ -8,7 +8,11 @@
         "value": "Taipei"
     },
     {
-        "value": "Taipei",
+        "label": "新北市",
+        "value": "NewTaipei"
+    },
+    {
+        "value": "Taoyuan",
         "label": "桃園市"
         
     },

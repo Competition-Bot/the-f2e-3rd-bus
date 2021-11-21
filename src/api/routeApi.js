@@ -19,12 +19,13 @@ export const getEstimatedTimeOfRoute = async(city,routeName) => {
 }
 
 export const getCityAllRoute = async(city) => {
-  let data = []
   try{
+    let data = []
+    let routedata = {}
     let url = `${baseUrl}/Route/City/${city}?$format=JSON`;
     let result = await axios.get(url);
-    let routedata = {}
-    result.data.map((item)=>{
+    
+    result.data.forEach((item)=>{
       routedata = {
         RouteName:item.RouteName.Zh_tw,
         RouteID:item.RouteID,

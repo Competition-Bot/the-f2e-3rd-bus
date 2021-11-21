@@ -1,11 +1,5 @@
-const Home = () => {
-    return (
-        <div>
-            Home
-        </div>
-    )
+function Home() {
+  return <div>首頁</div>;
 }
-
-
 
 export default Home;

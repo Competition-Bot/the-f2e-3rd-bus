@@ -1,19 +1,44 @@
 import "./App.css";
-import { Provider } from "react-redux"
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 //import ScrollToTop from "./components/ScrollToTop";
-import { createStore } from 'redux';
-import reducerApp from "./reducers";
-import routes from './utils/routes';
-import Header from './components/Header';
-let store = createStore(reducerApp)
+
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import News from "./pages/News";
+import NewsDetail from "./pages/NewsDetail";
+import Breadcrumb from "./components/BreadCrumb";
+import BusSearch from "./pages/BusSearch";
+import PlanSearch from "./pages/PlanSearch";
 
 function App() {
   return (
-    <Provider store={store}>
+    <BrowserRouter>
       <Header />
-      {routes}
-    </Provider>
-
+      <Switch>
+        <Route exact path="/">
+          <Home />
+          <Footer />
+        </Route>
+        <Redirect exact from="/news" to="/news/1" />
+        <Route path="/news/:page">
+          <Breadcrumb />
+          <News />
+          <Footer />
+        </Route>
+        <Route path="/news/detail/:newsid">
+          <Breadcrumb />
+          <NewsDetail />
+          <Footer />
+        </Route>
+        <Route path="/bussearch">
+          <BusSearch />
+        </Route>
+        <Route path="/plansearch">
+          <PlanSearch />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 

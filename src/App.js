@@ -1,11 +1,19 @@
 import "./App.css";
-
-import ScrollToTop from "./components/ScrollToTop";
+import { Provider } from "react-redux"
+//import ScrollToTop from "./components/ScrollToTop";
+import { createStore } from 'redux';
+import reducerApp from "./reducers";
+import routes from './utils/routes';
+import Header from './components/Header';
+let store = createStore(reducerApp)
 
 function App() {
   return (
-    <div className="App">
-    </div>
+    <Provider store={store}>
+      <Header />
+      {routes}
+    </Provider>
+
   );
 }
 

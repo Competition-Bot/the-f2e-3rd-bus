@@ -1,51 +1,82 @@
-import Home from '../pages/Home';
-import News from '../pages/News';
-import NewsDetail from '../pages/NewDetail';
-import BusSearch from '../pages/BusSearch';
-import RouteSearch from '../pages/RouteSearch';
-import { renderRoutes } from "react-router-config";
-
 export const routes = [
   {
-    path: '/',
-    component: Home,
+    name: "Home",
+    path: "/",
     exact: true,
-    breadcrumb: 'Home'
+    breadcrumb: "Home",
   },
   {
-    path: '/news/:page',
-    component: News,
+    name: "News",
+    path: "/news/:page",
     exact: true,
-    breadcrumb: 'News',
+    breadcrumb: "News",
+  },
+  {
+    name: "NewsDetail",
+    path: "/news/detail/:newsid",
+    exact: true,
+    breadcrumb: "NewsDetail",
+  },
+  {
+    path: "/bussearch",
+    breadcrumb: "BusSearch",
+    sidebarRoutes: [
+      {
+        name:"BusSearchBar",
+        path: "/bussearch",
+        exact: true,
+        routes:[
+          {
+            name:"RouteSearch",
+            path: "/bussearch/route",
+            exact: true,
+          },
+          {
+            name:"StopSearch",
+            path: "/bussearch/stop",
+            exact: true,
+          },
+        ]
+      },
+      {
+        name:"RouteResultInfo",
+        path: "/bussearch/route/:routename",
+        exact: true,
+      },
+      {
+        name:"RouteResultFare",
+        path: "/bussearch/route/:routename/detail",
+        exact: true,
+      },
+    ],
+    mapRoutes: [
+      {
+        name:"RouteMap",
+        path: "/bussearch/route",
+        exact: false,
+      },
+      {
+        name:"StopMap",
+        path: "/bussearch/stop",
+        exact: false,
+      },
+    ],
+  },
+  {
+    name: "PlanSearch",
+    path: "/plansearch",
+    exact: true,
     routes: [
       {
-        path: '/news/detail/:newsid',
-        component: NewsDetail,
+        name:"PlanResult",
+        path: "/plansearch/result",
         exact: true,
-        breadcrumb: 'Newsid'
       },
-    ]
+      {
+        name:"PlanDetail",
+        path: "/plansearch/detail",
+        exact: true,
+      },
+    ],
   },
-  {
-    path: '/bussearch',
-    component: BusSearch,
-    exact: true,
-    breadcrumb: 'BusSearch',
-  },
-  {
-    path: '/bussearch/route/:routename',
-    component: RouteSearch,
-    exact: true,
-    breadcrumb: 'RouteSearch'
-  },
-
-
-
-
 ];
-
-export default (
-  <div>
-    {renderRoutes(routes)}
-  </div>
-)

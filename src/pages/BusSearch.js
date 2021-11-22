@@ -1,4 +1,4 @@
-import { Switch, Route } from "react-router";
+import { Switch, Route,Redirect } from "react-router";
 import BusSearchBar from "../components/BusSearch/BusSearchBar";
 import RouteResultInfo from "../components/BusSearch/RouteResultInfo";
 import RouteResultFare from "../components/BusSearch/RouteResultFare";
@@ -10,7 +10,8 @@ function BusSearch() {
   return (
     <div>
       <Switch>
-        <Route exact path="/bussearch">
+        <Redirect exact from="/bussearch" to="/bussearch/route" />
+        <Route exact path="/bussearch/:type">
           <BusSearchBar />
         </Route>
         <Route exact path="/bussearch/route/:routename">

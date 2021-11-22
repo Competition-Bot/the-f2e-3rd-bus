@@ -7,7 +7,6 @@ function BusSearchBar() {
     <div>
       <div>找路線/找站牌</div>
       <Switch>
-        <Redirect exact from="/bussearch" to="/bussearch/route" />
         <Route exact path="/bussearch/route">
           <RouteSearch />
         </Route>

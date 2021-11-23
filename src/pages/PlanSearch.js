@@ -8,6 +8,8 @@ function PlanSearch() {
   return (
     <div>
       <div>路線規劃</div>
+      <div className="line"></div>
+      <a className="btn">查詢</a>
       <Switch>
         <Route exact path="/plansearch">
           <PlanSearchBar />

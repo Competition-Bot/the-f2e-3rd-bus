@@ -2,27 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap");
 
 body {
   margin: 0;
   font-size: 16px;
-  font-family: 'Noto Sans TC', sans-serif;
+  font-family: "Noto Sans TC", sans-serif;
   letter-spacing: 0.03em;
 }
 
 @layer base {
-  * {
-    @apply text-black
+  body {
+    @apply text-black;
   }
   h1 {
     /* logo title */
-    @apply text-blue-400 font-bold
+    @apply text-blue-400 font-bold;
+  }
+  a {
+    @apply cursor-pointer;
   }
 }
 
 @layer components {
   .btn {
-    @apply bg-yellow-400 text-white font-medium
+    @apply bg-yellow-400 rounded-full text-white font-medium;
+    @apply py-2 px-5 w-max inline-block;
+  }
+  .line {
+    @apply w-7 border-b-2 border-dashed border-blue-400;
   }
 }

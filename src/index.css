@@ -19,8 +19,15 @@ body {
     /* logo title */
     @apply text-blue-400 font-bold;
   }
+  h2 {
+    @apply font-medium text-3xl tracking-wide;
+  }
   a {
-    @apply cursor-pointer;
+    @apply cursor-pointer block;
+  }
+  .content-full {
+    height: calc(100vh - theme("height.header"));
+    min-height: 600px;
   }
 }
 
@@ -29,7 +36,38 @@ body {
     @apply bg-yellow-400 rounded-full text-white font-medium;
     @apply py-2 px-5 w-max inline-block;
   }
-  .line {
-    @apply w-7 border-b-2 border-dashed border-blue-400;
+  .tab-line {
+    @apply text-white py-2 font-medium w-max;
+  }
+  .tab-line-active {
+    @apply py-2 w-max font-medium text-yellow-400 border-b border-yellow-400;
+  }
+  /* searchbar */
+  .step-circle {
+    @apply w-8 h-8 rounded-full bg-blue-300 text-white flex items-center justify-center relative;
+  }
+  .step-circle:after {
+    content: "";
+    @apply border-r-2 border-blue-300 absolute h-12;
+    @apply top-12;
+  }
+  .step-circle-active:after {
+    @apply border-blue-400;
+  }
+}
+
+@variants group-hover, hover, focus {
+  .tab-line-hover {
+    @apply py-2 w-max font-medium text-yellow-400 border-b border-yellow-400;
+  }
+  /* pseudo solution */
+  .content {
+    content: ".";
+  }
+}
+
+@layer utilities {
+  .max-width-465 {
+    max-width: 465px;
   }
 }

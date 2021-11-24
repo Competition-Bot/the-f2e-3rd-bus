@@ -44,14 +44,37 @@ const BusSearchBar = ({ route }) => {
   }
 
   return (
-    <div>
-      <Select options={AllCity} onChange={_handleCitySelected} />
-      <Select options={routesData} onChange={_handleRouteSelected} />
-      {_routeName === "" ? (
-        <button>你什麼都還沒搜尋</button>
-      ) : (
-        <Link to={`/bussearch/route/${_routeName}`}>查詢</Link>
-      )}
+    // <div>
+    //   <Select options={AllCity} onChange={_handleCitySelected} />
+    //   <Select options={routesData} onChange={_handleRouteSelected} />
+    //   {_routeName === "" ? (
+    //     <button>你什麼都還沒搜尋</button>
+    //   ) : (
+    //     <Link to={`/bussearch/route/${_routeName}`}>查詢</Link>
+    //   )}
+    // </div>
+    <div className="mt-4 bg-white h-full shadow-card pt-8 grid auto-rows-max items-start justify-center gap-6">
+      <div className="grid grid-rows-2 justify-start gap-x-9 gap-y-4 items-center">
+        <div className="step-circle bg-blue-400 step-circle-active">
+          1
+        </div>
+        <div className="text-blue-400 font-medium">選擇縣市</div>
+        <Select
+          className="col-start-2 w-36"
+          options={AllCity}
+          onChange={_handleCitySelected}
+        />
+      </div>
+      <div className="grid grid-rows-2 justify-start gap-x-9 gap-y-4 items-center">
+        <div className="step-circle">2</div>
+        <div className="text-blue-400 font-medium">輸入公車號碼</div>
+        <Select
+          className="col-start-2 w-60"
+          options={AllCity}
+          onChange={_handleCitySelected}
+        />
+      </div>
+      <a className="btn justify-self-center mt-10">查詢</a>
     </div>
   );
 };

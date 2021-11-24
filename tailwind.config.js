@@ -12,6 +12,9 @@ module.exports = {
       height: {
         header: "70px",
       },
+      letterSpacing: {
+        wide: ".03em",
+      },
       colors: {
         white: "#ffffff",
         black: "#333333",
@@ -40,8 +43,7 @@ module.exports = {
     },
   },
   variants: {
-    extend: {
-    },
+    extend: {},
   },
   plugins: [require("@tailwindcss/forms")],
 };

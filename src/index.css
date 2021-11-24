@@ -53,7 +53,7 @@ body {
 
 @layer components {
   .btn {
-    @apply bg-yellow-400 rounded-full text-white font-medium;
+    @apply bg-yellow-400 rounded-full text-white font-medium shadow-btn;
     @apply py-2 px-5 w-max inline-block;
   }
   .tab-line {

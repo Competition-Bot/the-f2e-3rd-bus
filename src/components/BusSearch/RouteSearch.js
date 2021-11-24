@@ -1,31 +1,33 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { setCity, setRouteResult } from "../../actions/busActions";
+import { setCity, setRouteName, setRouteEstimatedTime, setStopEstimatedTime } from "../../actions/busActions";
 import Select from "react-select";
-import { getCityAllRoute, getEstimatedTimeOfRoute } from "../../api/routeApi";
+import { getCityAllRoute, getEstimatedTimeOfRoute, getRouteAllStop } from "../../api/routeApi";
 import AllCity from "../../Json/City.json";
 
-const BusSearchBar = ({ route }) => {
-  console.log(route);
+const BusSearchBar = () => {
+  let _city = useSelector((state) =>{ 
+    return state.busReducer.city
+  });
   const [routesData, setRoutesData] = useState([]);
   const [_routeName, _setRouteName] = useState("");
   const dispatch = useDispatch();
-  let _citySelected = useSelector((state) => state.busReducer.city);
 
-  function _handleCitySelected(value) {
+  function _handleCitySelected(_cityOption) {
     let options = [];
-    getCityAllRoute(value.value)
+    getCityAllRoute(_cityOption.value)
       .then((data) => {
+
         for (let i = 0; i < data.length; i++) {
           const option = {
-            value: data[i].RouteName,
-            label: data[i].RouteName,
+            value: data[i].routeName,
+            label: data[i].routeName,
           };
 
           options.push(option);
         }
-        dispatch(setCity(value.value));
+        dispatch(setCity(_cityOption.value));
         setRoutesData(options);
       })
       .catch((e) => {
@@ -33,24 +35,37 @@ const BusSearchBar = ({ route }) => {
       });
   }
 
-  function _handleRouteSelected(value) {
-    getEstimatedTimeOfRoute(_citySelected, value.value).then((data) => {
-      const half = Math.ceil(data.length / 2);
-      const goRoute = data.slice(0, half);
-      const backRoute = data.slice(-half);
-      dispatch(setRouteResult(value.value, goRoute, backRoute));
-      _setRouteName(value.value);
-    });
+  function _handleRouteSelected(_routeOption) {
+    _setRouteName(_routeOption.value);
+    dispatch(setRouteName(_routeOption.value))
+    console.log(_city)
   }
+
+  function _getRouteDetail() {
+    console.log(_city)
+    getEstimatedTimeOfRoute(_city, _routeName).then((_routedata) => {
+      dispatch(setRouteEstimatedTime(_routedata.goRoute, _routedata.backRoute, _routedata.goBus, _routedata.backBus));
+    });
+    // getRouteAllStop(_citySelected,_routeName).then((_stopdata)=>{
+    //   dispatch(setStopEstimatedTime(_stopdata.goRoute,_stopdata.backRoute,_stopdata.allBusData))
+    // }) 
+  }
+  function _showcity() {
+    console.log(_city)
+  }
+
 
   return (
     <div>
       <Select options={AllCity} onChange={_handleCitySelected} />
       <Select options={routesData} onChange={_handleRouteSelected} />
       {_routeName === "" ? (
-        <button>你什麼都還沒搜尋</button>
+        <button onClick={_showcity}>你什麼都還沒搜尋</button>
       ) : (
-        <Link to={`/bussearch/route/${_routeName}`}>查詢</Link>
+        <button onClick={_getRouteDetail}>
+          <Link to={`/bussearch/route/${_routeName}`}>查詢</Link>
+        </button>
+
       )}
     </div>
   );

@@ -11,6 +11,26 @@ body {
   letter-spacing: 0.03em;
 }
 
+.bussearch {
+  display: grid;
+  grid-template-rows: min-content 74% auto;
+}
+
+@media (min-width: 768px) {
+  .bussearch {
+    grid-template-rows: min-content 50% auto;
+    grid-template-columns: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bussearch {
+    grid-template-columns: 465px auto;
+    grid-template-rows: min-content auto;
+    grid-auto-flow: column;
+  }
+}
+
 @layer base {
   body {
     @apply text-black;
@@ -54,6 +74,10 @@ body {
   .step-circle-active:after {
     @apply border-blue-400;
   }
+  .line-dropdown {
+    @apply rounded-full w-8 border-white mx-auto bg-white cursor-pointer;
+    border: 1.5px solid white;
+  }
 }
 
 @variants group-hover, hover, focus {
@@ -67,7 +91,7 @@ body {
 }
 
 @layer utilities {
-  .max-width-465 {
-    max-width: 465px;
+  .min-width-465 {
+    min-width: 465px;
   }
 }

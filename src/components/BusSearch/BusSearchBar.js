@@ -4,9 +4,9 @@ import StopSearch from "./StopSearch";
 
 function BusSearchBar() {
   return (
-    <div className="relative h-full">
-      <div className="px-7 absolute w-full h-full">
-        <div className="px-3">
+    <div className="h-full">
+      <div className="lg:px-7 md:px-16 px-3 absolute w-full h-full">
+        <div className="px-5">
           <h2 className="text-white mb-2">公車動態</h2>
           <div className="grid gap-6 grid-flow-col justify-start">
             <NavLink
@@ -34,7 +34,7 @@ function BusSearchBar() {
           </Route>
         </Switch>
       </div>
-      <div className="bg-blue-400 w-full h-44"></div>
+      <div className="bg-blue-400 w-full h-48 -mt-1"></div>
     </div>
   );
 }

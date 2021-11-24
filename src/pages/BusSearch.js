@@ -5,16 +5,30 @@ import RouteResultFare from "../components/BusSearch/RouteResultFare";
 import StopResultInfo from "../components/BusSearch/StopResultInfo";
 import RouteMap from "../components/BusSearch/RouteMap";
 import StopMap from "../components/BusSearch/StopMap";
-import line_arrow from "../assets/icon/line-arrow-white.png";
+import BreadCrumbSearch from "../components/BreadCrumbSearch";
+
+import { useState } from "react";
 
 function BusSearch() {
+  const [showMap, setshowMap] = useState(false);
+
+  const _handleClickDropDown = (value = showMap) => {
+    setshowMap(!value);
+  };
+
   return (
-    <div className="flex">
-      <div className="relative w-2/6 max-width-465 content-full bg-blue-200 overflow-hidden">
-        <div className="grid grid-flow-col gap-3 items-center justify-start bg-blue-400 px-10 pt-5 pb-3">
-          <div className="rounded-full w-4 h-4 bg-yellow-400"></div>
-          <div className="text-white">搜尋</div>
-          <img src={line_arrow} alt="" />
+    <div className="bussearch content-full">
+      <BreadCrumbSearch />
+      <div
+        className={`z-10 relative w-full h-full bg-blue-200 lg:order-none order-2 overflow-hidden lg:row-auto ${
+          !showMap ? "row-span-2" : ""
+        }`}
+      >
+        <div className="bg-blue-400 pt-2 md:pb-4 pb-3 lg:hidden">
+          <div
+            className="line-dropdown"
+            onClick={() => _handleClickDropDown()}
+          ></div>
         </div>
         <Switch>
           <Redirect exact from="/bussearch" to="/bussearch/route" />
@@ -32,7 +46,11 @@ function BusSearch() {
           </Route>
         </Switch>
       </div>
-      <div className="w-4/6 content-full">
+      <div
+        className={`z-0 w-full h-full row-span-2 border border-red-400 lg:block ${
+          !showMap ? "hidden" : ""
+        }`}
+      >
         <Switch>
           <Route path="/bussearch/route">
             <RouteMap />

@@ -53,7 +53,8 @@ const BusSearchBar = ({ route }) => {
     //     <Link to={`/bussearch/route/${_routeName}`}>查詢</Link>
     //   )}
     // </div>
-    <div className="mt-4 bg-white h-full shadow-card pt-8 grid auto-rows-max items-start justify-center gap-6">
+    
+    <div className="mt-4 bg-white h-full shadow-card md:pt-8 pt-6 grid auto-rows-max items-start justify-center gap-6">
       <div className="grid grid-rows-2 justify-start gap-x-9 gap-y-4 items-center">
         <div className="step-circle bg-blue-400 step-circle-active">
           1
@@ -69,7 +70,7 @@ const BusSearchBar = ({ route }) => {
         <div className="step-circle">2</div>
         <div className="text-blue-400 font-medium">輸入公車號碼</div>
         <Select
-          className="col-start-2 w-60"
+          className="col-start-2 md:w-60 w-56"
           options={AllCity}
           onChange={_handleCitySelected}
         />

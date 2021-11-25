@@ -18,7 +18,6 @@ export function setCity(_city) {
 }
 
 export function setRouteInfo(_routeData) {
-    console.log(_routeData)
     return {
         type: SET_ROUTE_Info,
         payload: {

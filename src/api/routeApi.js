@@ -95,6 +95,7 @@ export const getRouteInfo = async (_city,_routeName,_routeUID) => {
 //$filter=RouteName/Zh_tw eq '${routeName}'
 //城市 某路線的預估站到站
 export const getEstimatedTimeOfRoute = async (_city, _routeName, _routeUID) => {
+
   try {
     let _data = {}
     let _stopData = {}
@@ -103,7 +104,6 @@ export const getEstimatedTimeOfRoute = async (_city, _routeName, _routeUID) => {
     let backRoute = []  //返程
     let goBus = []
     let backBus = []
-
     const _url = `${baseUrl}/EstimatedTimeOfArrival/City/${_city}/${_routeName}?$filter=RouteUID eq '${_routeUID}'&$orderby=StopSequence,Direction&$format=JSON`;
     let _result = await axios.get(_url);
 

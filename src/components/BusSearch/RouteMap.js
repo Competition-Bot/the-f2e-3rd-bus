@@ -3,7 +3,7 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import busCard from "../../components/BusSearch/Tooltip"
 
-import { useState,useEffect,useContext } from "react";
+import { useState,useEffect } from "react";
 import { useSelector } from "react-redux";
 import "../BusSearch/RouteMap.css";
 import { divIcon } from "leaflet";
@@ -15,6 +15,10 @@ function RouteMap({ position }, { marker }) {
   let _backStop = useSelector(
     (state) => state.busReducer.backStopEstimatedTime
   );
+  useEffect(() => {
+    console.log(_goStop)
+    console.log(_backStop)
+  }, [_goStop])
 
 
   const [pos, setPosition] = useState(

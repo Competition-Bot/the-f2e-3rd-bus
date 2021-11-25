@@ -13,7 +13,13 @@ function RouteResultInfo() {
             <div className="tab-line text-white absolute right-0">汐止社后 - 景美</div>
           </div>
         </div>
-        <div className="mt-4 bg-white h-full shadow-card md:pt-8 pt-6 grid auto-rows-max items-start justify-center gap-6">
+        <div className="mt-4 pb-28 bg-white h-full shadow-card grid auto-rows-max overflow-scroll">
+          <RouteListItem />
+          <RouteListItem />
+          <RouteListItem />
+          <RouteListItem />
+          <RouteListItem />
+          <RouteListItem />
           <RouteListItem />
           <RouteListItem />
           <RouteListItem />

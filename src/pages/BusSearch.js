@@ -47,7 +47,7 @@ function BusSearch() {
         </Switch>
       </div>
       <div
-        className={`z-0 w-full h-full row-span-2 border border-red-400 lg:block ${
+        className={`z-0 w-full h-full row-span-2 lg:block ${
           !showMap ? "hidden" : ""
         }`}
       >

@@ -1,64 +1,62 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { setCity, setRouteResult } from "../../actions/busActions";
+import { setCity, setRouteInfo } from "../../actions/busActions";
 import Select from "react-select";
-import { getCityAllRoute, getEstimatedTimeOfRoute } from "../../api/routeApi";
+import { getCityAllRoute, getRouteInfo } from "../../api/routeApi";
 import AllCity from "../../Json/City.json";
 
-const BusSearchBar = ({ route }) => {
-  console.log(route);
+const BusSearchBar = () => {
+  let _routeName = useSelector((state) => state.busReducer.routeName);
+  let _routeUID = useSelector((state) => state.busReducer.routeUID);
+  let _city = useSelector((state) => state.busReducer.city);
   const [routesData, setRoutesData] = useState([]);
-  const [_routeName, _setRouteName] = useState("");
   const dispatch = useDispatch();
-  let _citySelected = useSelector((state) => state.busReducer.city);
 
-  function _handleCitySelected(value) {
+  async function _handleCitySelected(_cityOption) {
+    console.log("click");
     let options = [];
-    getCityAllRoute(value.value)
-      .then((data) => {
-        for (let i = 0; i < data.length; i++) {
-          const option = {
-            value: data[i].RouteName,
-            label: data[i].RouteName,
-          };
+    const _allRoute = await getCityAllRoute(_cityOption.value);
 
-          options.push(option);
-        }
-        dispatch(setCity(value.value));
-        setRoutesData(options);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    for (let i = 0; i < _allRoute.length; i++) {
+      const option = {
+        value: _allRoute[i].routeUID,
+        label: _allRoute[i].routeName,
+      };
+
+      options.push(option);
+    }
+    dispatch(setCity(_cityOption.value));
+    setRoutesData(options); //useState儲存下一個select選項
   }
 
-  function _handleRouteSelected(value) {
-    getEstimatedTimeOfRoute(_citySelected, value.value).then((data) => {
-      const half = Math.ceil(data.length / 2);
-      const goRoute = data.slice(0, half);
-      const backRoute = data.slice(-half);
-      dispatch(setRouteResult(value.value, goRoute, backRoute));
-      _setRouteName(value.value);
-    });
+  async function _handleRouteSelected(_routeOption) {
+    const _data = await getRouteInfo(
+      _city,
+      _routeOption.label,
+      _routeOption.value
+    );
+
+    const _routeData = {
+      routeName: _routeOption.label,
+      routeUID: _routeOption.value,
+      destinationStopName: _data[0].destinationStopName,
+      departureStopName: _data[0].departureStopName,
+      trickPrice: _data[0].trickPrice,
+      bufferZone: _data[0].bufferZone,
+    };
+    console.log(_routeData);
+    dispatch(setRouteInfo(_routeData));
+  }
+
+  function _showcity() {
+    console.log(_city);
   }
 
   return (
-    // <div>
-    //   <Select options={AllCity} onChange={_handleCitySelected} />
-    //   <Select options={routesData} onChange={_handleRouteSelected} />
-    //   {_routeName === "" ? (
-    //     <button>你什麼都還沒搜尋</button>
-    //   ) : (
-    //     <Link to={`/bussearch/route/${_routeName}`}>查詢</Link>
-    //   )}
-    // </div>
-    
     <div className="mt-4 bg-white h-full shadow-card md:pt-8 pt-6 grid auto-rows-max items-start justify-center gap-6">
       <div className="grid grid-rows-2 justify-start gap-x-9 gap-y-4 items-center">
-        <div className="step-circle bg-blue-400 step-circle-active">
-          1
-        </div>
+        <div className="step-circle bg-blue-400 step-circle-active">1</div>
         <div className="text-blue-400 font-medium">選擇縣市</div>
         <Select
           className="col-start-2 w-36"
@@ -75,7 +73,12 @@ const BusSearchBar = ({ route }) => {
           onChange={_handleCitySelected}
         />
       </div>
-      <a className="btn justify-self-center mt-10">查詢</a>
+      <Link
+        to={`/bussearch/route/${_routeUID}`}
+        className="btn justify-self-center mt-10"
+      >
+        查詢
+      </Link>
     </div>
   );
 };

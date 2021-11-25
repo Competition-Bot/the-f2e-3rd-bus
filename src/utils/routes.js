@@ -40,12 +40,12 @@ export const routes = [
       },
       {
         name:"RouteResultInfo",
-        path: "/bussearch/route/:routename",
+        path: "/bussearch/route/:routeuid",
         exact: true,
       },
       {
         name:"RouteResultFare",
-        path: "/bussearch/route/:routename/detail",
+        path: "/bussearch/route/:routeuid/detail",
         exact: true,
       },
     ],

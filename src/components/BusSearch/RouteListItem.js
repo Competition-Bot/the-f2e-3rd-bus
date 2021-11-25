@@ -18,8 +18,8 @@ function RouteListItem() {
         </div>
       </div>
       <div className="h-full w-max flex items-center justify-center">
-        <div className="border-l-2 border-blue-300 h-full absolute"></div>
-        <div className="rounded-full w-4 h-4 bg-blue-300"></div>
+        <div className="border-l-2 border-blue-300 h-full absolute z-0"></div>
+        <div className="rounded-full w-4 h-4 bg-blue-400 z-10 shadow-busCircle"></div>
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ function RouteResultFare() {
           <h2 className="text-white mb-2">284</h2>
           <div className="tab-line text-white">汐止社后 - 景美</div>
         </div>
-        <div className="mt-4 pb-28 pt-5 px-6 bg-white h-full shadow-card grid auto-rows-max overflow-scroll">
+        <div className="mt-4 pb-32 pt-5 px-6 bg-white h-full shadow-card grid auto-rows-max overflow-scroll">
           <div className="relative pl-155 pb-4">
             <div className="flex items-center relative mb-2">
               <div className="rounded-full w-4 h-4 bg-blue-400 absolute -left-8"></div>

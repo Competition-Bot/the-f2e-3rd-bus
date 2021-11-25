@@ -71,3 +71,5 @@ function RouteMap({ position }, { marker }) {
     </MapContainer>
   );
 }
+
+export default RouteMap;

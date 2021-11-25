@@ -11,6 +11,8 @@ body {
   letter-spacing: 0.03em;
 }
 
+/* bussearch */
+
 .bussearch {
   display: grid;
   grid-template-rows: min-content 74% auto;
@@ -111,5 +113,11 @@ body {
   }
   .min-width-465 {
     min-width: 465px;
+  }
+  .rotate-180 {
+    transform: rotate(180deg);
+  }
+  .pl-155 {
+    padding-left: 1.55rem;
   }
 }

@@ -34,7 +34,7 @@ function Home() {
             <div className="text-gray-500 hover:text-black">查看更多</div>
           </Link>
         </div>
-        <div class="line"></div>
+        <div className="line"></div>
         <ul>
           <span className="flex items-center justify-between py-4">
             {/* <span className=" text-gray-400 pr-5">2021/11/17</span> */}

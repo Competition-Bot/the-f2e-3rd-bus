@@ -3,11 +3,18 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import "../BusSearch/RouteMap.css";
 import { divIcon } from "leaflet";
 import {iconBlack, iconYellow, iconOrange} from './MarkerIcon';
 
 function RouteMap({ position }, { marker }) {
+  let _city = useSelector((state) => state.busReducer.city);
+  let _goStop = useSelector((state) => state.busReducer.goStopEstimatedTime);
+  let _backStop = useSelector(
+    (state) => state.busReducer.backStopEstimatedTime
+  );
+
   const [pos, setPosition] = useState(
     (position = [25.0246292,121.5424487])
   );

@@ -24,11 +24,14 @@
     margin-bottom: 20px;
     height: 76px;
     border-radius: 5px;
-    width: 98px;
+    width: auto;
 }
 .popup .leaflet-popup-content{
     margin: 0px;
     padding: 8px 16px;
+    min-width: 96px;
+    min-height: 76px;
+    
 }
 
 .popup .leaflet-popup-close-button{
@@ -37,6 +40,7 @@
 .popup .leaflet-popup-tip{
     display: none;
 }
+
 /* .location{
     position: absolute;
     width: 50px;

@@ -31,8 +31,9 @@ const _renderMarker = ({data}) => {
       key={`marker-${data.stationUID}`}
     >
       <Popup className="popup flex" position={data.stopPosition} closeButton={true} >
-        <h2 className="text-white text-base font-semibold w-20">{data.stopName}</h2>
-        <h2 className="flex bg-white text-yellow-400 text-base font-semibold w-15 h-7 justify-center items-center rounded-md mt-1">{data.estimatedTime}</h2>
+        <h2 className="flex text-white text-base font-semibold w-auto justify-center items-center">{data.stopName}</h2>
+        <h2 className="flex bg-white text-yellow-400 text-base font-semibold w-15 h-7 justify-center items-center rounded-md mt-1">{data.estimateTime}</h2>
+       
       </Popup>
     </Marker>
   )
@@ -44,10 +45,7 @@ function RouteMap({ position }, { marker }) {
   let _backStop = useSelector( //第二個
     (state) => state.busReducer.backStopEstimatedTime
   );
-  useEffect(() => {
-    console.log(_goStop)
-    console.log(_backStop)
-  }, [_goStop])
+
 
   // useEffect(() => {
     

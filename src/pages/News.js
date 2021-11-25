@@ -2,10 +2,13 @@ import AllCity from "../Json/City.json";
 import Select from "react-select";
 import { Link } from "react-router-dom";
 
+import Vector_blue from "../assets/img/Vector_blue.png";
+import Vector_blue_left from "../assets/img/Vector_blue_left.png";
+
 
 function News() {
   return (
-    <div className="px-12 py-9 ">
+    <div className="px-12 py-9 h-screen lg:px-48">
       <div className="flex justify-between items-center pb-4">
         <div className="text-3xl font-medium">最新消息</div>
         <Select className="w-32 " options={AllCity} />
@@ -23,7 +26,7 @@ function News() {
             <span className="text-blue-400  w-20 pr-5" >新北</span>
             <span className="pr-5 ">搭乘公車捷運請佩戴口罩，未戴口罩得拒載並處以最高1萬5千元罰鍰</span>
           </span>
-          <img className=" h-3 w-2" src="/img/Vector_blue.png" />
+          <img className=" h-3 w-2" src={Vector_blue} />
         </span>
 
 
@@ -41,7 +44,7 @@ function News() {
                 className="relative inline-flex items-center px-2 py-2  text-sm font-medium text-gray-500 hover:bg-gray-50"
               >
                 <span className="sr-only">Previous</span>
-                <img className=" h-3 w-2" src="/img/Vector_blue_left.png" />
+                <img className=" h-3 w-2" src={Vector_blue_left} />
               </a>
               <a
                 href="#"
@@ -68,7 +71,7 @@ function News() {
                 className="relative inline-flex items-center px-2 py-2 rounded-r-md    text-sm font-medium text-gray-500 hover:bg-gray-50"
               >
                 <span className="sr-only">Next</span>
-                <img className=" h-3 w-2" src="/img/Vector_blue.png" />
+                <img className=" h-3 w-2" src={Vector_blue}/>
               </a>
             </nav>
           </div>

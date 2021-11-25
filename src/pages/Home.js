@@ -2,6 +2,13 @@ import { Container } from "postcss";
 import Select from "react-select";
 import AllCity from "../Json/City.json";
 import { Link } from "react-router-dom";
+import line_blue from "../assets/img/line_blue.png";
+import HomeImage from "../assets/img/HomeImage.png";
+import Vector_blue from "../assets/img/Vector_blue.png";
+
+
+
+
 
 
 function Home() {
@@ -13,7 +20,7 @@ function Home() {
           <div className="text-3xl text-blue-400 font-bold">Take a Bus!<br />查詢公車不再是件麻煩事</div>
           <div className="flex py-7">
             <div className="home_switch_on mr-2">找路線</div>
-            <img className="w-8 h-px mt-6 " src="/img/line_blue.png" />
+            <img className="w-8 h-px mt-6 " src={line_blue} alt="" />
             <div className="home_switch_off ml-2">找站牌</div>
           </div>
           <div className="md:flex">
@@ -23,7 +30,7 @@ function Home() {
           </div>
           <div className=" btn shadow-btn mt-7">查詢</div>
         </div>
-        <div className="pt-14  lg:pt-0  "><img className=" w-176 lg:pl-14 " src="/img/HomeImage.png" /></div>
+        <div className="pt-14  lg:pt-0  "><img className=" w-176 lg:pl-14 " src={HomeImage} /></div>
       </div>
 
       {/* 最新消息列表 */}
@@ -42,7 +49,7 @@ function Home() {
               <span className="text-blue-400  w-20 pr-5" >新北</span>
               <span className="pr-5 ">搭乘公車捷運請佩戴口罩，未戴口罩得拒載並處以最高1萬5千元罰鍰</span>
             </span>
-            <img className=" h-3 w-2" src="/img/Vector_blue.png" />
+            <img className=" h-3 w-2" src={Vector_blue} />
           </span>
 
 

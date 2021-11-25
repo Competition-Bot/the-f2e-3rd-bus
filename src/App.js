@@ -25,7 +25,7 @@ function App() {
         <Route path="/news/:page">
           <Breadcrumb />
           <News />
-          <NewsDetail />
+          <NewsDetail/>
           <Footer />
         </Route>
         <Route exact path="/news/detail/:newsid">

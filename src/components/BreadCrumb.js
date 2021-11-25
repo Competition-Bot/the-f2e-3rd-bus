@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 // }
 
 function Breadcrumb() {
-  return <div>Breadcrumb</div>;
+  return <div>Breadcrumb me</div>;
 }
 
 export default Breadcrumb;

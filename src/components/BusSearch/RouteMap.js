@@ -104,14 +104,14 @@ function RouteMap({ position }, { marker }) {
       />
 
    
-       <MarkerClusterGroup>
+       {/* <MarkerClusterGroup> */}
        {_goStop ?
          _goStop.map((item) => (
            <_renderMarker data={item} />
          ))
          : null
        }
-     </MarkerClusterGroup>
+     {/* </MarkerClusterGroup> */}
 
     </MapContainer>
   );

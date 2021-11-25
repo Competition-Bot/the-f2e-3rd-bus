@@ -1,77 +1,45 @@
-.leaflet-container {
-    height: 500px;
-    width: 100%;
-  }
-.my-icon{
-    height: 50px;
-    width: 50px;;
-    color:yellow;
-}
 .marker-black{
-    background-image: url(../../img/Marker_B.svg);
+   
     background-repeat: no-repeat;
     background-position: center;
     border: 0;
    
 }
 .marker-orange{
-    background-image: url(../../img/Marker_O.svg);
+    background-image: url(../../assets/img/Marker_O.svg);
     background-repeat: no-repeat;
     background-position: center;
     border: 0;
    
 }
 .marker-yellow{
-    background-image: url(../../img/Marker_Y.svg);
+   
     background-repeat: no-repeat;
     background-position: center;
     border: 0;
-   
 }
 
 .popup .leaflet-popup-content-wrapper{
     background: #F9B835;
     margin-bottom: 20px;
     height: 76px;
-    width: 98px;    
+    border-radius: 5px;
+    width: 98px;
 }
+.popup .leaflet-popup-content{
+    margin: 0px;
+    padding: 8px 16px;
+}
+
 .popup .leaflet-popup-close-button{
     display: none;
 }
 .popup .leaflet-popup-tip{
     display: none;
 }
-
-
-.busName{
-    width: 70px;
-    margin-bottom: 20px;
-    
-}
-.busName p{
-    font-size: 15px;
-    color: white;
-    font-weight: 400;
-    font-style: normal;
-    margin-top: -5px;
-  
-}
-.busState{
-    display: flex;
-    margin-top: -15px;
-    
-    width: 61px;
-    height: 27px;
-    background: white;
-    color: #F9B835;
-    border-radius: 5px;
-
-    text-align: center;
-    justify-content: center;
-}
-.busState p{
-    font-size: 15px;
-    margin-top: 3px;
-    color:#F9B835 ;
-    font-weight: 400;
-}
+/* .location{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-repeat: no-repeat;
+} */

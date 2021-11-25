@@ -1,8 +1,8 @@
 import L from "leaflet";
-import black from "../../img/Marker_B.svg";
-import orange from "../../img/Marker_O.svg";
-import yellow from "../../img/Marker_Y.svg";
-import bus from "../../img/Icon_bus.svg";
+import black from "../../assets/img/Marker_B.svg";
+import orange from "../../assets/img/Marker_O.svg";
+import yellow from "../../assets/img/Marker_Y.svg";
+import bus from "../../assets/img/Icon_bus.svg";
 
 export const iconBlack = new L.Icon({
     iconUrl: black,

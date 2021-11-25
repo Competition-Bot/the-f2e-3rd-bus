@@ -2,7 +2,7 @@ function RouteResultFare() {
   return (
     <div className="h-full">
       <div className="lg:px-7 md:px-16 px-3 absolute w-full h-full">
-        <div className="px-5">
+        <div className="px-3">
           <h2 className="text-white mb-2">284</h2>
           <div className="tab-line text-white">汐止社后 - 景美</div>
         </div>

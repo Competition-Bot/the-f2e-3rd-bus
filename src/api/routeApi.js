@@ -17,7 +17,7 @@ export const getRouteAllStop = async (_city, _routeName, _routeUID) => {
 
     let _url = `${baseUrl}/StopOfRoute/City/${_city}/${_routeName}?$filter=RouteUID eq '${_routeUID}'&$format=JSON`;
     const _result = await axios.get(_url);
-
+    
     if (_result) {
       //所有去程站點
       _result.data[0].Stops.forEach(item => {

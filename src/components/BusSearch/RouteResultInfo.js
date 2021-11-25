@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 
 function RouteResultInfo() {
   const _UID = useParams().routeuid;
+  let _routeUID = useSelector((state) => state.busReducer.routeUID);
   let _routeName = useSelector((state) => state.busReducer.routeName);
   let _city = useSelector((state) => state.busReducer.city);
   let _goRoute = useSelector((state) => state.busReducer.goRouteEstimatedTime);
@@ -23,7 +24,7 @@ function RouteResultInfo() {
   useEffect(() => {
     _handleRouteAPI();
     _handleStopAPI();
-  }, [_goRoute]);
+  });
 
   async function _handleRouteAPI() {
     const _estimatedRouteData = await getEstimatedTimeOfRoute(
@@ -44,7 +45,7 @@ function RouteResultInfo() {
   }
 
   async function _handleStopAPI() {
-    const _estimatedStopData = await getRouteAllStop(_city, _routeName, _UID);
+    const _estimatedStopData = await getRouteAllStop(_city, _routeName, _routeUID);
     if (_estimatedStopData && _goRoute) {
       let _goStopData = _estimatedStopData.goRoute;
       let _backStopData = _estimatedStopData.backRoute;
@@ -83,10 +84,10 @@ function RouteResultInfo() {
     <div className="h-full">
       <div className="lg:px-7 md:px-16 px-3 absolute w-full h-full">
         <div className="px-5">
-          <h2 className="text-white mb-2">284</h2>
+          <h2 className="text-white mb-2">{_routeName}</h2>
           <div className="grid gap-6 grid-flow-col justify-start relative">
-            <a className="tab-line tab-line-active">往汐止社后</a>
-            <a className="tab-line hover:tab-line-hover">往景美</a>
+            <a className="tab-line tab-line-active">往{_goStopName}</a>
+            <a className="tab-line hover:tab-line-hover">往{_backStopName}</a>
             <div className="tab-line text-white absolute right-0">
               汐止社后 - 景美
             </div>

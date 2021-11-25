@@ -36,21 +36,16 @@ const BusSearchBar = () => {
       _routeOption.label,
       _routeOption.value
     );
-
+    console.log(_data)
     const _routeData = {
       routeName: _routeOption.label,
       routeUID: _routeOption.value,
-      destinationStopName: _data[0].destinationStopName,
-      departureStopName: _data[0].departureStopName,
-      trickPrice: _data[0].trickPrice,
-      bufferZone: _data[0].bufferZone,
+      destinationStopName: _data.destinationStopName,
+      departureStopName: _data.departureStopName,
+      trickPrice: _data.trickPrice,
+      bufferZone: _data.bufferZone,
     };
-    console.log(_routeData);
     dispatch(setRouteInfo(_routeData));
-  }
-
-  function _showcity() {
-    console.log(_city);
   }
 
   return (
@@ -69,8 +64,8 @@ const BusSearchBar = () => {
         <div className="text-blue-400 font-medium">輸入公車號碼</div>
         <Select
           className="col-start-2 md:w-60 w-56"
-          options={AllCity}
-          onChange={_handleCitySelected}
+          options={routesData}
+          onChange={_handleRouteSelected}
         />
       </div>
       <Link

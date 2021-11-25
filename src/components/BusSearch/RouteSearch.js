@@ -14,7 +14,6 @@ const BusSearchBar = () => {
   const dispatch = useDispatch();
 
   async function _handleCitySelected(_cityOption) {
-    console.log("click");
     let options = [];
     const _allRoute = await getCityAllRoute(_cityOption.value);
 
@@ -36,7 +35,6 @@ const BusSearchBar = () => {
       _routeOption.label,
       _routeOption.value
     );
-    console.log(_data)
     const _routeData = {
       routeName: _routeOption.label,
       routeUID: _routeOption.value,

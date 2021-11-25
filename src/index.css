@@ -11,6 +11,26 @@ body {
   letter-spacing: 0.03em;
 }
 
+.bussearch {
+  display: grid;
+  grid-template-rows: min-content 74% auto;
+}
+
+@media (min-width: 768px) {
+  .bussearch {
+    grid-template-rows: min-content 50% auto;
+    grid-template-columns: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bussearch {
+    grid-template-columns: 465px auto;
+    grid-template-rows: min-content auto;
+    grid-auto-flow: column;
+  }
+}
+
 @layer base {
   body {
     @apply text-black;
@@ -19,28 +39,69 @@ body {
     /* logo title */
     @apply text-blue-400 font-bold;
   }
-  a {
-    @apply cursor-pointer;
+  h2 {
+    @apply font-medium text-3xl tracking-wide;
   }
-
-
+  a {
+    @apply cursor-pointer block;
+  }
+  .content-full {
+    height: calc(100vh - theme("height.header"));
+    min-height: 600px;
+  }
 }
 
 @layer components {
   .btn {
-    @apply bg-yellow-400 rounded-full text-white font-medium;
+    @apply bg-yellow-400 rounded-full text-white font-medium shadow-btn;
     @apply py-2 px-5 w-max inline-block;
   }
 
-  .home_switch_on{
-    @apply bg-blue-400  text-white font-medium py-1.5 px-3.5 w-max inline-block shadow-btn
-  }
-  .home_switch_off{
-    @apply bg-white border border-blue-400 text-blue-400 font-medium py-1.5 px-3.5 w-max inline-block 
+  .line {
+    @apply border-b-2  border-blue-400;
   }
 
-  .line {
-    @apply  border-b-2  border-blue-400;
+  .tab-line {
+    @apply text-white py-2 font-medium w-max;
+  }
+  .tab-line-active {
+    @apply py-2 w-max font-medium text-yellow-400 border-b border-yellow-400;
+  }
+
+  /* home */
+
+  .home_switch_on {
+    @apply bg-blue-400  text-white font-medium py-1.5 px-3.5 w-max inline-block shadow-btn;
+  }
+  .home_switch_off {
+    @apply bg-white border border-blue-400 text-blue-400 font-medium py-1.5 px-3.5 w-max inline-block;
+  }
+
+  /* searchbar */
+  .step-circle {
+    @apply w-8 h-8 rounded-full bg-blue-300 text-white flex items-center justify-center relative;
+  }
+  .step-circle:after {
+    content: "";
+    @apply border-r-2 border-blue-300 absolute h-12;
+    @apply top-12;
+  }
+  .step-circle-active:after {
+    @apply border-blue-400;
+  }
+  .line-dropdown {
+    @apply rounded-full w-8 border-white mx-auto bg-white cursor-pointer;
+    border: 1.5px solid white;
+  }
+}
+
+@variants group-hover, hover, focus {
+  .tab-line-hover {
+    @apply py-2 w-max font-medium text-yellow-400 border-b border-yellow-400;
+  }
+  /* pseudo solution */
+  .content {
+    content: ".";
   }
 }
 
@@ -48,6 +109,7 @@ body {
   .w-176 {
     width: 80rem;
   }
-  
-
+  .min-width-465 {
+    min-width: 465px;
+  }
 }

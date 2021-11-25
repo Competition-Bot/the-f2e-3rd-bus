@@ -94,4 +94,7 @@ body {
   .min-width-465 {
     min-width: 465px;
   }
+  .rotate-180 {
+    transform: rotate(180deg)
+  }
 }

@@ -1,4 +1,5 @@
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import MarkerClusterGroup from "react-leaflet-markercluster";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import busCard from "../../components/BusSearch/Tooltip"
@@ -9,6 +10,33 @@ import "../BusSearch/RouteMap.css";
 import { divIcon } from "leaflet";
 import { iconBlack, iconYellow, iconOrange } from './MarkerIcon';
 import { list } from "purgecss/node_modules/postcss";
+
+const _renderMarker = ({data}) => {
+
+  let icon = iconBlack
+  if (data.estimatedTime == '進站中') {
+    icon = iconOrange
+  }
+  else if (data.estimatedTime == '3分鐘') {
+    icon = iconYellow
+  }
+  else {
+    icon = iconBlack
+  }
+
+  return (
+    <Marker
+      position={data.stopPosition}
+      icon={icon}
+      key={`marker-${data.stationUID}`}
+    >
+      <Popup className="popup flex" position={data.stopPosition} closeButton={true} >
+        <h2 className="text-white text-base font-semibold w-20">{data.stopName}</h2>
+        <h2 className="flex bg-white text-yellow-400 text-base font-semibold w-15 h-7 justify-center items-center rounded-md mt-1">{data.estimatedTime}</h2>
+      </Popup>
+    </Marker>
+  )
+}
 
 function RouteMap({ position }, { marker }) {
   let _city = useSelector((state) => state.busReducer.city); //城市
@@ -21,14 +49,18 @@ function RouteMap({ position }, { marker }) {
     console.log(_backStop)
   }, [_goStop])
 
-  useEffect(()=>{
-    setPosition(mapCenterPos)
-  }),[mapCenterPos]
- 
+  // useEffect(() => {
+    
+  // }, [_city])
+  
+  // useEffect(()=>{
+  //   setPosition(mapCenterPos)
+  // }),[mapCenterPos]
 
-  const [pos, setPosition] = useState(
-    (mapCenterPos)
-  );
+
+  // const [pos, setPosition] = useState(
+  //   (mapCenterPos)
+  // );
   const [mark, setMarker] = useState(
     (marker = [25.0242987, 121.5441439])
   );
@@ -46,40 +78,13 @@ function RouteMap({ position }, { marker }) {
     iconSize: [50, 50],
   });
 
-  const _renderMarker = () => {
-    let lsit =[];
 
-    const state;
-    if (state == '進站中') {
-      icon = iconOrange
-    }
-    else if (state == '3分鐘') {
-      icon = iconYellow
-    }
-    else {
-      icon = icon
-    }
 
-    list.push(
-      <Marker
-        position={position}
-        icon={icon}
-        key={`marker-${item.StationUID}`}
-      >
-        <Popup className="popup flex" position={position} closeButton={true} busName={busname} busState={busstate} >
-        <h2 className="text-white text-base font-semibold w-20">busname</h2>
-        <h2 className="flex bg-white text-yellow-400 text-base font-semibold w-15 h-7 justify-center items-center rounded-md mt-1">busstate</h2>
-        </Popup>
-      </Marker>
-    );
-    return list;
-  }
-
-  function ChangeMap({center}){
+  function ChangeMap({ center }) {
     let map = useMap();
-    if(center !== undefined){
+    if (center !== undefined) {
       map.panTo(center);
-      setPosition(undefined)
+      //setPosition(undefined)
     }
     return null;
   }
@@ -90,27 +95,29 @@ function RouteMap({ position }, { marker }) {
         width: "100%",
         height: "100%",
       }}
-      center={pos}
+      center={[25.0242987, 121.5441439]}
       zoom={15}
       scrollWheelZoom={false}
     >
-      <ChangeMap center={pos}>
+      <ChangeMap center={[25.0242987, 121.5441439]} />
       <TileLayer
         url="https://api.mapbox.com/styles/v1/cindy1029/ckwev8vay0d4g14p9dip5htx5/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiY2luZHkxMDI5IiwiYSI6ImNrd2Vpd3EyNzA1NWQycXJ1OTh2ZWtpaXUifQ.odRRCORGIXPix4oKd1_R5g"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      {/* {_goStop.map((item)=>(
-        
-      ))} */}
-      {/* <Marker position={mark} icon={customMarkerIcono}>
-        <Popup className="popup flex">
-          <h2 className="text-white text-base font-semibold w-20">福德二路</h2>
-          <h2 className="flex bg-white text-yellow-400 text-base font-semibold w-15 h-7 justify-center items-center rounded-md mt-1">進站中</h2>
-        </Popup>
-      </Marker> */}
-      <MarkerClusterGroup>{_renderMarkers()}</MarkerClusterGroup>
+
+   
+       <MarkerClusterGroup>
+       {_goStop ?
+         _goStop.map((item) => (
+           <_renderMarker data={item} />
+         ))
+         : null
+       }
+     </MarkerClusterGroup>
+
     </MapContainer>
   );
 }
 
 export default RouteMap;
+

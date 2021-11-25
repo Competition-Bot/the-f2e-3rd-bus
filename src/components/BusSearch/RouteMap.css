@@ -8,22 +8,25 @@
     color:yellow;
 }
 .marker-black{
-    background-image: url(../../img/Marker_B.png);
+    background-image: url(../../img/Marker_B.svg);
     background-repeat: no-repeat;
     background-position: center;
     border: 0;
+   
 }
 .marker-orange{
-    background-image: url(../../img/Marker_O.png);
+    background-image: url(../../img/Marker_O.svg);
     background-repeat: no-repeat;
     background-position: center;
     border: 0;
+   
 }
 .marker-yellow{
-    background-image: url(../../img/Marker_Y.png);
+    background-image: url(../../img/Marker_Y.svg);
     background-repeat: no-repeat;
     background-position: center;
     border: 0;
+   
 }
 
 .popup .leaflet-popup-content-wrapper{

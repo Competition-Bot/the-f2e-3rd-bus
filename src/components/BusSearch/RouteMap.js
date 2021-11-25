@@ -5,16 +5,16 @@ import L from "leaflet";
 import { useState } from "react";
 import "../BusSearch/RouteMap.css";
 import { divIcon } from "leaflet";
+import {iconBlack, iconYellow, iconOrange} from './MarkerIcon';
 
 function RouteMap({ position }, { marker }) {
   const [pos, setPosition] = useState(
-    (position = [25.024821886429546, 121.54454905058702])
+    (position = [25.0246292,121.5424487])
   );
   const [mark, setMarker] = useState(
-    (marker = [25.024821886429546, 121.54454905058702])
+    (marker = [25.0246292,121.5424487])
   );
 
-  const customMarkerIcon0 = divIcon({ iconSize: [50, 50] });
   const customMarkerIconb = divIcon({
     className: "marker-black",
     iconSize: [50, 50],
@@ -28,14 +28,6 @@ function RouteMap({ position }, { marker }) {
     iconSize: [50, 50],
   });
 
-  const greenIcon = new L.Icon({
-    iconUrl:
-      "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png",
-
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-  });
 
   return (
     <MapContainer
@@ -44,13 +36,13 @@ function RouteMap({ position }, { marker }) {
         height: "100%",
       }}
       center={pos}
-      zoom={18}
+      zoom={15}
       scrollWheelZoom={false}
     >
       <TileLayer
+        url="https://api.mapbox.com/styles/v1/cindy1029/ckweni43705l015prqt6i3ecv/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiY2luZHkxMDI5IiwiYSI6ImNrd2Vpd3EyNzA1NWQycXJ1OTh2ZWtpaXUifQ.odRRCORGIXPix4oKd1_R5g"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+        />
       <Marker position={mark} icon={customMarkerIcono}>
         <Popup className="popup">
           <div className="busName">

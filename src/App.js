@@ -13,6 +13,7 @@ import PlanSearch from "./pages/PlanSearch";
 
 function App() {
   return (
+
     <BrowserRouter>
       <Header />
       <Switch>
@@ -24,9 +25,10 @@ function App() {
         <Route path="/news/:page">
           <Breadcrumb />
           <News />
+          <NewsDetail />
           <Footer />
         </Route>
-        <Route path="/news/detail/:newsid">
+        <Route exact path="/news/detail/:newsid">
           <Breadcrumb />
           <NewsDetail />
           <Footer />
@@ -39,6 +41,7 @@ function App() {
         </Route>
       </Switch>
     </BrowserRouter>
+
   );
 }
 

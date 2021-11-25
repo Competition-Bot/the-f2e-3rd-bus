@@ -1,55 +1,51 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { setCity, setRouteName, setRouteEstimatedTime, setStopEstimatedTime } from "../../actions/busActions";
+import { setCity, setRouteInfo } from "../../actions/busActions";
 import Select from "react-select";
-import { getCityAllRoute, getEstimatedTimeOfRoute, getRouteAllStop } from "../../api/routeApi";
+import { getCityAllRoute, getRouteInfo } from "../../api/routeApi";
 import AllCity from "../../Json/City.json";
 
 const BusSearchBar = () => {
-  let _city = useSelector((state) =>{ 
-    return state.busReducer.city
-  });
+  let _routeName = useSelector((state) => state.busReducer.routeName);
+  let _routeUID = useSelector((state) => state.busReducer.routeUID);
+  let _city = useSelector((state) => state.busReducer.city);
   const [routesData, setRoutesData] = useState([]);
-  const [_routeName, _setRouteName] = useState("");
   const dispatch = useDispatch();
 
-  function _handleCitySelected(_cityOption) {
+  async function _handleCitySelected(_cityOption) {
+    console.log('click')
     let options = [];
-    getCityAllRoute(_cityOption.value)
-      .then((data) => {
+    const _allRoute = await getCityAllRoute(_cityOption.value);
 
-        for (let i = 0; i < data.length; i++) {
-          const option = {
-            value: data[i].routeName,
-            label: data[i].routeName,
-          };
+    for (let i = 0; i < _allRoute.length; i++) {
+      const option = {
+        value: _allRoute[i].routeUID,
+        label: _allRoute[i].routeName,
+      };
 
-          options.push(option);
-        }
-        dispatch(setCity(_cityOption.value));
-        setRoutesData(options);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+      options.push(option);
+    }
+    dispatch(setCity(_cityOption.value));
+    setRoutesData(options); //useState儲存下一個select選項
   }
 
-  function _handleRouteSelected(_routeOption) {
-    _setRouteName(_routeOption.value);
-    dispatch(setRouteName(_routeOption.value))
-    console.log(_city)
+  async function _handleRouteSelected(_routeOption) {
+    const _data = await getRouteInfo(_city, _routeOption.label, _routeOption.value)
+
+    const _routeData = {
+      routeName: _routeOption.label,
+      routeUID: _routeOption.value,
+      destinationStopName: _data[0].destinationStopName,
+      departureStopName: _data[0].departureStopName,
+      trickPrice: _data[0].trickPrice,
+      bufferZone: _data[0].bufferZone,
+    }
+    console.log(_routeData)
+    dispatch(setRouteInfo(_routeData))
   }
 
-  function _getRouteDetail() {
-    console.log(_city)
-    getEstimatedTimeOfRoute(_city, _routeName).then((_routedata) => {
-      dispatch(setRouteEstimatedTime(_routedata.goRoute, _routedata.backRoute, _routedata.goBus, _routedata.backBus));
-    });
-    // getRouteAllStop(_citySelected,_routeName).then((_stopdata)=>{
-    //   dispatch(setStopEstimatedTime(_stopdata.goRoute,_stopdata.backRoute,_stopdata.allBusData))
-    // }) 
-  }
+
   function _showcity() {
     console.log(_city)
   }
@@ -62,8 +58,8 @@ const BusSearchBar = () => {
       {_routeName === "" ? (
         <button onClick={_showcity}>你什麼都還沒搜尋</button>
       ) : (
-        <button onClick={_getRouteDetail}>
-          <Link to={`/bussearch/route/${_routeName}`}>查詢</Link>
+        <button>
+          <Link to={`/bussearch/route/${_routeUID}`}>查詢</Link>
         </button>
 
       )}

@@ -14,10 +14,10 @@ function BusSearch() {
         <Route exact path="/bussearch/:type">
           <BusSearchBar />
         </Route>
-        <Route exact path="/bussearch/route/:routename">
+        <Route exact path="/bussearch/route/:routeuid">
           <RouteResultInfo />
         </Route>
-        <Route path="/bussearch/route/:routename/detail">
+        <Route path="/bussearch/route/:routeuid/detail">
           <RouteResultFare />
         </Route>
         <Route path="/bussearch/stop/:stopid">

@@ -1,7 +1,7 @@
 //選取縣市
 export const SET_CITY = "SET_CITY";
 
-export const SET_ROUTE_NAME = "SET_ROUTE_NAME";
+export const SET_ROUTE_Info = "SET_ROUTE_Info";
 
 //設定選取路線
 export const SET_ROUTE_ESTIMATEDTIME = "SET_ROUTE_ESTIMATEDTIME";

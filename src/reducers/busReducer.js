@@ -2,12 +2,12 @@ import {
     SET_CITY,
     SET_ROUTE_ESTIMATEDTIME,
     SET_STOP_ESTIMATEDTIME,
-    SET_ROUTE_NAME
+    SET_ROUTE_Info,
 } from '../utils/actionType/BusActionType'
 
 const initialState = {
     city: "",
-    routeName:"",
+    routeName: "",
     goRouteEstimatedTime: [],
     backRouteEstimatedTime: [],
     goRouteBusEstimatedTime: [],
@@ -29,12 +29,17 @@ export const busReducer = (state = initialState, action) => {
         case SET_CITY:
             return {
                 ...state,
-                city:action.payload.city
+                city: action.payload.city
             }
-        case SET_ROUTE_NAME:
+        case SET_ROUTE_Info:
             return {
                 ...state,
-                routeName: action.payload.routeName
+                routeUID: action.payload.routeUID,
+                routeName: action.payload.routeName,
+                goStopName: action.payload.goStopName,
+                backStopName: action.payload.backStopName,
+                trickPrice: action.payload.trickPrice,
+                bufferZone: action.payload.bufferZone,
             }
         case SET_ROUTE_ESTIMATEDTIME:
             return {
@@ -46,10 +51,11 @@ export const busReducer = (state = initialState, action) => {
             }
         case SET_STOP_ESTIMATEDTIME:
             return {
+                ...state,
                 goStopEstimatedTime: action.payload.goStopEstimatedTime,
                 backStopEstimatedTime: action.payload.backStopEstimatedTime,
             }
-        
+
         default:
             return state
     }

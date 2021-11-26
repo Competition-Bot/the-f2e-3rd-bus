@@ -1,28 +1,34 @@
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap, Polyline } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-import busCard from "../../components/BusSearch/Tooltip"
 
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import "../BusSearch/RouteMap.css";
-import { divIcon } from "leaflet";
 import { iconBlack, iconYellow, iconOrange } from './MarkerIcon';
-import { list } from "purgecss/node_modules/postcss";
+import location from '../../assets/img/location.svg';
 
-const _renderMarker = ({data}) => {
+let buslist = []
 
+var mapCenterPos=[25.0242987, 121.5441439]
+const limeOptions = { color: '#333333' }
+
+const _renderMarker = ({ data }) => {
+
+  buslist.push(data.stopPosition)
   let icon = iconBlack
-  if (data.estimatedTime == '進站中') {
+
+  if (data.estimateTime == '進佔中') {
     icon = iconOrange
   }
-  else if (data.estimatedTime == '3分鐘') {
+  else if (data.estimateTime == '3分鐘') {
     icon = iconYellow
   }
   else {
     icon = iconBlack
   }
+
+ 
 
   return (
     <Marker
@@ -30,16 +36,18 @@ const _renderMarker = ({data}) => {
       icon={icon}
       key={`marker-${data.stationUID}`}
     >
-      <Popup className="popup flex" position={data.stopPosition} closeButton={true} >
+      <Popup className="popup flex" position={data.stopPosition} closeButton={true}
+      >
         <h2 className="flex text-white text-base font-semibold w-auto justify-center items-center">{data.stopName}</h2>
         <h2 className="flex bg-white text-yellow-400 text-base font-semibold w-15 h-7 justify-center items-center rounded-md mt-1">{data.estimateTime}</h2>
-       
+
       </Popup>
     </Marker>
   )
 }
 
-function RouteMap({ position }, { marker }) {
+function RouteMap() {
+
   let _city = useSelector((state) => state.busReducer.city); //城市
   let _goStop = useSelector((state) => state.busReducer.goStopEstimatedTime); //第一個
   let _backStop = useSelector( //第二個
@@ -48,33 +56,13 @@ function RouteMap({ position }, { marker }) {
 
 
   // useEffect(() => {
-    
+
   // }, [_city])
-  
-  // useEffect(()=>{
-  //   setPosition(mapCenterPos)
-  // }),[mapCenterPos]
+  const [centerPos, setPosition] = useState(mapCenterPos);
 
-
-  // const [pos, setPosition] = useState(
-  //   (mapCenterPos)
-  // );
-  const [mark, setMarker] = useState(
-    (marker = [25.0242987, 121.5441439])
-  );
-
-  const customMarkerIconb = divIcon({
-    className: "marker-black",
-    iconSize: [50, 50],
-  });
-  const customMarkerIcono = divIcon({
-    className: "marker-orange",
-    iconSize: [50, 50],
-  });
-  const customMarkerIcony = divIcon({
-    className: "marker-yellow",
-    iconSize: [50, 50],
-  });
+  useEffect(() => {
+    setPosition(mapCenterPos)
+  }, [mapCenterPos])
 
 
 
@@ -82,7 +70,7 @@ function RouteMap({ position }, { marker }) {
     let map = useMap();
     if (center !== undefined) {
       map.panTo(center);
-      //setPosition(undefined)
+      setPosition(undefined)
     }
     return null;
   }
@@ -92,27 +80,29 @@ function RouteMap({ position }, { marker }) {
       style={{
         width: "100%",
         height: "100%",
+        zIndex: "0"
       }}
       center={[25.0242987, 121.5441439]}
       zoom={15}
       scrollWheelZoom={false}
     >
-      <ChangeMap center={[25.0242987, 121.5441439]} />
+      <ChangeMap center={centerPos} />
       <TileLayer
         url="https://api.mapbox.com/styles/v1/cindy1029/ckwev8vay0d4g14p9dip5htx5/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiY2luZHkxMDI5IiwiYSI6ImNrd2Vpd3EyNzA1NWQycXJ1OTh2ZWtpaXUifQ.odRRCORGIXPix4oKd1_R5g"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
 
-   
-       {/* <MarkerClusterGroup> */}
-       {_goStop ?
-         _goStop.map((item) => (
-           <_renderMarker data={item} />
-         ))
-         : null
-       }
-     {/* </MarkerClusterGroup> */}
 
+      <MarkerClusterGroup>
+        {_goStop ?
+          _goStop.map((item) => (
+            <_renderMarker data={item} />
+          ))
+          : null
+        }
+      </MarkerClusterGroup>
+      <Polyline pathOptions={limeOptions} positions={buslist}></Polyline>
+      <div className="location"><img src={location} alt='location'/></div>
     </MapContainer>
   );
 }

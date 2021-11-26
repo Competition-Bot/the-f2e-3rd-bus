@@ -114,16 +114,20 @@ export const getEstimatedTimeOfRoute = async (_city, _routeName, _routeUID) => {
 
     _result.data.forEach((route) => {
       let _eTime = ""
+      let _status = 0 
       if (route.EstimateTime) {
 
         const _time = Math.floor(route.EstimateTime / 60)
         if (_time < 3) {
           _eTime = "進佔中"
+          _status = 3
         }
         else if (_time >= 3 && _time < 4) {
           _eTime = "3分鐘"
+          _status = 2
         } else if (_time >= 4) {
           _eTime = `${_time}分鐘`
+          _status = 1
         }
 
       } else {
@@ -134,6 +138,7 @@ export const getEstimatedTimeOfRoute = async (_city, _routeName, _routeUID) => {
         stopID: route.StopID,
         stopName: route.StopName.Zh_tw,
         estimateTime: _eTime,
+        status:_status,
         nextBusTime: route.NextBusTime
       }
       //去程返程

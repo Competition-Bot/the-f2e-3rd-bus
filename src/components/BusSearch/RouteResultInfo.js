@@ -63,6 +63,7 @@ function RouteResultInfo() {
             stopID: item.stopID,
             estimateTime: item.estimateTime,
             nextBusTime: item.nextBusTime,
+            status: item.status,
           };
         }
       });
@@ -74,6 +75,7 @@ function RouteResultInfo() {
             stopID: item.stopID,
             estimateTime: item.estimateTime,
             nextBusTime: item.nextBusTime,
+            status: item.status,
           };
         }
       });

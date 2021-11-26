@@ -45,6 +45,18 @@ function SearchBreadCrumb() {
           <div className="rounded-full w-4 h-4 bg-yellow-400"></div>
           <div className="text-white">班表/票價</div>
         </Route>
+        <Route exact path="/bussearch/stop/:stopid">
+          <NavLink
+            to="/bussearch"
+            className="text-white grid grid-flow-col md:gap-3 gap-2 items-center justify-start"
+          >
+            <CircleArrow alt="circle" />
+            <span className="md:text-base text-sm">重新搜尋</span>
+          </NavLink>
+          <LineDash className="md:w-auto w-5" alt="line" />
+          <div className="rounded-full w-4 h-4 bg-yellow-400"></div>
+          <div className="text-white md:text-base text-sm">台北教育大學</div>
+        </Route>
         <Route exact path="/plansearch">
           <div className="rounded-full w-4 h-4 bg-yellow-400"></div>
           <div className="text-white">搜尋</div>

@@ -88,6 +88,9 @@ body {
     @apply border-r-2 border-blue-300 absolute h-12;
     @apply top-12;
   }
+  .step-circle-active {
+    @apply bg-blue-400;
+  }
   .step-circle-active:after {
     @apply border-blue-400;
   }

@@ -8,7 +8,7 @@ const baseUrl = `https://ptx.transportdata.tw/MOTC/v2/Bus/`;
 
 //路線所有站牌 地圖用
 export const getRouteAllStop = async (_city, _routeName, _routeUID) => {
-  
+
   try {
     let _data = {}
     let _stopData = {}
@@ -17,13 +17,13 @@ export const getRouteAllStop = async (_city, _routeName, _routeUID) => {
 
     let _url = `${baseUrl}/StopOfRoute/City/${_city}/${_routeName}?$filter=RouteUID eq '${_routeUID}'&$format=JSON`;
     const _result = await axios.get(_url);
-    
+
     if (_result) {
       //所有去程站點
       _result.data[0].Stops.forEach(item => {
         _stopData = {
           stopName: item.StopName.Zh_tw,
-          stopPosition: item.StopPosition,
+          stopPosition: [item.StopPosition.PositionLat, item.StopPosition.PositionLon],
           stationID: item.StationID,
         }
         goRoute.push(_stopData)
@@ -32,7 +32,7 @@ export const getRouteAllStop = async (_city, _routeName, _routeUID) => {
       _result.data[1].Stops.forEach(item => {
         _stopData = {
           stopName: item.StopName.Zh_tw,
-          stopPosition: item.StopPosition,
+          stopPosition: [item.StopPosition.PositionLat, item.StopPosition.PositionLon],
           stationID: item.StationID,
         }
         backRoute.push(_stopData)
@@ -73,8 +73,8 @@ export const getCityAllRoute = async (city) => {
 }
 
 //路線資訊
-export const getRouteInfo = async (_city,_routeName,_routeUID) => {
-  try{
+export const getRouteInfo = async (_city, _routeName, _routeUID) => {
+  try {
     let _routeData = {}
     const _url = `${baseUrl}/Route/City/${_city}/${_routeName}?$filter=RouteUID eq '${_routeUID}'&$format=JSON`;
     let _result = await axios.get(_url);
@@ -87,7 +87,7 @@ export const getRouteInfo = async (_city,_routeName,_routeUID) => {
       }
     })
     return _routeData;
-  }catch(e) {
+  } catch (e) {
     alert("查無資料!");
   }
 }
@@ -95,6 +95,7 @@ export const getRouteInfo = async (_city,_routeName,_routeUID) => {
 //$filter=RouteName/Zh_tw eq '${routeName}'
 //城市 某路線的預估站到站
 export const getEstimatedTimeOfRoute = async (_city, _routeName, _routeUID) => {
+
   try {
     let _data = {}
     let _stopData = {}
@@ -103,7 +104,6 @@ export const getEstimatedTimeOfRoute = async (_city, _routeName, _routeUID) => {
     let backRoute = []  //返程
     let goBus = []
     let backBus = []
-
     const _url = `${baseUrl}/EstimatedTimeOfArrival/City/${_city}/${_routeName}?$filter=RouteUID eq '${_routeUID}'&$orderby=StopSequence,Direction&$format=JSON`;
     let _result = await axios.get(_url);
 
@@ -111,17 +111,38 @@ export const getEstimatedTimeOfRoute = async (_city, _routeName, _routeUID) => {
     _result.data.sort(function (a, b) {
       return a.Direction - b.Direction
     })
-    
+
     _result.data.forEach((route) => {
+      let _eTime = ""
+      let _status = 0 
+      if (route.EstimateTime) {
+
+        const _time = Math.floor(route.EstimateTime / 60)
+        if (_time < 3) {
+          _eTime = "進佔中"
+          _status = 3
+        }
+        else if (_time >= 3 && _time < 4) {
+          _eTime = "3分鐘"
+          _status = 2
+        } else if (_time >= 4) {
+          _eTime = `${_time}分鐘`
+          _status = 1
+        }
+
+      } else {
+        _eTime = "未發車"
+      }
       _stopData = {
         plateNumb: route.PlateNumb,
         stopID: route.StopID,
         stopName: route.StopName.Zh_tw,
-        estimateTime: route.EstimateTime,
+        estimateTime: _eTime,
+        status:_status,
         nextBusTime: route.NextBusTime
       }
       //去程返程
-      if(route.Direction === 0){
+      if (route.Direction === 0) {
         goRoute.push(_stopData)
         if (route.PlateNumb !== "") {
           _busData = {
@@ -129,8 +150,8 @@ export const getEstimatedTimeOfRoute = async (_city, _routeName, _routeUID) => {
           }
           goBus.push(_busData)
         }
-        
-      }else{
+
+      } else {
         backRoute.push(_stopData)
         if (route.PlateNumb !== "") {
           _busData = {
@@ -138,7 +159,7 @@ export const getEstimatedTimeOfRoute = async (_city, _routeName, _routeUID) => {
           }
           backBus.push(_busData)
         }
-        
+
       }
     })
     //彙整所有回傳資料

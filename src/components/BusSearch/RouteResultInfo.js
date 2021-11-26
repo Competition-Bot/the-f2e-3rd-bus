@@ -94,8 +94,8 @@ function RouteResultInfo() {
         <div className="px-5">
           <h2 className="text-white mb-2">{_routeName}</h2>
           <div className="grid gap-6 grid-flow-col justify-start relative">
-            <a onClick={_changeRoute} className="tab-line tab-line-active">往{_goStopName}</a>
-            <a onClick={_changeRoute} className="tab-line hover:tab-line-hover">往{_backStopName}</a>
+            <a onClick={_changeRoute} className={`tab-line hover:tab-line-hover ${_go ? "tab-line-active" : ''}`}>往{_goStopName}</a>
+            <a onClick={_changeRoute} className={`tab-line hover:tab-line-hover ${!_go ? "tab-line-active" : ''}`}>往{_backStopName}</a>
             <div className="tab-line text-white absolute right-0">
             {_goStopName} - {_backStopName}
             </div>
@@ -105,13 +105,12 @@ function RouteResultInfo() {
           {
             _go ?
               _goRoute.map((item)=>(
-                <RouteListItem key={item.routeUID} routeData={item} />
+                <RouteListItem key={item.stopUID} routeData={item} />
               ))
             : _backRoute.map((item)=>(
-              <RouteListItem key={item.routeUID} routeData={item} />
+              <RouteListItem key={item.stopUID} routeData={item} />
             ))
           }
-
         </div>
       </div>
       <div className="bg-blue-400 w-full h-48 -mt-1"></div>

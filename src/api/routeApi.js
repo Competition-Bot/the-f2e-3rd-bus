@@ -119,7 +119,7 @@ export const getEstimatedTimeOfRoute = async (_city, _routeName, _routeUID) => {
 
         const _time = Math.floor(route.EstimateTime / 60)
         if (_time < 3) {
-          _eTime = "進佔中"
+          _eTime = "進站中"
           _status = 3
         }
         else if (_time >= 3 && _time < 4) {

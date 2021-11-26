@@ -10,14 +10,17 @@ import {iconBlack, iconYellow, iconOrange} from './MarkerIcon';
 
 function RouteMap({ position }, { marker }) {
   let _city = useSelector((state) => state.busReducer.city);
+  let _goBusRealTime = useSelector((state)=> state.busReducer.goBusRealTime);
+  let _backBusRealTime = useSelector((state)=> state.busReducer.backBusRealTime)
   let _goStop = useSelector((state) => state.busReducer.goStopEstimatedTime);
   let _backStop = useSelector(
     (state) => state.busReducer.backStopEstimatedTime
   );
+  
   useEffect(() => {
-    console.log(_goStop)
-    console.log(_backStop)
-  }, [_goStop])
+    console.log(_goBusRealTime)
+    console.log(_backBusRealTime)
+  }, [_goBusRealTime])
 
   const [pos, setPosition] = useState(
     (position = [25.0246292,121.5424487])

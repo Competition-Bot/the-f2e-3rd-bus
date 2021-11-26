@@ -86,6 +86,7 @@ export const getRouteInfo = async (_city, _routeName, _routeUID) => {
         bufferZone: item.FareBufferZoneDescriptionZh
       }
     })
+    console.log(_routeData);
     return _routeData;
   } catch (e) {
     alert("查無資料!");
@@ -144,30 +145,14 @@ export const getEstimatedTimeOfRoute = async (_city, _routeName, _routeUID) => {
       //去程返程
       if (route.Direction === 0) {
         goRoute.push(_stopData)
-        if (route.PlateNumb !== "") {
-          _busData = {
-            plateNumb: route.PlateNumb
-          }
-          goBus.push(_busData)
-        }
-
       } else {
         backRoute.push(_stopData)
-        if (route.PlateNumb !== "") {
-          _busData = {
-            plateNumb: route.PlateNumb
-          }
-          backBus.push(_busData)
-        }
-
       }
     })
     //彙整所有回傳資料
     _data = {
       goRoute,
-      backRoute,
-      goBus,
-      backBus
+      backRoute
     }
     return _data;
 
@@ -176,10 +161,34 @@ export const getEstimatedTimeOfRoute = async (_city, _routeName, _routeUID) => {
   }
 }
 
+//路線公車動態資料
+export const getBusRealTime = async (_city,_routeName) => {
+  try {
+    let _data = {}
+    let _stopData = {}
+    let goBusRealTime = []
+    let backBusRealTime = []
+    let _url = `${baseUrl}/RealTimeByFrequency/City/${_city}/${_routeName}?$filter=RouteName/Zh_tw eq '${_routeName}'&$format=JSON`;
+    let _result = await axios.get(_url);
+    _result.data.forEach((item)=>{
+      _stopData = {
+        PlateNumb:item.PlateNumb,
+        BusPosition:[item.BusPosition.PositionLat,item.BusPosition.PositionLon],
+      }
+      if(item.Direction === 0) goBusRealTime.push(_stopData)
+      else backBusRealTime.push(_stopData)
+    })
+    _data = {
+      goBusRealTime,
+      backBusRealTime,
+    }
+    return _data
+  } catch(err) {
+    alert("查無資料!");
+  }
+}
+
 //路線票價資訊
-
-
-
 
 
 //城市所有站牌

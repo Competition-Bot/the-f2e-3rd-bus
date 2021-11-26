@@ -1,11 +1,12 @@
 import RouteListItem from "./RouteListItem";
-import { useEffect ,useState} from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  setBusRealTime,
   setRouteEstimatedTime,
   setStopEstimatedTime,
 } from "../../actions/busActions";
-import { getEstimatedTimeOfRoute, getRouteAllStop } from "../../api/routeApi";
+import { getBusRealTime, getEstimatedTimeOfRoute, getRouteAllStop } from "../../api/routeApi";
 
 function RouteResultInfo() {
   const dispatch = useDispatch();
@@ -14,22 +15,20 @@ function RouteResultInfo() {
   let _routeName = useSelector((state) => state.busReducer.routeName);
   let _city = useSelector((state) => state.busReducer.city);
   let _goRoute = useSelector((state) => state.busReducer.goRouteEstimatedTime);
-  let _backRoute = useSelector(
-    (state) => state.busReducer.backRouteEstimatedTime
-  );
+  let _backRoute = useSelector((state) => state.busReducer.backRouteEstimatedTime);
   let _goStopName = useSelector((state) => state.busReducer.goStopName);
   let _backStopName = useSelector((state) => state.busReducer.backStopName);
 
   useEffect(() => {
     _handleRouteAPI();
-  },[]);
+  }, []);
 
   useEffect(() => {
     _handleStopAPI();
   }, [_goRoute])
-  
-  function _changeRoute(){
-   _setGo(!_go)
+
+  function _changeRoute() {
+    _setGo(!_go)
   }
 
   async function _handleRouteAPI() {
@@ -38,16 +37,27 @@ function RouteResultInfo() {
       _routeName,
       _routeUID,
     );
+    const _realTimeData = await getBusRealTime(
+      _city,
+      _routeName,
+    );
     if (_estimatedRouteData) {
       dispatch(
         setRouteEstimatedTime(
           _estimatedRouteData.goRoute,
-          _estimatedRouteData.backRoute,
-          _estimatedRouteData.goBus,
-          _estimatedRouteData.backBus
+          _estimatedRouteData.backRoute
         )
       );
     }
+    if (_realTimeData) {
+      dispatch(
+        setBusRealTime(
+          _realTimeData.goBusRealTime,
+          _realTimeData.backBusRealTime,
+        )
+      );
+    }
+
   }
 
   async function _handleStopAPI() {
@@ -97,19 +107,19 @@ function RouteResultInfo() {
             <a onClick={_changeRoute} className={`tab-line hover:tab-line-hover ${_go ? "tab-line-active" : ''}`}>往{_goStopName}</a>
             <a onClick={_changeRoute} className={`tab-line hover:tab-line-hover ${!_go ? "tab-line-active" : ''}`}>往{_backStopName}</a>
             <div className="tab-line text-white absolute right-0">
-            {_goStopName} - {_backStopName}
+              {_goStopName} - {_backStopName}
             </div>
           </div>
         </div>
         <div className="mt-4 pb-28 bg-white h-full shadow-card grid auto-rows-max overflow-scroll">
           {
             _go ?
-              _goRoute.map((item)=>(
+              _goRoute.map((item) => (
                 <RouteListItem key={item.stopUID} routeData={item} />
               ))
-            : _backRoute.map((item)=>(
-              <RouteListItem key={item.stopUID} routeData={item} />
-            ))
+              : _backRoute.map((item) => (
+                <RouteListItem key={item.stopUID} routeData={item} />
+              ))
           }
         </div>
       </div>

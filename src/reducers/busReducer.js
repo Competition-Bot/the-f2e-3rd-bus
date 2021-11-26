@@ -3,6 +3,7 @@ import {
     SET_ROUTE_ESTIMATEDTIME,
     SET_STOP_ESTIMATEDTIME,
     SET_ROUTE_Info,
+    SET_BUS_REALTIME,
 } from '../utils/actionType/BusActionType'
 
 const initialState = {
@@ -46,14 +47,21 @@ export const busReducer = (state = initialState, action) => {
                 ...state,
                 goRouteEstimatedTime: action.payload.goRouteEstimatedTime,
                 backRouteEstimatedTime: action.payload.backRouteEstimatedTime,
-                goRouteBusEstimatedTime: action.payload.goBusEstimatedTime,
-                backRouteBusEstimatedTime: action.payload.backBusEstimatedTime,
+                //goRouteBusEstimatedTime: action.payload.goBusEstimatedTime,
+                //backRouteBusEstimatedTime: action.payload.backBusEstimatedTime,
             }
         case SET_STOP_ESTIMATEDTIME:
             return {
                 ...state,
                 goStopEstimatedTime: action.payload.goStopEstimatedTime,
                 backStopEstimatedTime: action.payload.backStopEstimatedTime,
+            }
+        
+        case SET_BUS_REALTIME:
+            return {
+                ...state,
+                goBusRealTime: action.payload.goBusRealTime,
+                backBusRealTime: action.payload.backBusRealTime,
             }
 
         default:

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import Select from "react-select";
 function StopSearch() {
   return (
@@ -12,7 +14,7 @@ function StopSearch() {
         <div className="text-blue-400 font-medium">輸入站牌關鍵字</div>
         <Select className="col-start-2 md:w-60 w-56" />
       </div>
-      <a className="btn justify-self-center mt-10">查詢</a>
+      <Link to="/bussearch/stop/:stopid" className="btn justify-self-center mt-10">查詢</Link>
     </div>
   );
 }

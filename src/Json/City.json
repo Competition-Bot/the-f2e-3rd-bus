@@ -1,7 +1,7 @@
 [
     {
-        "label": "全部縣市",
-        "value": "All"
+        "label": "選擇縣市",
+        "value": "Unselected"
     },
     {
         "label": "台北市",

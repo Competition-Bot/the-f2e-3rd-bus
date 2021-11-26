@@ -13,7 +13,7 @@ function StopListItem() {
     const statusTextList = ["未發車", "5分", "進站中", "3分"]
 
     return (
-        <Link to="/bussearch/route/:routename" className="relative flex justify-between px-5 items-center">
+        <Link to="/bussearch/route/:city/:routename" className="relative flex justify-between px-5 items-center">
             <div className="grid grid-flow-col auto-cols-max gap-x-5 items-center py-4">
                 <div className={`${statusStyleList[0]} px-4 py-1`}>{statusTextList[0]}</div>
                 <div>

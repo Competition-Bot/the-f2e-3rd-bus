@@ -7,7 +7,7 @@ const baseUrl = `https://ptx.transportdata.tw/MOTC/v2/Bus/`;
 
 
 //路線所有站牌 地圖用
-export const getRouteAllStop = async (_city, _routeName, _routeUID) => {
+export const getRouteAllStop = async (_city, _routeName) => {
 
   try {
     let _data = {}
@@ -15,7 +15,7 @@ export const getRouteAllStop = async (_city, _routeName, _routeUID) => {
     let goRoute = []
     let backRoute = []
 
-    let _url = `${baseUrl}/StopOfRoute/City/${_city}/${_routeName}?$filter=RouteUID eq '${_routeUID}'&$format=JSON`;
+    let _url = `${baseUrl}/StopOfRoute/City/${_city}/${_routeName}?$filter=RouteName/Zh_tw eq '${_routeName}'&$format=JSON`;
     const _result = await axios.get(_url);
 
     if (_result) {
@@ -73,10 +73,10 @@ export const getCityAllRoute = async (city) => {
 }
 
 //路線資訊
-export const getRouteInfo = async (_city, _routeName, _routeUID) => {
+export const getRouteInfo = async (_city, _routeName) => {
   try {
     let _routeData = {}
-    const _url = `${baseUrl}/Route/City/${_city}/${_routeName}?$filter=RouteUID eq '${_routeUID}'&$format=JSON`;
+    const _url = `${baseUrl}/Route/City/${_city}/${_routeName}?$filter=RouteName/Zh_tw eq '${_routeName}'&$format=JSON`;
     let _result = await axios.get(_url);
     _result.data.forEach((item) => {
       _routeData = {
@@ -95,7 +95,7 @@ export const getRouteInfo = async (_city, _routeName, _routeUID) => {
 
 //$filter=RouteName/Zh_tw eq '${routeName}'
 //城市 某路線的預估站到站
-export const getEstimatedTimeOfRoute = async (_city, _routeName, _routeUID) => {
+export const getEstimatedTimeOfRoute = async (_city, _routeName) => {
 
   try {
     let _data = {}
@@ -105,7 +105,7 @@ export const getEstimatedTimeOfRoute = async (_city, _routeName, _routeUID) => {
     let backRoute = []  //返程
     let goBus = []
     let backBus = []
-    const _url = `${baseUrl}/EstimatedTimeOfArrival/City/${_city}/${_routeName}?$filter=RouteUID eq '${_routeUID}'&$orderby=StopSequence,Direction&$format=JSON`;
+    const _url = `${baseUrl}/EstimatedTimeOfArrival/City/${_city}/${_routeName}?$filter=RouteName/Zh_tw eq '${_routeName}'&$orderby=StopSequence,Direction&$format=JSON`;
     let _result = await axios.get(_url);
 
     // 降冪

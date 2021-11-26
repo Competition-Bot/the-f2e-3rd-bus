@@ -84,7 +84,7 @@ function PlanDetail() {
                 <div>從臺北教育大學到台北動物園</div>
               </div>
               <div className="flex items-center mt-4">
-                <Link to="/bussearch/route/:routename" className="btn hover:btn-hover">
+                <Link to="/bussearch/route/:city/:routename" className="btn hover:btn-hover">
                   查看公車動態
                 </Link>
                 <div className="py-1.5 px-3 bg-gray-300 font-medium absolute right-0">

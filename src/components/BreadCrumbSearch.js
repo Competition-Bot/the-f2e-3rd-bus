@@ -16,7 +16,7 @@ function SearchBreadCrumb() {
           <div className="text-white">搜尋</div>
           <LineArrow alt="log" />
         </Route>
-        <Route exact path="/bussearch/route/:routename">
+        <Route exact path="/bussearch/route/:city/:routename">
           <NavLink
             to="/bussearch"
             className="text-white grid grid-flow-col md:gap-3 gap-2 items-center justify-start"
@@ -38,7 +38,7 @@ function SearchBreadCrumb() {
         </Route>
         <Route exact path="/bussearch/route/:routename/detail">
           <NavLink
-            to="/bussearch/route/:routename"
+            to="/bussearch/route/:city/:routename"
             className="text-white grid grid-flow-col md:gap-3 gap-2 items-center justify-start"
           >
             <CircleArrow alt="circle" />

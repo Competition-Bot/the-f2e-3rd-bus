@@ -11,7 +11,7 @@ function RouteListItem({ routeData }) {
   ];
 
   return (
-    <div
+    <a
       key={routeData.routeUID}
       className="relative flex justify-between px-5"
     >
@@ -45,7 +45,7 @@ function RouteListItem({ routeData }) {
           ></div>
         </div>
       </div>
-    </div>
+    </a>
   );
 }
 

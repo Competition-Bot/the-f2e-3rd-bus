@@ -70,11 +70,11 @@
         "label": "宜蘭縣"        
     },
     {
-        "value": "Hualien",
+        "value": "HualienCounty",
         "label": "花蓮縣"        
     },
     {
-        "value": "Taitung",
+        "value": "TaitungCounty",
         "label": "台東縣"        
     },
     {
@@ -90,7 +90,7 @@
         "label": "蘭嶼縣"        
     },
     {
-        "value": "Kinmen",
+        "value": "KinmenCounty",
         "label": "金門縣"        
     },
     {

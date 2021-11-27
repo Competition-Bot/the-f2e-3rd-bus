@@ -42,7 +42,6 @@ function RouteResultInfo() {
   function _changeRoute() {
     _setGo(!_go)
     dispatch(setRouteDirection(!_go));
-
   }
 
   //呼叫選取的路線詳細資料
@@ -107,9 +106,12 @@ function RouteResultInfo() {
           estimateTime: item.estimateTime,
           nextBusTime: item.nextBusTime,
           status: item.status,
+          index: index,
+          popup: false
         };
       }
       );
+      
 
       _backRoute.forEach((item, index) => {
         _backStopData[index] = {
@@ -119,6 +121,8 @@ function RouteResultInfo() {
           estimateTime: item.estimateTime,
           nextBusTime: item.nextBusTime,
           status: item.status,
+          index: index,
+          popup: false
         };
       });
 

@@ -15,7 +15,6 @@ function PlanDetail() {
   const [data, setdata] = useState(null)
 
   useEffect(() => {
-    console.log("use")
     if (planresultid >= _planlist.length) {
       history.push("/plansearch");
     }
@@ -27,10 +26,13 @@ function PlanDetail() {
   const _renderPlanInfo = () => {
     let list = [];
     data.step.forEach((item, idx) => {
-      if (idx !== 0) list.push(<AngleRight stroke="white" height="14" width="8" />);
+      if (idx !== 0) list.push(<AngleRight key={"angle"+idx} stroke="white" height="14" width="8" />);
       if (item.type === "walk") {
         list.push(
-          <div className="flex items-center h-10 pt-2 w-max">
+          <div 
+          className="flex items-center h-10 pt-2 w-max"
+          key={"plandeInfo"+idx}
+          >
             <FontAwesomeIcon
               icon={faWalking}
               size="lg"
@@ -42,7 +44,10 @@ function PlanDetail() {
         );
       } else if (item.type === "bus") {
         list.push(
-          <div className="flex items-center h-10 w-max">
+          <div 
+          className="flex items-center h-10 w-max"
+          key={"plandeInfo"+idx}
+          >
             <FontAwesomeIcon
               icon={faBus}
               size="lg"
@@ -74,7 +79,7 @@ function PlanDetail() {
                 color="#333333"
                 className="mr-2"
               />
-              <div>步行到{item.destination}</div>
+              <div>步行到{item.destination.label}</div>
               <div className="py-1.5 px-3 bg-gray-300 font-medium absolute right-0">
                 約{item.time}分鐘
               </div>
@@ -98,10 +103,10 @@ function PlanDetail() {
                   color="#1E659C"
                 />
                 <div className="text-blue-400 font-medium mr-2">{item.name}</div>
-                <div>從 <span className="text-blue-400">{item.start}</span> 到 <span className="text-blue-400">{item.end}</span></div>
+                <div>從 <span className="text-blue-400">{item.start.label}</span> 到 <span className="text-blue-400">{item.end.label}</span></div>
               </div>
               <div className="flex items-center mt-4">
-                <Link to="/bussearch/route/:city/:routename" className="btn hover:btn-hover">
+                <Link to={`/bussearch/route/${item.city}/${item.name}`} className="btn hover:btn-hover">
                   查看公車動態
                 </Link>
                 <div className="py-1.5 px-3 bg-gray-300 font-medium absolute right-0">
@@ -142,7 +147,7 @@ function PlanDetail() {
                 <div className="rounded-full w-4 h-4 bg-blue-300 z-10"></div>
               </div>
               <div className="py-6">
-                <div>{data.pos[0]}</div>
+                <div>{data.plan[0].label}</div>
                 <div className="border-b border-gray-300 w-11/12 absolute bottom-0"></div>
               </div>
             </div>
@@ -153,7 +158,7 @@ function PlanDetail() {
                 <div className="rounded-full w-4 h-4 bg-blue-300 z-10"></div>
               </div>
               <div className="py-6">
-                <div>抵達{data.pos[1]}</div>
+                <div>抵達{data.plan[1].label}</div>
                 <div className="border-b border-gray-300 w-11/12 absolute bottom-0"></div>
               </div>
             </div>

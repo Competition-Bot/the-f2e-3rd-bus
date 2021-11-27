@@ -25,10 +25,9 @@ function App() {
         <Route path="/news/:page">
           <Breadcrumb />
           <News />
-          <NewsDetail/>
           <Footer />
         </Route>
-        <Route exact path="/news/detail/:newsid">
+        <Route exact path="/newsdetail/:newsid">
           <Breadcrumb />
           <NewsDetail />
           <Footer />
@@ -41,7 +40,6 @@ function App() {
         </Route>
       </Switch>
     </BrowserRouter>
-
   );
 }
 

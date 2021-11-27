@@ -10,7 +10,8 @@ import brn_location from '../../assets/img/btn_location.svg';
 function RouteMap() {
   let _direction = useSelector((state) => {
     console.log(state.busReducer.direction)
-    return state.busReducer.direction});
+    return state.busReducer.direction
+  });
   let _goBusRealTime = useSelector((state) => state.busReducer.goBusRealTime);
   let _backBusRealTime = useSelector((state) => state.busReducer.backBusRealTime)
   let _goStop = useSelector((state) => {
@@ -21,7 +22,7 @@ function RouteMap() {
   );
   useEffect(() => {
     console.log(_goStop)
-  }, [_goStop])
+  }, [_direction])
 
   // useEffect(() => {
   //   console.log(_goBusRealTime)
@@ -102,17 +103,18 @@ function RouteMap() {
         _direction ?
           <>
             {_goStop ?
-              _goStop.map(function(item,index) {
+              _goStop.map((item,index) => (
                 <_renderMarker key={`renderMaker_go_${index}`} data={item} />
-              })
+              ))
               : null
             }
           </>
+
           :
           <>
             {_backStop ?
               _backStop.map((item,index) => (
-                <_renderMarker key={`renderMaker_go_${index}`} data={item} />
+                <_renderMarker key={`renderMaker_back_${index}`} data={item} />
               ))
               : null
             }

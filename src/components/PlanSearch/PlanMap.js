@@ -56,6 +56,15 @@ function PlanMap() {
         />
         );
       }
+      else{
+        list.push(
+          <Polyline
+          key={`line-${item.name}`}
+          pathOptions={{ color: "#333", weight: 5, smoothFactor: 5,dashArray: '8, 8', dashOffset: '0' }}
+          positions={item.routePos}
+        />
+        );
+      }
     })
 
     return list;
@@ -70,7 +79,7 @@ function PlanMap() {
     }}
     center={[25.003627598369928, 121.30582390333893]}
     zoom={15}
-    scrollWheelZoom={false}
+    scrollWheelZoom={true}
   >
     <TileLayer
       url="https://api.mapbox.com/styles/v1/cindy1029/ckwev8vay0d4g14p9dip5htx5/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiY2luZHkxMDI5IiwiYSI6ImNrd2Vpd3EyNzA1NWQycXJ1OTh2ZWtpaXUifQ.odRRCORGIXPix4oKd1_R5g"

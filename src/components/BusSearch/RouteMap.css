@@ -1,40 +1,28 @@
-.leaflet-container {
-    height: 500px;
-    width: 100%;
-  }
-.my-icon{
-    height: 50px;
-    width: 50px;;
-    color:yellow;
-}
-.marker-black{
-    background-image: url(../../img/Marker_B.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    border: 0;
-   
-}
-.marker-orange{
-    background-image: url(../../img/Marker_O.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    border: 0;
-   
-}
-.marker-yellow{
-    background-image: url(../../img/Marker_Y.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    border: 0;
-   
-}
-
 .popup .leaflet-popup-content-wrapper{
-    background: #F9B835;
+    background-color: #F9B835;
     margin-bottom: 20px;
     height: 76px;
-    width: 98px;    
+    border-radius: 5px;
+    width: auto;
 }
+
+.popup .leaflet-popup-content{
+    margin: 0px;
+    padding: 8px 16px;
+    min-width: 96px;
+    min-height: 76px;
+    
+}
+.popupBlack{
+    display: flex;
+    background-color: #000;
+    margin-bottom: 20px;
+    height: 76px;
+    border-radius: 5px;
+    width: auto;
+
+}
+
 .popup .leaflet-popup-close-button{
     display: none;
 }
@@ -42,36 +30,51 @@
     display: none;
 }
 
+.marker-cluster-small{
+    background-image: url(../../assets//img//Marker_num.svg);
+    background-color: rgba(1, 1,1, 0);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.marker-cluster-small div{
+   background-color:  rgba(1, 1,1, 0);
+   color:#ffffff;
+   font-size: 16px;
+}
+.marker-cluster-medium{
+    background-color: rgba(1, 1,1, 0);
+    background-image: url(../../assets//img//Marker_num.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.marker-cluster-medium div{
+    background-color: rgba(1, 1,1, 0);
+    color:#ffffff;
+    font-size: 16px;
+}
+.marker-cluster-large{
+    background-color: rgba(1, 1,1, 0);
+    background-image: url(../../assets//img//Marker_num.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.marker-cluster-large div{
+    background-color: rgba(1, 1,1, 0);
+    color:#ffffff;
+    font-size: 16px;
+}
+.marker-cluster {
+    background-clip: padding-box;
+    border-radius: 20px;
+    }
 
-.busName{
-    width: 70px;
-    margin-bottom: 20px;
-    
-}
-.busName p{
-    font-size: 15px;
-    color: white;
-    font-weight: 400;
-    font-style: normal;
-    margin-top: -5px;
-  
-}
-.busState{
-    display: flex;
-    margin-top: -15px;
-    
-    width: 61px;
-    height: 27px;
-    background: white;
-    color: #F9B835;
-    border-radius: 5px;
 
-    text-align: center;
-    justify-content: center;
-}
-.busState p{
-    font-size: 15px;
-    margin-top: 3px;
-    color:#F9B835 ;
-    font-weight: 400;
+.location{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-repeat: no-repeat;
+    z-index: 1000;
+    bottom: 5%;
+    right: 5%;
 }

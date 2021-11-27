@@ -1,4 +1,5 @@
 const initialState = {
+
   pos: [{ label: "桃園火車站", pos: [24.989091044191944, 121.31445629500928] }, { label: "桃園藝文廣場", pos: [25.01748496655275, 121.29998728728835] }],
   time: {
     type: "出發時間",
@@ -27,6 +28,7 @@ const initialState = {
         ]
       },
         {
+          city: "Taoyuan",
           type: "bus",
           name: "152",
           start: { label: "統領百貨", pos: [24.991228150817925, 121.31209634112956] },

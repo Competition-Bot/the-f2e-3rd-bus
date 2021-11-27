@@ -16,23 +16,26 @@ const BusSearchBar = () => {
   const [step, setstep] = useState(1);
 
   async function _handleCitySelected(_cityOption) {
+    _setRoutesData([])
     let _options = [];
     if (_cityOption.value === "Unselected") return;
     const _allRoute = await getCityAllRoute(_cityOption.value);
-
-    for (let i = 0; i < _allRoute.length; i++) {
-      const _option = {
-        value: _allRoute[i].routeName,
-        label: _allRoute[i].routeName,
-      };
-
-      _options.push(_option);
+    if(_allRoute){
+      for (let i = 0; i < _allRoute.length; i++) {
+        const _option = {
+          value: _allRoute[i].routeName,
+          label: _allRoute[i].routeName,
+        };
+  
+        _options.push(_option);
+      }
+  
+      dispatch(setCity(_cityOption.value));
+      _setRoutesData(_options); //useState儲存下一個select選項
+      _setCity(_cityOption.value);
+      setstep(2);
     }
-
-    dispatch(setCity(_cityOption.value));
-    _setRoutesData(_options); //useState儲存下一個select選項
-    _setCity(_cityOption.value);
-    setstep(2);
+    
   }
 
   function _handleRouteSelected(_routeOption) {

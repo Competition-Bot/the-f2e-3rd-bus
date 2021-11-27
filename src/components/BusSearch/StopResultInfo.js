@@ -103,7 +103,7 @@ function StopResultInfo() {
             _listData.map((item,i)=>(
               <StopListItem key={i} data={item} />
             ))
-            : null
+            : <div>等我一下下</div>
           }
 
         </div>

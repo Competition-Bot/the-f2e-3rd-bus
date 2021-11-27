@@ -4,6 +4,10 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { getEstimatedTimeOfStop, getSearchStation, getRouteDirection, getStationAllRoute } from '../../api/stopApi';
 import { setStationPos } from '../../actions/busActions'
+import { ReactComponent as Loading } from "../../assets/img/loading.svg";
+
+
+
 function StopResultInfo() {
   const { city, stopname } = useParams();
   const [_code, _setCode] = useState(0);
@@ -103,7 +107,7 @@ function StopResultInfo() {
             _listData.map((item,i)=>(
               <StopListItem key={i} data={item} />
             ))
-            : <div>等我一下下</div>
+            : <div className="mt-10 mx-auto"><Loading /></div>
           }
 
         </div>

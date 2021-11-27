@@ -79,12 +79,6 @@ function StopResultInfo() {
 
   }
 
-  function _handleSelectStation(index) {
-    console.log(index.key)
-    console.log("click")
-    //_setListData(_stationStopsData[index])
-  }
-
   return (
     <div className="h-full">
       <div className="lg:px-7 md:px-16 px-3 absolute w-full h-full">

@@ -17,7 +17,6 @@ function StopSearch() {
     let _options = [];
     if (_cityOption.value === "Unselected") return;
     const _allStation = await getCityAllStation(_cityOption.value);
-    console.log(_allStation);
     for (let i = 0; i < _allStation.length; i++) {
       const _option = {
         value: _allStation[i].stationName,
@@ -34,7 +33,7 @@ function StopSearch() {
  
   function _handleStationSelected(_stationOption) {
     _setStationName(_stationOption.value);
-    setstep(0);
+    setstep(3);
   }
 
   return (

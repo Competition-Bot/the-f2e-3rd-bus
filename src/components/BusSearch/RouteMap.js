@@ -8,17 +8,20 @@ import { iconBlack, iconYellow, iconOrange, icon_location, iconBlack_shadow } fr
 import brn_location from '../../assets/img/btn_location.svg';
 
 function RouteMap() {
-  let  _direction = useSelector((state) => state.busReducer.direction);
-  console.log(_direction)
+  let _direction = useSelector((state) => {
+    console.log(state.busReducer.direction)
+    return state.busReducer.direction});
   let _goBusRealTime = useSelector((state) => state.busReducer.goBusRealTime);
   let _backBusRealTime = useSelector((state) => state.busReducer.backBusRealTime)
   let _goStop = useSelector((state) => {
-    console.log(state.busReducer.goStopEstimatedTime)
     return state.busReducer.goStopEstimatedTime
   });
   let _backStop = useSelector(
     (state) => state.busReducer.backStopEstimatedTime
   );
+  useEffect(() => {
+    console.log(_goStop)
+  }, [_goStop])
 
   // useEffect(() => {
   //   console.log(_goBusRealTime)
@@ -99,17 +102,17 @@ function RouteMap() {
         _direction ?
           <>
             {_goStop ?
-              _goStop.map((item) => (
-                <_renderMarker data={item} />
-              ))
+              _goStop.map(function(item,index) {
+                <_renderMarker key={`renderMaker_go_${index}`} data={item} />
+              })
               : null
             }
           </>
           :
           <>
             {_backStop ?
-              _backStop.map((item) => (
-                <_renderMarker data={item} />
+              _backStop.map((item,index) => (
+                <_renderMarker key={`renderMaker_go_${index}`} data={item} />
               ))
               : null
             }

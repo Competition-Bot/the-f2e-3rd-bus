@@ -1,6 +1,6 @@
 function NewsDetail(){
     return(
-        <div className="bg-gray-300 py-12 px-9 h-screen lg:px-48">
+        <div className="py-12 px-9 h-screen lg:px-48">
             <div className="text-3xl font-medium">振興券專案祭出超值優惠，大溪復興一日交通票券10月7日開賣!</div>
             <div className=" text-gray-400 pr-5 pt-4">2021/10/1</div>
             <div class="line pt-4"></div>

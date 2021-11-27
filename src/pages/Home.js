@@ -1,7 +1,11 @@
 import { Container } from "postcss";
 import Select from "react-select";
 import AllCity from "../Json/City.json";
-import { Link } from "react-router-dom";
+import { Link, Switch, Route, NavLink } from "react-router-dom";
+import HomeRouteSearch from "../components/HomeRouteSearch";
+import HomeStopSearch from "../components/HomeStopSearch";
+
+
 import line_blue from "../assets/img/line_blue.png";
 import HomeImage from "../assets/img/HomeImage.png";
 import Vector_blue from "../assets/img/Vector_blue.png";
@@ -12,6 +16,8 @@ import Vector_blue from "../assets/img/Vector_blue.png";
 
 
 function Home() {
+
+
   return (
     <div className="">
       {/* 主介面 */}
@@ -19,18 +25,43 @@ function Home() {
         <div className="">
           <div className="text-3xl text-blue-400 font-bold">Take a Bus!<br />查詢公車不再是件麻煩事</div>
           <div className="flex py-7">
-            <div className="home_switch_on mr-2">找路線</div>
+            <NavLink
+              to="/"
+              className="home_switch_on mr-2"
+              activeClassName="home_switch_on"
+            >
+              找路線
+            </NavLink>
             <img className="w-8 h-px mt-6 " src={line_blue} alt="" />
-            <div className="home_switch_off ml-2">找站牌</div>
+            <NavLink
+              to="/"
+              activeClassName="home_switch_on"
+              className="home_switch_off ml-2"
+            >
+              找站牌
+            </NavLink>
           </div>
-          <div className="md:flex">
-            <Select className="w-32 mr-7" options={AllCity} />
-            {/* <select className="border-gray-400  border rounded-md" ></select> */}
-            <Select className="w-64 mt-7 md:mt-0" />
-          </div>
-          <div className=" btn shadow-btn mt-7">查詢</div>
+          <Switch>
+            <Route exact path="/">
+              <HomeRouteSearch />
+            </Route>
+            <Route exact path="/">
+              <HomeStopSearch/>
+            </Route>
+          </Switch>
+          <Link
+            to="/"
+            className="btn shadow-btn mt-7 "
+          >
+            查詢
+          </Link>
+          {/* <label>
+            <input type="checkbox" className="transition checked:bg-yellow-600 cursor-pointer h-16 w-64 rounded-full appearance-none bg-blue-200" ></input>
+          </label> */}
         </div>
         <div className="pt-14  lg:pt-0  "><img className=" w-176 lg:pl-14 " src={HomeImage} /></div>
+
+
       </div>
 
       {/* 最新消息列表 */}

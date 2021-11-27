@@ -32,10 +32,10 @@ function PlanSearch() {
           <Route exact path="/plansearch">
             <PlanSearchBar />
           </Route>
-          <Route exact path="/plansearch/result">
+          <Route path="/plansearch/result">
             <PlanResult />
           </Route>
-          <Route path="/plansearch/detail">
+          <Route path="/plansearch/detail/:planresultid">
             <PlanDetail />
           </Route>
         </Switch>

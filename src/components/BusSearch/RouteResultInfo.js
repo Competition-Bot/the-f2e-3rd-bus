@@ -96,9 +96,9 @@ function RouteResultInfo() {
           <div className="grid gap-6 grid-flow-col justify-start relative">
             <a onClick={_changeRoute} className={`tab-line hover:tab-line-hover ${_go ? "tab-line-active" : ''}`}>往{_goStopName}</a>
             <a onClick={_changeRoute} className={`tab-line hover:tab-line-hover ${!_go ? "tab-line-active" : ''}`}>往{_backStopName}</a>
-            <div className="tab-line text-white absolute right-0">
+            {/* <div className="tab-line text-white absolute right-0">
             {_goStopName} - {_backStopName}
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="mt-4 pb-28 bg-white h-full shadow-card grid auto-rows-max overflow-scroll">

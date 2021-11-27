@@ -94,6 +94,18 @@ body {
   .step-circle-active:after {
     @apply border-blue-400;
   }
+  .step-circle-dash {
+    @apply bg-white text-blue-300 border-blue-300 border-2 border-dashed;
+  }
+  .step-circle-dash:after {
+    @apply border-dashed;
+  }
+  .step-circle-dash-active {
+    @apply text-blue-400 border-blue-400;
+  }
+  .step-circle-dash-active:after {
+    @apply border-blue-400;
+  }
   .line-dropdown {
     @apply rounded-full w-8 border-white mx-auto bg-white cursor-pointer;
     border: 1.5px solid white;

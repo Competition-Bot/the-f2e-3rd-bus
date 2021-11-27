@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { setCity, setRouteInfo } from "../../actions/busActions";
 import Select from "react-select";
@@ -12,10 +12,11 @@ const BusSearchBar = () => {
   let _city = useSelector((state) => state.busReducer.city);
   const [routesData, setRoutesData] = useState([]);
   const dispatch = useDispatch();
+  const [step, setstep] = useState(1);
 
   async function _handleCitySelected(_cityOption) {
-    console.log("click");
     let options = [];
+    if (_cityOption.value === "Unselected") return;
     const _allRoute = await getCityAllRoute(_cityOption.value);
 
     for (let i = 0; i < _allRoute.length; i++) {
@@ -28,6 +29,8 @@ const BusSearchBar = () => {
     }
     dispatch(setCity(_cityOption.value));
     setRoutesData(options); //useState儲存下一個select選項
+
+    setstep(2);
   }
 
   async function _handleRouteSelected(_routeOption) {
@@ -36,7 +39,6 @@ const BusSearchBar = () => {
       _routeOption.label,
       _routeOption.value
     );
-    console.log(_data)
     const _routeData = {
       routeName: _routeOption.label,
       routeUID: _routeOption.value,
@@ -46,31 +48,48 @@ const BusSearchBar = () => {
       bufferZone: _data.bufferZone,
     };
     dispatch(setRouteInfo(_routeData));
+
+    setstep(3);
   }
 
   return (
     <div className="mt-4 bg-white h-full shadow-card md:pt-8 pt-6 grid auto-rows-max items-start justify-center gap-6">
       <div className="grid grid-rows-2 justify-start gap-x-9 gap-y-4 items-center">
-        <div className="step-circle bg-blue-400 step-circle-active">1</div>
+        <div
+          className={`step-circle ${step === 1 ? "step-circle-active" : ""}`}
+        >
+          1
+        </div>
         <div className="text-blue-400 font-medium">選擇縣市</div>
         <Select
           className="col-start-2 w-36"
           options={AllCity}
           onChange={_handleCitySelected}
+          defaultValue={AllCity[0]}
         />
       </div>
       <div className="grid grid-rows-2 justify-start gap-x-9 gap-y-4 items-center">
-        <div className="step-circle">2</div>
+        <div
+          className={`step-circle ${step === 2 ? "step-circle-active" : ""}`}
+        >
+          2
+        </div>
         <div className="text-blue-400 font-medium">輸入公車號碼</div>
         <Select
           className="col-start-2 md:w-60 w-56"
           options={routesData}
           onChange={_handleRouteSelected}
+          isDisabled={step >= 2 ? false : true}
         />
       </div>
       <Link
         to={`/bussearch/route/${_routeUID}`}
-        className="btn justify-self-center mt-10"
+        className={`btn justify-self-center mt-10 ${
+          step !== 3 ? "bg-gray-300" : ""
+        }`}
+        onClick={(e) => {
+          if (step !== 3) e.preventDefault();
+        }}
       >
         查詢
       </Link>

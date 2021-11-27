@@ -1,12 +1,21 @@
+
+import { useSelector } from "react-redux";
+
 function RouteResultFare() {
+  let _routeName = useSelector((state) => state.busReducer.routeName);
+  let _goStopName = useSelector((state) => state.busReducer.goStopName);
+  let _backStopName = useSelector((state) => state.busReducer.backStopName);
+  let test = useSelector((state) => state.busReducer);
+  console.log(test)
+
   return (
     <div className="h-full">
       <div className="lg:px-7 md:px-16 px-3 absolute w-full h-full">
-        <div className="px-5">
-          <h2 className="text-white mb-2">284</h2>
-          <div className="tab-line text-white">汐止社后 - 景美</div>
+        <div className="px-3">
+          <h2 className="text-white mb-2">{_routeName}</h2>
+          <div className="tab-line text-white">{_goStopName} - {_backStopName}</div>
         </div>
-        <div className="mt-4 pb-28 pt-5 px-6 bg-white h-full shadow-card grid auto-rows-max overflow-scroll">
+        <div className="mt-4 pb-32 pt-5 px-6 bg-white h-full shadow-card grid auto-rows-max overflow-scroll">
           <div className="relative pl-155 pb-4">
             <div className="flex items-center relative mb-2">
               <div className="rounded-full w-4 h-4 bg-blue-400 absolute -left-8"></div>

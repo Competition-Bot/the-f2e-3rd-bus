@@ -18,7 +18,6 @@ export function setCity(_city) {
 }
 
 export function setRouteInfo(_routeData) {
-    console.log(_routeData)
     return {
         type: SET_ROUTE_Info,
         payload: {
@@ -35,6 +34,7 @@ export function setRouteInfo(_routeData) {
 
 /* 路線名稱/去程站牌預估站到站/返程站牌預估站到站/去程公車預估站到站/返程公車預估站到站*/
 export function setRouteEstimatedTime(_goRoute, _backRoute, _goBusEstimated, _backBusEstimated) {
+
     return {
         type: SET_ROUTE_ESTIMATEDTIME,
         payload: {
@@ -49,6 +49,7 @@ export function setRouteEstimatedTime(_goRoute, _backRoute, _goBusEstimated, _ba
 }
 
 export function setStopEstimatedTime(_goRouteStop, _backRoutegoStop) {
+    console.log(_goRouteStop)
     return {
         type: SET_STOP_ESTIMATEDTIME,
         payload: {

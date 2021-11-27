@@ -36,7 +36,7 @@ function News() {
 
 
 {/* pagenumber */}
-<div class="flex justify-center ...">
+<div className="flex justify-center ...">
       <div className=" px-4 py-3 flex items-center justify-between  sm:px-6">
         <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
           <div>

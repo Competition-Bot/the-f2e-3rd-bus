@@ -11,22 +11,22 @@ body {
   letter-spacing: 0.03em;
 }
 
-/* bussearch */
+/* search */
 
-.bussearch {
+.search {
   display: grid;
   grid-template-rows: min-content 74% auto;
 }
 
 @media (min-width: 768px) {
-  .bussearch {
+  .search {
     grid-template-rows: min-content 50% auto;
     grid-template-columns: 100%;
   }
 }
 
 @media (min-width: 1024px) {
-  .bussearch {
+  .search {
     grid-template-columns: 465px auto;
     grid-template-rows: min-content auto;
     grid-auto-flow: column;
@@ -88,12 +88,33 @@ body {
     @apply border-r-2 border-blue-300 absolute h-12;
     @apply top-12;
   }
+  .step-circle-active {
+    @apply bg-blue-400;
+  }
   .step-circle-active:after {
+    @apply border-blue-400;
+  }
+  .step-circle-dash {
+    @apply bg-white text-blue-300 border-blue-300 border-2 border-dashed;
+  }
+  .step-circle-dash:after {
+    @apply border-dashed;
+  }
+  .step-circle-dash-active {
+    @apply text-blue-400 border-blue-400;
+  }
+  .step-circle-dash-active:after {
     @apply border-blue-400;
   }
   .line-dropdown {
     @apply rounded-full w-8 border-white mx-auto bg-white cursor-pointer;
     border: 1.5px solid white;
+  }
+
+  /* plansearch */
+  .planlistitem {
+    @apply grid p-4 items-center gap-4 relative;
+    grid-template-columns: auto max-content max-content;
   }
 }
 

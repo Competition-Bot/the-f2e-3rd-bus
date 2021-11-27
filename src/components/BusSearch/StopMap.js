@@ -5,11 +5,10 @@ import "leaflet/dist/leaflet.css";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import "../BusSearch/RouteMap.css";
-import { iconBlack, iconYellow, icon_location} from './MarkerIcon';
+import { iconBlack, iconYellow, icon_location, iconBlack_shadow } from './MarkerIcon';
 import location from '../../assets/img/btn_location.svg';
 
 const _renderMarker = () => {
-
 
     let icon = iconYellow
 
@@ -33,19 +32,22 @@ const _renderMarker = () => {
 
 function StopMap() {
 
-    function LocationMarker() {
-        const [position, setPosition] = useState(null);
+ 
+    // function LocationMarker() {
+    //     const [position, setPosition] = useState(null);
 
-        const map = useMap();
-        map.locate().on("locationfound", function (e) {
-            setPosition(e.latlng);
-            map.flyTo(e.latlng, map.getZoom());
-        });
+    //     const map = useMap();
+    //     useEffect(() => {
+    //         map.locate().on("locationfound", function (e) {
+    //             setPosition(e.latlng);
+    //             map.flyTo(e.latlng, map.getZoom());
+    //         });
+    //     }, [map]);
 
-        return position === null ? null : (
-            <Marker position={position} icon={icon_location}></Marker>
-        );
-    }
+    //     return position === null ? null : (
+    //         <Marker position={position} icon={icon_location}></Marker>
+    //     );
+    // }
 
     return (
 
@@ -73,7 +75,7 @@ function StopMap() {
                 : null
             } */}
 
-            {/* <LocationMarker /> */} 
+            {/* <LocationMarker /> */}
             <div className="location" ><img src={location} alt='location' /></div>
         </MapContainer>
 

@@ -33,7 +33,7 @@ function StopSearch() {
  
   function _handleStationSelected(_stationOption) {
     _setStationName(_stationOption.value);
-    setstep(0);
+    setstep(3);
   }
 
   return (

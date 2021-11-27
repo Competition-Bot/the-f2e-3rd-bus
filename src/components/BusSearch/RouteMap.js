@@ -102,17 +102,17 @@ function RouteMap() {
         _direction ?
           <>
             {_goStop ?
-              _goStop.map((item) => (
-                <_renderMarker data={item} />
-              ))
+              _goStop.map(function(item,index) {
+                <_renderMarker key={`renderMaker_go_${index}`} data={item} />
+              })
               : null
             }
           </>
           :
           <>
             {_backStop ?
-              _backStop.map((item) => (
-                <_renderMarker data={item} />
+              _backStop.map((item,index) => (
+                <_renderMarker key={`renderMaker_go_${index}`} data={item} />
               ))
               : null
             }

@@ -14,9 +14,6 @@ async function getNews() {
 export default getNews;
 
 
-
-
-
 function getAuthorizationHeader() {
     //  填入自己 ID、KEY 開始
         let AppID = 'FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF';
@@ -30,3 +27,6 @@ function getAuthorizationHeader() {
         let Authorization = 'hmac username=\"' + AppID + '\", algorithm=\"hmac-sha1\", headers=\"x-date\", signature=\"' + HMAC + '\"';
         return { 'Authorization': Authorization, 'X-Date': GMTString }; 
     }
+
+
+    

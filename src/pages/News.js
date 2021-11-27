@@ -1,6 +1,8 @@
 import AllCity from "../Json/City.json";
 import Select from "react-select";
 import { Link } from "react-router-dom";
+import news from "../Json/News.json";
+import NewsItem from "../components/NewsItem";
 
 import Vector_blue from "../assets/img/Vector_blue.png";
 import Vector_blue_left from "../assets/img/Vector_blue_left.png";
@@ -16,24 +18,10 @@ function News() {
         <Select className="w-32 " options={AllCity} />
 
       </div>
-      <div class="line"></div>
-
-      <Link to="/newsdetail/1">
-      <ul>
-        <span className="flex items-center justify-between py-4">
-        {/* <Link to={`/ProductList/ProductItem/${product.id}`}> */}
-         
-          <span className="truncate">
-            {/* <span className=" text-gray-400 pr-5">2021/11/17</span> */}
-            <span className="text-blue-400  w-20 pr-5" >新北</span>
-            <span className="pr-5 ">搭乘公車捷運請佩戴口罩，未戴口罩得拒載並處以最高1萬5千元罰鍰</span>
-          </span>
-          <img className=" h-3 w-2" src={Vector_blue} />
-        </span>
-
-
-      </ul>
-      </Link> 
+      <div class="line"></div>    
+      {news.map(news => (
+              <NewsItem key={news.id} news={news}/>
+            ))}
 
 {/* pagenumber */}
 <div className="flex justify-center ...">

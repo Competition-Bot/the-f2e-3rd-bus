@@ -4,8 +4,10 @@ import AllCity from "../Json/City.json";
 import { Link, Switch, Route, NavLink } from "react-router-dom";
 import HomeRouteSearch from "../components/HomeRouteSearch";
 import HomeStopSearch from "../components/HomeStopSearch";
+import NewsItem from "../components/NewsItem";
 import React, { useState,useEffect } from 'react';
-import getNews from "../api/newsApi"
+import News from "../Json/News.json"
+// import getNews from "../api/newsApi"
 
 
 import line_blue from "../assets/img/line_blue.png";
@@ -18,14 +20,12 @@ import Vector_blue from "../assets/img/Vector_blue.png";
 
 
 function Home() {
-  const [data, setData] = useState([]);
-  useEffect(async () => { setData(await getNews()) }, [])
+  // const [newsdata, setData] = useState([]);
+  // useEffect(async () => { setData(await getNews()) }, [])
 
+let news5 = News.slice(0,5)
 
   return (
-    
-
-
     <div className="">
       {/* 主介面 */}
       <div className="py-16 p-10 md:px-40 md:py-24 xl:flex">
@@ -62,12 +62,11 @@ function Home() {
           >
             查詢
           </Link>
-          {/* <label>
-            <input type="checkbox" className="transition checked:bg-yellow-600 cursor-pointer h-16 w-64 rounded-full appearance-none bg-blue-200" ></input>
-          </label> */}
         </div>
-        <div className="pt-14   lg:pt-0  "><img className=" min-w-327 md:min-w-420  lg:min-w-628" src={HomeImage} /></div>
+        <div className="pt-14   lg:pt-0  "><img className=" min-w-327  md:min-w-420  lg:min-w-628" src={HomeImage} /></div>
       </div>
+
+
 
       {/* 最新消息列表 */}
       <div className="bg-gray-200 p-9 md:p-12 lg:px-40 ">
@@ -80,21 +79,10 @@ function Home() {
         <div className="line"></div>
         <div>
         </div>
-        <Link to="/newsdetail/1">
-        <ul>
-          <span className="flex items-center justify-between py-4">
-            {/* <span className=" text-gray-400 pr-5">2021/11/17</span> */}
-            <span className="truncate">
-              <span className="text-blue-400  w-20 pr-5" >新北</span>
-              <span className="pr-5 ">搭乘公車捷運請佩戴口罩，未戴口罩得拒載並處以最高1萬5千元罰鍰</span>
-            </span>
-            <img className=" h-3 w-2" src={Vector_blue} />
-          </span>
-
-
-        </ul>
-        </Link>
-
+        
+        {news5.map(news => (
+              <NewsItem key={news.id} news={news}/>
+            ))}
       </div>
 
 

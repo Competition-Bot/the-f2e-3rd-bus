@@ -41,6 +41,9 @@ module.exports = {
         card: "0px 4px 8px rgba(0, 0, 0, 0.06)",
         busCircle: "0px 0px 4px #005DC0",
       },
+      fontFamily: {
+        ch: ["Noto Sans TC", "sans-serif"],
+      },
     },
   },
   variants: {

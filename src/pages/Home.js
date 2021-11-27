@@ -28,7 +28,7 @@ function Home() {
 
     <div className="">
       {/* 主介面 */}
-      <div className="py-16 p-10 md:px-40 md:py-24 lg:flex">
+      <div className="py-16 p-10 md:px-40 md:py-24 xl:flex">
         <div className="">
           <div className="text-3xl text-blue-400 font-bold">Take a Bus!<br />查詢公車不再是件麻煩事</div>
           <div className="flex py-7">
@@ -66,7 +66,7 @@ function Home() {
             <input type="checkbox" className="transition checked:bg-yellow-600 cursor-pointer h-16 w-64 rounded-full appearance-none bg-blue-200" ></input>
           </label> */}
         </div>
-        <div className="pt-14  lg:pt-0  "><img className=" max-w-7xl lg:pl-14 w-176" src={HomeImage} /></div>
+        <div className="pt-14   lg:pt-0  "><img className=" min-w-327 md:min-w-420  lg:min-w-628" src={HomeImage} /></div>
       </div>
 
       {/* 最新消息列表 */}
@@ -80,6 +80,7 @@ function Home() {
         <div className="line"></div>
         <div>
         </div>
+        <Link to="/newsdetail/1">
         <ul>
           <span className="flex items-center justify-between py-4">
             {/* <span className=" text-gray-400 pr-5">2021/11/17</span> */}
@@ -92,6 +93,7 @@ function Home() {
 
 
         </ul>
+        </Link>
 
       </div>
 

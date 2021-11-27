@@ -18,11 +18,11 @@ function News() {
       </div>
       <div class="line"></div>
 
-
+      <Link to="/newsdetail/1">
       <ul>
         <span className="flex items-center justify-between py-4">
         {/* <Link to={`/ProductList/ProductItem/${product.id}`}> */}
-         <Link to="/newsdetail/1">detail</Link> 
+         
           <span className="truncate">
             {/* <span className=" text-gray-400 pr-5">2021/11/17</span> */}
             <span className="text-blue-400  w-20 pr-5" >新北</span>
@@ -33,7 +33,7 @@ function News() {
 
 
       </ul>
-
+      </Link> 
 
 {/* pagenumber */}
 <div className="flex justify-center ...">

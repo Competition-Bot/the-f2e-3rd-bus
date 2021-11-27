@@ -63,14 +63,16 @@ const routes = [
 
 // map, render, and wrap your breadcrumb components however you want.
 const Breadcrumbs = ({ breadcrumbs }) => (
+
   <div className="flex items-center px-12 py-5 lg:px-48">
     {breadcrumbs.map(({
       match,
       breadcrumb
     }) => (
       <span className="flex items-center group" key={match.url}>
-        <div className="bg-black group-hover:bg-blue-400 w-3.5 h-3.5 rounded-full mr-2.5"></div>
-        <NavLink className="text-black group-hover:text-blue-400 mr-5" to={match.url}>{breadcrumb}</NavLink>
+        <img className=" w-8 h-px mr-5" src={line_black}/>
+        <div className="bg-blue-400  group-hover:bg-opacity-75 w-3.5 h-3.5 rounded-full mr-2.5"></div>
+        <NavLink className="text-blue-400 group-hover:text-opacity-75 mr-5" to={match.url}>{breadcrumb}</NavLink>
       </span>
     ))}
   </div>

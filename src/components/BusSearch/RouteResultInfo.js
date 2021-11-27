@@ -50,13 +50,13 @@ function RouteResultInfo() {
     }
   }
 
-  async function _handleStopAPI() {
-    const _estimatedStopData = await getRouteAllStop(_city, _routeName, _routeUID);
-    if (_estimatedStopData && _goRoute) {
-      let _goStopData = _estimatedStopData.goRoute;
-      let _backStopData = _estimatedStopData.backRoute;
-      _goRoute.forEach((item, index) => {
-        if (_goStopData[index].stopName === item.stopName) {
+  function _handleStopAPI() {
+    getRouteAllStop(_city, _routeName, _routeUID).then((_estimatedStopData)=>{
+      if (_estimatedStopData && _goRoute) {
+        let _goStopData = _estimatedStopData.goRoute;
+        let _backStopData = _estimatedStopData.backRoute;
+        
+        _goRoute.forEach((item, index) => {
           _goStopData[index] = {
             ..._goStopData[index],
             plateNumb: item.plateNumb,
@@ -65,10 +65,9 @@ function RouteResultInfo() {
             nextBusTime: item.nextBusTime,
             status: item.status,
           };
-        }
-      });
-      _backRoute.forEach((item, index) => {
-        if (_backStopData[index].stopName === item.stopName) {
+        });
+        
+        _backRoute.forEach((item, index) => {
           _backStopData[index] = {
             ..._backStopData[index],
             plateNumb: item.plateNumb,
@@ -77,15 +76,17 @@ function RouteResultInfo() {
             nextBusTime: item.nextBusTime,
             status: item.status,
           };
-        }
-      });
-      dispatch(
-        setStopEstimatedTime(
-          _goStopData,
-          _backStopData
-        )
-      );
-    }
+        });
+        
+        dispatch(
+          setStopEstimatedTime(
+            _goStopData,
+            _backStopData
+          )
+        );
+      }
+    })
+    
   }
 
   return (

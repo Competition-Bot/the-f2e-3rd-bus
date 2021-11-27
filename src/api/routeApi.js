@@ -45,10 +45,11 @@ export const getRouteAllStop = async (_city, _routeName) => {
     alert("查無資料!");
   }
 }
-
+var reg=/[u4E00-u9FA5]/g;
 //城市所有路線
 export const getCityAllRoute = async (city) => {
   try {
+    
     let _data = []
     let _routedata = {}
     let _url = `${baseUrl}/Route/City/${city}?$format=JSON`;
@@ -56,7 +57,7 @@ export const getCityAllRoute = async (city) => {
 
     result.data.forEach((item) => {
       _routedata = {
-        routeName: item.RouteName.Zh_tw,
+        routeName: item.RouteName.Zh_tw.replace(/[\u4e00-\u9fff\u3400-\u4dff\uf900-\ufaff]/g,'').replace(/[()-]/g,""),
         routeUID: item.RouteUID,
       }
       _data.push(_routedata)

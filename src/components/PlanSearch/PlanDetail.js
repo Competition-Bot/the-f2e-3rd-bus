@@ -26,10 +26,13 @@ function PlanDetail() {
   const _renderPlanInfo = () => {
     let list = [];
     data.step.forEach((item, idx) => {
-      if (idx !== 0) list.push(<AngleRight stroke="white" height="14" width="8" />);
+      if (idx !== 0) list.push(<AngleRight key={"angle"+idx} stroke="white" height="14" width="8" />);
       if (item.type === "walk") {
         list.push(
-          <div className="flex items-center h-10 pt-2 w-max">
+          <div 
+          className="flex items-center h-10 pt-2 w-max"
+          key={"plandeInfo"+idx}
+          >
             <FontAwesomeIcon
               icon={faWalking}
               size="lg"
@@ -41,7 +44,10 @@ function PlanDetail() {
         );
       } else if (item.type === "bus") {
         list.push(
-          <div className="flex items-center h-10 w-max">
+          <div 
+          className="flex items-center h-10 w-max"
+          key={"plandeInfo"+idx}
+          >
             <FontAwesomeIcon
               icon={faBus}
               size="lg"
@@ -100,7 +106,7 @@ function PlanDetail() {
                 <div>從 <span className="text-blue-400">{item.start.label}</span> 到 <span className="text-blue-400">{item.end.label}</span></div>
               </div>
               <div className="flex items-center mt-4">
-                <Link to="/bussearch/route/:routename" className="btn hover:btn-hover">
+                <Link to={`/bussearch/route/${item.city}/${item.name}`} className="btn hover:btn-hover">
                   查看公車動態
                 </Link>
                 <div className="py-1.5 px-3 bg-gray-300 font-medium absolute right-0">

@@ -62,7 +62,6 @@ export function setBusRealTime(_goBusRealTime,_backBusRealTime){
 }
 
 export function setStopEstimatedTime(_goRouteStop, _backRoutegoStop) {
-    console.log(_goRouteStop)
     return {
         type: SET_STOP_ESTIMATEDTIME,
         payload: {

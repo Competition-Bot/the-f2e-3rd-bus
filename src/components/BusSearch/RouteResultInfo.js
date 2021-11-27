@@ -23,7 +23,6 @@ function RouteResultInfo() {
   const { city, routename } = useParams();
 
   let _goRoute = useSelector((state) => {
-    console.log(state.busReducer.goRouteEstimatedTime)
     return state.busReducer.goRouteEstimatedTime
   }
   );
@@ -37,15 +36,12 @@ function RouteResultInfo() {
   }, []);
 
   useEffect(() => {
-    if (_getEstimateData) {
       _handleStopAPI();
-    }
-
-  }, [_getEstimateData])
+  }, [_goRoute])
 
   function _changeRoute() {
     _setGo(!_go)
-    dispatch(setRouteDirection(_go));
+    dispatch(setRouteDirection(!_go));
 
   }
 
@@ -76,7 +72,6 @@ function RouteResultInfo() {
       routename,
     );
     if (_estimatedRouteData) {
-      console.log(_estimatedRouteData.goRoute)
       dispatch(
         setRouteEstimatedTime(
           _estimatedRouteData.goRoute,
@@ -97,13 +92,13 @@ function RouteResultInfo() {
   }
 
   async function _handleStopAPI() {
-    const _estimatedStopData = await getRouteAllStop(
+    const _stopOfRoute = await getRouteAllStop(
       city,
       routename
     );
-    if (_estimatedStopData && _goRoute) {
-      let _goStopData = _estimatedStopData.goRoute;
-      let _backStopData = _estimatedStopData.backRoute;
+    if (_stopOfRoute && _goRoute) {
+      let _goStopData = _stopOfRoute.goRoute;
+      let _backStopData = _stopOfRoute.backRoute;
       _goRoute.forEach((item, index) => {
         _goStopData[index] = {
           ..._goStopData[index],

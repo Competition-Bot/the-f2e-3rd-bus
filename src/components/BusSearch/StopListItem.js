@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 
 function StopListItem({data}) {
-    console.log(data)
     const statusStyleList = [
         "bg-gray-300 text-white",
         "bg-gray-300 text-black",

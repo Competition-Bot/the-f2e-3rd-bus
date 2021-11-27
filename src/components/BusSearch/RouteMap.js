@@ -5,18 +5,18 @@ import "leaflet/dist/leaflet.css";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import "../BusSearch/RouteMap.css";
-import { iconBlack, iconYellow, iconOrange } from './MarkerIcon';
-import location from '../../assets/img/location.svg';
+import { iconBlack, iconYellow, iconOrange,icon_location,iconBlack_shadow} from './MarkerIcon';
+import brn_location from '../../assets/img/btn_location.svg';
 
 let buslist = []
 
-var mapCenterPos=[25.0242987, 121.5441439]
-const limeOptions = { color: '#333333' }
+var mapCenterPos = [25.0242987, 121.5441439]
+const polylineOptions = { color: '#828282', opacity: '0.5', weight: '5' }
 
 const _renderMarker = ({ data }) => {
 
   buslist.push(data.stopPosition)
-  let icon = iconBlack
+  let icon = iconBlack_shadow
 
   if (data.estimateTime == '進佔中') {
     icon = iconOrange
@@ -25,10 +25,10 @@ const _renderMarker = ({ data }) => {
     icon = iconYellow
   }
   else {
-    icon = iconBlack
+    icon = iconBlack_shadow
   }
 
- 
+  
 
   return (
     <Marker
@@ -36,12 +36,13 @@ const _renderMarker = ({ data }) => {
       icon={icon}
       key={`marker-${data.stationUID}`}
     >
-      <Popup className="popup flex" position={data.stopPosition} closeButton={true}
-      >
-        <h2 className="flex text-white text-base font-semibold w-auto justify-center items-center">{data.stopName}</h2>
-        <h2 className="flex bg-white text-yellow-400 text-base font-semibold w-15 h-7 justify-center items-center rounded-md mt-1">{data.estimateTime}</h2>
-
+      <Popup className="popup flex" position={data.stopPosition} closeButton={true}>
+        <div className="">
+          <h2 className="flex text-white text-base font-semibold w-auto justify-center items-center">{data.stopName}</h2>
+          <h2 className="flex bg-white text-yellow-400 text-base font-semibold w-15 h-7 justify-center items-center rounded-md mt-1">{data.estimateTime}</h2>
+        </div>
       </Popup>
+      <Polyline pathOptions={polylineOptions} positions={buslist}></Polyline>
     </Marker>
   )
 }
@@ -59,11 +60,6 @@ function RouteMap() {
 
   // }, [_city])
   const [centerPos, setPosition] = useState(mapCenterPos);
-
-  useEffect(() => {
-    setPosition(mapCenterPos)
-  }, [mapCenterPos])
-
 
 
   function ChangeMap({ center }) {
@@ -93,16 +89,16 @@ function RouteMap() {
       />
 
 
-      <MarkerClusterGroup>
+      {/* <MarkerClusterGroup> */}
         {_goStop ?
           _goStop.map((item) => (
             <_renderMarker data={item} />
           ))
           : null
         }
-      </MarkerClusterGroup>
-      <Polyline pathOptions={limeOptions} positions={buslist}></Polyline>
-      <div className="location"><img src={location} alt='location'/></div>
+      {/* </MarkerClusterGroup> */}
+
+      <div className="location" ><img src={brn_location} alt='location' /></div>
     </MapContainer>
   );
 }

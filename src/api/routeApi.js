@@ -151,6 +151,7 @@ export const getEstimatedTimeOfRoute = async (_city, _routeName) => {
       goRoute,
       backRoute
     }
+    console.log(goRoute)
     return _data;
 
   } catch (err) {

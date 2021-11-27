@@ -77,7 +77,7 @@ function SearchBreadCrumb() {
           <div className="rounded-full w-4 h-4 bg-yellow-400"></div>
           <div className="text-white md:text-base text-sm">路線方案</div>
         </Route>
-        <Route exact path="/plansearch/detail">
+        <Route exact path="/plansearch/detail/:planresultid">
           <NavLink
             to="/plansearch/result"
             className="text-white grid grid-flow-col md:gap-3 gap-2 items-center justify-start"

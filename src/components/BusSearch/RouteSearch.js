@@ -37,7 +37,7 @@ const BusSearchBar = () => {
 
   function _handleRouteSelected(_routeOption) {
     _setRouteName(_routeOption.value);
-    setstep(0);
+    setstep(3);
   }
 
   return (
@@ -58,7 +58,7 @@ const BusSearchBar = () => {
       </div>
       <div className="grid grid-rows-2 justify-start gap-x-9 gap-y-4 items-center">
         <div
-          className={`step-circle ${step !== 1 ? "step-circle-active" : ""}`}
+          className={`step-circle ${step === 2 ? "step-circle-active" : ""}`}
         >
           2
         </div>
@@ -67,13 +67,16 @@ const BusSearchBar = () => {
           className="col-start-2 md:w-60 w-56"
           options={_routesData}
           onChange={_handleRouteSelected}
+          isDisabled={step >= 2 ? false : true}
         />
       </div>
       <Link
-        to={`/bussearch/route/${_city}/${_routeName}`}
-        className="btn justify-self-center mt-10"
+        to={`/bussearch/route/${_city}/${_routeName}`}        
+        className={`btn justify-self-center mt-10 ${
+          step !== 3 ? "bg-gray-300" : ""
+        }`}
         onClick={(e) => {
-          if (step !== 0) e.preventDefault();
+          if (step !== 3) e.preventDefault();
         }}
       >
         查詢

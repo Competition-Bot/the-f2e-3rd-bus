@@ -7,20 +7,26 @@ import {
   setBusRealTime,
   setRouteEstimatedTime,
   setStopEstimatedTime,
+  setRouteDirection,
 } from "../../actions/busActions";
-import { 
-  getBusRealTime, 
-  getEstimatedTimeOfRoute, 
+import {
+  getBusRealTime,
+  getEstimatedTimeOfRoute,
   getRouteAllStop,
   getRouteInfo,
- } from "../../api/routeApi";
+} from "../../api/routeApi";
 
 function RouteResultInfo() {
   const dispatch = useDispatch();
   const [_go, _setGo] = useState(true)
-  const {city,routename} = useParams();
+  const [_getEstimateData, _setEstimateData] = useState(false)
+  const { city, routename } = useParams();
 
-  let _goRoute = useSelector((state) => state.busReducer.goRouteEstimatedTime);
+  let _goRoute = useSelector((state) => {
+    console.log(state.busReducer.goRouteEstimatedTime)
+    return state.busReducer.goRouteEstimatedTime
+  }
+  );
   let _backRoute = useSelector((state) => state.busReducer.backRouteEstimatedTime);
   let _goStopName = useSelector((state) => state.busReducer.goStopName);
   let _backStopName = useSelector((state) => state.busReducer.backStopName);
@@ -31,11 +37,16 @@ function RouteResultInfo() {
   }, []);
 
   useEffect(() => {
-    _handleStopAPI();
-  }, [_goRoute])
+    if (_getEstimateData) {
+      _handleStopAPI();
+    }
+
+  }, [_getEstimateData])
 
   function _changeRoute() {
     _setGo(!_go)
+    dispatch(setRouteDirection(_go));
+
   }
 
   //呼叫選取的路線詳細資料
@@ -51,7 +62,7 @@ function RouteResultInfo() {
       trickPrice: _data.trickPrice,
       bufferZone: _data.bufferZone,
     };
-    dispatch(setRouteInfo(_routeData));    
+    dispatch(setRouteInfo(_routeData));
   }
 
   //呼叫路線預估站到站資料
@@ -65,12 +76,14 @@ function RouteResultInfo() {
       routename,
     );
     if (_estimatedRouteData) {
+      console.log(_estimatedRouteData.goRoute)
       dispatch(
         setRouteEstimatedTime(
           _estimatedRouteData.goRoute,
           _estimatedRouteData.backRoute
         )
       );
+      _setEstimateData(true);
     }
     if (_realTimeData) {
       dispatch(
@@ -85,36 +98,35 @@ function RouteResultInfo() {
 
   async function _handleStopAPI() {
     const _estimatedStopData = await getRouteAllStop(
-      city, 
+      city,
       routename
     );
     if (_estimatedStopData && _goRoute) {
       let _goStopData = _estimatedStopData.goRoute;
       let _backStopData = _estimatedStopData.backRoute;
       _goRoute.forEach((item, index) => {
-        if (_goStopData[index].stopName === item.stopName) {
-          _goStopData[index] = {
-            ..._goStopData[index],
-            plateNumb: item.plateNumb,
-            stopID: item.stopID,
-            estimateTime: item.estimateTime,
-            nextBusTime: item.nextBusTime,
-            status: item.status,
-          };
-        }
-      });
+        _goStopData[index] = {
+          ..._goStopData[index],
+          plateNumb: item.plateNumb,
+          stopID: item.stopID,
+          estimateTime: item.estimateTime,
+          nextBusTime: item.nextBusTime,
+          status: item.status,
+        };
+      }
+      );
+
       _backRoute.forEach((item, index) => {
-        if (_backStopData[index].stopName === item.stopName) {
-          _backStopData[index] = {
-            ..._backStopData[index],
-            plateNumb: item.plateNumb,
-            stopID: item.stopID,
-            estimateTime: item.estimateTime,
-            nextBusTime: item.nextBusTime,
-            status: item.status,
-          };
-        }
+        _backStopData[index] = {
+          ..._backStopData[index],
+          plateNumb: item.plateNumb,
+          stopID: item.stopID,
+          estimateTime: item.estimateTime,
+          nextBusTime: item.nextBusTime,
+          status: item.status,
+        };
       });
+
       dispatch(
         setStopEstimatedTime(
           _goStopData,
@@ -124,6 +136,8 @@ function RouteResultInfo() {
     }
   }
 
+
+
   return (
     <div className="h-full">
       <div className="lg:px-7 md:px-16 px-3 absolute w-full h-full">
@@ -132,25 +146,25 @@ function RouteResultInfo() {
           <div className="grid gap-6 grid-flow-col justify-start relative">
             <a onClick={_changeRoute} className={`tab-line hover:tab-line-hover ${_go ? "tab-line-active" : ''}`}>往{_goStopName}</a>
             <a onClick={_changeRoute} className={`tab-line hover:tab-line-hover ${!_go ? "tab-line-active" : ''}`}>往{_backStopName}</a>
-            <div className="tab-line text-white absolute right-0">
-              {_goStopName} - {_backStopName}
-            </div>
-          </div>
-        </div>
+            {/* <div className="tab-line text-white absolute right-0">
+            {_goStopName} - {_backStopName}
+          </div> */}
+          </div >
+        </div >
         <div className="mt-4 pb-28 bg-white h-full shadow-card grid auto-rows-max overflow-scroll">
           {
             _go ?
               _goRoute.map((item) => (
-                <RouteListItem key={item.stopUID} routeData={item} />
+                <RouteListItem key={item.stopName} routeData={item} />
               ))
               : _backRoute.map((item) => (
-                <RouteListItem key={item.stopUID} routeData={item} />
+                <RouteListItem key={item.stopName} routeData={item} />
               ))
           }
         </div>
-      </div>
+      </div >
       <div className="bg-blue-400 w-full h-48 -mt-1"></div>
-    </div>
+    </div >
   );
 }
 

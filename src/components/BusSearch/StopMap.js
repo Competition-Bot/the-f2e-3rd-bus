@@ -6,19 +6,22 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import "../BusSearch/RouteMap.css";
 import { iconBlack, iconYellow, icon_location, iconBlack_shadow } from './MarkerIcon';
-import location from '../../assets/img/btn_location.svg';
+import location_icon from '../../assets/img/btn_location.svg';
+import useGeoLocation from '../BusSearch/useGeoLcation.js'
 
 const _renderMarker = () => {
 
     let icon = iconYellow
+    // const mapRef = useRef();
 
+   
     return (
         <Marker
             // position={data.stopPosition}
             icon={icon}
         // key={`marker-${data.stationUID}`}
         >
-            <Popup className="popup flex" position={[25.0242987, 121.5441439]} closeButton={true}>
+            <Popup className="busup flex" position={[25.0242987, 121.5441439]} closeButton={true}>
                 <div className="">
                     <h2 className="flex text-white text-base font-semibold w-auto justify-center items-center">站牌名字</h2>
                     <h2 className="flex bg-white text-yellow-400 text-base font-semibold w-15 h-7 justify-center items-center rounded-md mt-1">X個站牌</h2>
@@ -76,7 +79,7 @@ function StopMap() {
             } */}
 
             {/* <LocationMarker /> */}
-            <div className="location" ><img src={location} alt='location' /></div>
+            <div className="location" ><img src={location_icon} alt='location' /></div>
         </MapContainer>
 
     )

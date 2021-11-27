@@ -4,8 +4,9 @@ import "leaflet/dist/leaflet.css";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import "../BusSearch/RouteMap.css";
-import { iconBlack, iconYellow, iconOrange, icon_location, iconBlack_shadow } from './MarkerIcon';
+import { iconBlack, iconYellow, iconOrange, icon_location, iconBlack_shadow,iconBus } from './MarkerIcon';
 import brn_location from '../../assets/img/btn_location.svg';
+import '../PlanSearch/map.css'
 
 function RouteMap() {
   let _direction = useSelector((state) => {
@@ -47,8 +48,6 @@ function RouteMap() {
       icon = iconBlack_shadow
     }
 
-
-
     return (
       <Marker
         position={data.stopPosition}
@@ -68,16 +67,19 @@ function RouteMap() {
   // useEffect(() => {
 
   // }, [_city])
-  const [centerPos, setPosition] = useState(mapCenterPos);
-
-
-  function ChangeMap({ center }) {
-    let map = useMap();
-    if (center !== undefined) {
-      map.panTo(center);
-      setPosition(undefined)
-    }
-    return null;
+  const _renderBus=( {data} )=>{
+    console.log("Marker"+ data)
+    
+    return(
+      <Marker
+        position={data.BosPositon}
+        icon={iconBus}
+      >
+        <Popup className="popup flex" position={data.BosPositon} closeButton={true}>
+            <h2 className="flex text-white text-base font-semibold w-auto justify-center items-center">{data.PlateNumb}</h2>
+        </Popup>
+      </Marker>
+    )
   }
 
   return (
@@ -91,7 +93,6 @@ function RouteMap() {
       zoom={15}
       scrollWheelZoom={false}
     >
-      <ChangeMap center={centerPos} />
       <TileLayer
         url="https://api.mapbox.com/styles/v1/cindy1029/ckwev8vay0d4g14p9dip5htx5/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiY2luZHkxMDI5IiwiYSI6ImNrd2Vpd3EyNzA1NWQycXJ1OTh2ZWtpaXUifQ.odRRCORGIXPix4oKd1_R5g"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -108,8 +109,13 @@ function RouteMap() {
               ))
               : null
             }
+              {/* {_goBusRealTime ?
+                _goBusRealTime.map((item,index)=>(
+                  <_renderBus key={`renderMarker_go_${index}`} data={item} />
+                ))
+                : null
+               } */}
           </>
-
           :
           <>
             {_backStop ?
@@ -118,6 +124,12 @@ function RouteMap() {
               ))
               : null
             }
+            {/* {_backBusRealTime ?
+                _backBusRealTime.map((item,index)=>(
+                  <_renderBus key={`renderMarker_go_${index}`} data={item} />
+                ))
+                : null
+               } */}
           </>
 
       }

@@ -66,9 +66,7 @@ function Home() {
             <input type="checkbox" className="transition checked:bg-yellow-600 cursor-pointer h-16 w-64 rounded-full appearance-none bg-blue-200" ></input>
           </label> */}
         </div>
-        <div className="pt-14  lg:pt-0  "><img className=" w-176 lg:pl-14 " src={HomeImage} /></div>
-
-
+        <div className="pt-14  lg:pt-0  "><img className=" max-w-7xl lg:pl-14 w-176" src={HomeImage} /></div>
       </div>
 
       {/* 最新消息列表 */}

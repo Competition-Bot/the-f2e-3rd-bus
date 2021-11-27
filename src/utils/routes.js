@@ -40,7 +40,7 @@ export const routes = [
       },
       {
         name:"RouteResultInfo",
-        path: "/bussearch/route/:routeuid",
+        path: "/bussearch/route/:city/:routename",
         exact: true,
       },
       {

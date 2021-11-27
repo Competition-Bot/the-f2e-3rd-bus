@@ -2,7 +2,10 @@ import {
     SET_ROUTE_ESTIMATEDTIME,
     SET_CITY,
     SET_ROUTE_Info,
-    SET_STOP_ESTIMATEDTIME
+    SET_STOP_ESTIMATEDTIME,
+    SET_BUS_REALTIME,
+    SET_STATION_POS,
+    SET_ROUTE_DIRECTION
 } from '../utils/actionType/BusActionType'
 
 
@@ -33,23 +36,32 @@ export function setRouteInfo(_routeData) {
 }
 
 /* 路線名稱/去程站牌預估站到站/返程站牌預估站到站/去程公車預估站到站/返程公車預估站到站*/
-export function setRouteEstimatedTime(_goRoute, _backRoute, _goBusEstimated, _backBusEstimated) {
+export function setRouteEstimatedTime(_goRoute, _backRoute) {
 
     return {
         type: SET_ROUTE_ESTIMATEDTIME,
         payload: {
             goRouteEstimatedTime: _goRoute,
             backRouteEstimatedTime: _backRoute,
-            goBusEstimatedTime: _goBusEstimated,
-            backBusEstimatedTime: _backBusEstimated,
+            //goBusEstimatedTime: _goBusEstimated,
+            //backBusEstimatedTime: _backBusEstimated,
         }
 
     }
 
 }
 
+export function setBusRealTime(_goBusRealTime,_backBusRealTime){
+    return {
+        type: SET_BUS_REALTIME,
+        payload: {
+            goBusRealTime: _goBusRealTime,
+            backBusRealTime: _backBusRealTime,
+        }
+    }
+}
+
 export function setStopEstimatedTime(_goRouteStop, _backRoutegoStop) {
-    console.log(_goRouteStop)
     return {
         type: SET_STOP_ESTIMATEDTIME,
         payload: {
@@ -58,6 +70,24 @@ export function setStopEstimatedTime(_goRouteStop, _backRoutegoStop) {
         }
     }
 
+}
+
+export function setStationPos(_stationData){
+    return {
+        type: SET_STATION_POS,
+        payload: {
+            stationData: _stationData,
+        }
+    }
+}
+
+export function setRouteDirection(_dir) {
+    return {
+        type: SET_ROUTE_DIRECTION,
+        payload: {
+            direction: _dir
+        }
+    }
 }
 
 

@@ -35,13 +35,13 @@ function BusSearch() {
           <Route exact path="/bussearch/:type">
             <BusSearchBar />
           </Route>
-          <Route exact path="/bussearch/route/:routename">
+          <Route exact path="/bussearch/route/:city/:routename">
             <RouteResultInfo />
           </Route>
           <Route path="/bussearch/route/:routename/detail">
             <RouteResultFare />
           </Route>
-          <Route path="/bussearch/stop/:stopid">
+          <Route path="/bussearch/stop/:city/:stopname">
             <StopResultInfo />
           </Route>
         </Switch>

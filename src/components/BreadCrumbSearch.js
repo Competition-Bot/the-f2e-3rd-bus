@@ -48,7 +48,7 @@ function SearchBreadCrumb() {
           <div className="rounded-full w-4 h-4 bg-yellow-400"></div>
           <div className="text-white">班表/票價</div>
         </Route>
-        <Route exact path="/bussearch/stop/:stopid">
+        <Route exact path="/bussearch/stop/:city/:stopname">
           <NavLink
             to="/bussearch"
             className="text-white grid grid-flow-col md:gap-3 gap-2 items-center justify-start"

@@ -41,7 +41,7 @@ function BusSearch() {
           <Route path="/bussearch/route/:routename/detail">
             <RouteResultFare />
           </Route>
-          <Route path="/bussearch/stop/:stopid">
+          <Route path="/bussearch/stop/:city/:stopname">
             <StopResultInfo />
           </Route>
         </Switch>

@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useState} from "react";
 import { Link } from "react-router-dom";
 import { setCity } from "../../actions/busActions";

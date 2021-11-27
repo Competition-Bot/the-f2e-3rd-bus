@@ -2,7 +2,8 @@ import { ReactComponent as AngleRight } from "../../assets/icon/angle-right.svg"
 import { Link } from "react-router-dom";
 
 
-function StopListItem() {
+function StopListItem({data}) {
+    console.log(data)
     const statusStyleList = [
         "bg-gray-300 text-white",
         "bg-gray-300 text-black",
@@ -15,9 +16,9 @@ function StopListItem() {
     return (
         <Link to="/bussearch/route/:city/:routename" className="relative flex justify-between px-5 items-center">
             <div className="grid grid-flow-col auto-cols-max gap-x-5 items-center py-4">
-                <div className={`${statusStyleList[0]} px-4 py-1`}>{statusTextList[0]}</div>
+                <div className={`${statusStyleList[0]} px-4 py-1`}>{data.estimateTime}</div>
                 <div>
-                    <div>237 往捷運動物園</div>
+                    <div>{data.routeName} 往{data.direction}</div>
                     <div className="border-b border-gray-300 w-1/2 absolute bottom-0"></div>
                 </div>
             </div>

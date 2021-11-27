@@ -3,7 +3,8 @@ import {
     SET_CITY,
     SET_ROUTE_Info,
     SET_STOP_ESTIMATEDTIME,
-    SET_BUS_REALTIME
+    SET_BUS_REALTIME,
+    SET_STATION_POS
 } from '../utils/actionType/BusActionType'
 
 
@@ -68,6 +69,16 @@ export function setStopEstimatedTime(_goRouteStop, _backRoutegoStop) {
         }
     }
 
+}
+
+export function setStationPos(_stationData){
+    console.log(_stationData)
+    return {
+        type: SET_STATION_POS,
+        payload: {
+            stationData: _stationData,
+        }
+    }
 }
 
 

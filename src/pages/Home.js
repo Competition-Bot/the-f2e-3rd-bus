@@ -4,6 +4,8 @@ import AllCity from "../Json/City.json";
 import { Link, Switch, Route, NavLink } from "react-router-dom";
 import HomeRouteSearch from "../components/HomeRouteSearch";
 import HomeStopSearch from "../components/HomeStopSearch";
+import React, { useState,useEffect } from 'react';
+import getNews from "../api/newsApi"
 
 
 import line_blue from "../assets/img/line_blue.png";
@@ -16,9 +18,14 @@ import Vector_blue from "../assets/img/Vector_blue.png";
 
 
 function Home() {
+  const [data, setData] = useState([]);
+  useEffect(async () => { setData(await getNews()) }, [])
 
 
   return (
+    
+
+
     <div className="">
       {/* 主介面 */}
       <div className="py-16 p-10 md:px-40 md:py-24 lg:flex">
@@ -73,6 +80,8 @@ function Home() {
           </Link>
         </div>
         <div className="line"></div>
+        <div>
+        </div>
         <ul>
           <span className="flex items-center justify-between py-4">
             {/* <span className=" text-gray-400 pr-5">2021/11/17</span> */}

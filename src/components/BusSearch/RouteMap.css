@@ -1,5 +1,3 @@
-@import '~react-leaflet-markercluster/dist/styles.min.css';
-
 .popup .leaflet-popup-content-wrapper{
     background-color: #F9B835;
     margin-bottom: 20px;

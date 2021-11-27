@@ -27,14 +27,14 @@ function SearchBreadCrumb() {
           <LineDash className="md:w-auto w-5" alt="line" />
           <div className="rounded-full w-4 h-4 bg-yellow-400"></div>
           <div className="text-white md:text-base text-sm">{_routeName}</div>
-          <LineDash className="md:w-auto w-5" alt="line" />
+          {/* <LineDash className="md:w-auto w-5" alt="line" />
           <NavLink
             to="/bussearch/route/:routename/detail"
             className="text-white grid grid-flow-col md:gap-3 gap-2 items-center justify-start"
           >
             <CircleArrow alt="circle" className="rotate-180" />
             <span className="md:text-base text-sm">班表/票價</span>
-          </NavLink>
+          </NavLink> */}
         </Route>
         <Route exact path="/bussearch/route/:routename/detail">
           <NavLink

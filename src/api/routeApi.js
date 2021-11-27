@@ -16,7 +16,7 @@ export const getRouteAllStop = async (_city, _routeName) => {
 
     if (_result) {
       //所有去程站點
-      _result.data[0].Stops.forEach(item => {
+      _result.data[1].Stops.forEach(item => {
         _stopData = {
           stopName: item.StopName.Zh_tw,
           stopPosition: [item.StopPosition.PositionLat, item.StopPosition.PositionLon],
@@ -25,7 +25,7 @@ export const getRouteAllStop = async (_city, _routeName) => {
         goRoute.push(_stopData)
       });
       //所有返程站點
-      _result.data[1].Stops.forEach(item => {
+      _result.data[0].Stops.forEach(item => {
         _stopData = {
           stopName: item.StopName.Zh_tw,
           stopPosition: [item.StopPosition.PositionLat, item.StopPosition.PositionLon],
@@ -83,7 +83,6 @@ export const getRouteInfo = async (_city, _routeName) => {
         bufferZone: item.FareBufferZoneDescriptionZh
       }
     })
-    console.log(_routeData);
     return _routeData;
   } catch (e) {
     alert("查無資料!");
@@ -151,7 +150,6 @@ export const getEstimatedTimeOfRoute = async (_city, _routeName) => {
       goRoute,
       backRoute
     }
-    console.log(goRoute)
     return _data;
 
   } catch (err) {

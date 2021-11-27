@@ -3,6 +3,7 @@ export const SET_CITY = "SET_CITY";
 
 export const SET_ROUTE_Info = "SET_ROUTE_Info";
 
+export const SET_ROUTE_DIRECTION = "SET_ROUTE_DIRECTION";
 //設定選取路線
 export const SET_ROUTE_ESTIMATEDTIME = "SET_ROUTE_ESTIMATEDTIME";
 

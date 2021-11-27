@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 
 import Vector_blue from "../assets/img/Vector_blue.png";
 import Vector_blue_left from "../assets/img/Vector_blue_left.png";
+import Breadcrumbs from '../components/BreadCrumb';
 
 
 function News() {
   return (
-    <div className="px-12 py-9 h-screen lg:px-48">
+    <div className="px-12 py-9 h-screen lg:px-48 ">
+      {/* <Breadcrumbs/> */}
       <div className="flex justify-between items-center pb-4">
         <div className="text-3xl font-medium">最新消息</div>
         <Select className="w-32 " options={AllCity} />
@@ -20,7 +22,7 @@ function News() {
       <ul>
         <span className="flex items-center justify-between py-4">
         {/* <Link to={`/ProductList/ProductItem/${product.id}`}> */}
-         <Link to="/news/detail/1">detail</Link> 
+         <Link to="/newsdetail/1">detail</Link> 
           <span className="truncate">
             {/* <span className=" text-gray-400 pr-5">2021/11/17</span> */}
             <span className="text-blue-400  w-20 pr-5" >新北</span>

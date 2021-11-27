@@ -8,10 +8,10 @@ function RouteListItem({ data }) {
   const _renderPlanInfo = () => {
     let list = [];
     data.step.forEach((item, idx) => {
-      if (idx !== 0) list.push(<AngleRight stroke="#333333" />);
+      if (idx !== 0) list.push(<AngleRight key={`angle-${idx}`} stroke="#333333" />);
       if (item.type === "walk") {
         list.push(
-          <div className="flex items-end h-7 pt-1 w-max">
+          <div key={`step-${idx}`} className="flex items-end h-7 pt-1 w-max">
             <FontAwesomeIcon
               icon={faWalking}
               size="lg"
@@ -22,7 +22,7 @@ function RouteListItem({ data }) {
         );
       } else if (item.type === "bus") {
         list.push(
-          <div className="flex items-center h-7 pt-1 w-max">
+          <div key={`step-${idx}`} className="flex items-center h-7 pt-1 w-max">
             <FontAwesomeIcon
               icon={faBus}
               size="lg"

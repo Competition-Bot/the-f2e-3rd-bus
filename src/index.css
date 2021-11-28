@@ -134,9 +134,6 @@ body {
 }
 
 @layer utilities {
-  .w-176 {
-    width: 80rem;
-  }
   .min-width-465 {
     min-width: 465px;
   }
@@ -146,4 +143,28 @@ body {
   .pl-155 {
     padding-left: 1.55rem;
   }
+  .w-327{
+    width:327px;
+  }
+  .max-w-327{
+    max-width: 327px;
+  }
+  .min-w-327{
+    min-width: 327px;
+  }
+  .min-w-420{
+    min-width: 420px;
+  }
+  .max-w-420{
+    max-width: 420px;
+  }
+
+  .min-w-628{
+    min-width: 628px;
+  }
+  .max-w-628 {
+    max-width: 628px;
+  }
+
+
 }

@@ -1,29 +1,26 @@
+import NewsItem from "../components/NewsItem";
+import { useState } from "react";
+import News from "../Json/News.json";
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Link } from "react-router-dom";
 
-import React, { useState, useEffect } from "react";
-import getNews from "../api/newsApi";
-
 import HomeImage from "../assets/img/HomeImage.png";
-import Vector_blue from "../assets/img/Vector_blue.png";
 
 import RouteSearch from "../components/BusSearch/RouteSearch";
 import StopSearch from "../components/BusSearch/StopSearch";
 import { ReactComponent as Line } from "../assets/icon/line-dash.svg";
 
 function Home() {
-  const [data, setData] = useState([]);
-  useEffect(async () => {
-    setData(await getNews());
-  }, []);
+  let news5 = News.slice(0, 5);
+
   const [byRoute, setbyRoute] = useState(true);
 
   const _handleTabClick = (value = !byRoute) => {
-    setbyRoute(value)
+    setbyRoute(value);
   };
 
   return (
-    <div className="">
+    <div>
       {/* 主介面 */}
       <div className="py-16 p-10 md:px-40 md:py-24 lg:flex">
         <div>
@@ -37,7 +34,7 @@ function Home() {
               className={`home_switch_on hover:home-switch-on-hover ${
                 byRoute ? "" : "home_switch_off"
               }`}
-              onClick={()=>_handleTabClick(true)}
+              onClick={() => _handleTabClick(true)}
             >
               找路線
             </a>
@@ -46,15 +43,19 @@ function Home() {
               className={`home_switch_on hover:home-switch-on-hover ${
                 !byRoute ? "" : "home_switch_off"
               }`}
-              onClick={()=>_handleTabClick(false)}
+              onClick={() => _handleTabClick(false)}
             >
               找站牌
             </a>
           </div>
           {byRoute ? <RouteSearch /> : <StopSearch />}
         </div>
-        <div className="pt-14  lg:pt-0  ">
-          <img className=" w-176 lg:pl-14 " src={HomeImage} />
+        <div className="pt-14 lg:pt-0 lg:flex lg:items-center">
+          <img
+            className="min-w-327 md:min-w-420 lg:min-w-628"
+            src={HomeImage}
+            alt=""
+          />
         </div>
       </div>
 
@@ -67,18 +68,10 @@ function Home() {
           </Link>
         </div>
         <div className="line"></div>
-        <ul>
-          <span className="flex items-center justify-between py-4">
-            {/* <span className=" text-gray-400 pr-5">2021/11/17</span> */}
-            <span className="truncate">
-              <span className="text-blue-400  w-20 pr-5">新北</span>
-              <span className="pr-5 ">
-                搭乘公車捷運請佩戴口罩，未戴口罩得拒載並處以最高1萬5千元罰鍰
-              </span>
-            </span>
-            <img className=" h-3 w-2" src={Vector_blue} />
-          </span>
-        </ul>
+        <div></div>
+        {news5.map((news) => (
+          <NewsItem key={news.id} news={news} />
+        ))}
       </div>
     </div>
   );

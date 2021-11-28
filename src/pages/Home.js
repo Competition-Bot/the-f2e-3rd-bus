@@ -20,7 +20,7 @@ function Home() {
   };
 
   return (
-    <div className="">
+    <div>
       {/* 主介面 */}
       <div className="py-16 p-10 md:px-40 md:py-24 lg:flex">
         <div>
@@ -50,8 +50,12 @@ function Home() {
           </div>
           {byRoute ? <RouteSearch /> : <StopSearch />}
         </div>
-        <div className="pt-14  lg:pt-0  ">
-          <img className=" w-176 lg:pl-14 " src={HomeImage} alt="" />
+        <div className="pt-14 lg:pt-0 lg:flex lg:items-center">
+          <img
+            className="min-w-327 md:min-w-420 lg:min-w-628"
+            src={HomeImage}
+            alt=""
+          />
         </div>
       </div>
 

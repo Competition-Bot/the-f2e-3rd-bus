@@ -37,7 +37,7 @@ function StopSearch() {
 
   return location.pathname === "/" ? (
     <>
-      <div className="grid grid-flow-col auto-cols-max gap-x-4">
+      <div className="grid lg:grid-flow-col auto-cols-max gap-4">
         <Select
           className="w-36"
           options={AllCity}

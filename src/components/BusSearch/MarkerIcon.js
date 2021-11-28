@@ -6,7 +6,7 @@ import blue from "../../assets/img/Marker_BE.svg";
 import bus from "../../assets/img/Icon_bus.svg";
 import location from "../../assets/img/location.svg";
 import black_shadow from "../../assets/img/Marker_B_shad.svg"
-import { colors } from "tailwindcss/defaultTheme";
+import num from "../../assets/img/Marker_num.svg"
 
 export const iconBlack = new L.Icon({
     iconUrl: black,
@@ -47,5 +47,10 @@ export const iconBus = new L.Icon({
 export const icon_location = new L.Icon({
     iconUrl: location,
     iconSize: new L.Point(50, 50),
+})
+
+export const iconNum = new L.Icon({
+    iconUrl: num,
+    iconSize: new L.Point(40, 40),
 })
 

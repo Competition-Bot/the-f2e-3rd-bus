@@ -1,20 +1,24 @@
 import { MapContainer, TileLayer, Marker, Popup, useMap, Polyline } from "react-leaflet";
-import MarkerClusterGroup from "react-leaflet-markercluster";
 import "leaflet/dist/leaflet.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import "../BusSearch/StopMap.css";
-import { iconBlack, iconYellow, icon_location, iconBlack_shadow } from './MarkerIcon';
+import { iconNum } from './MarkerIcon';
 import location_icon from '../../assets/img/btn_location.svg';
-import useGeoLocation from '../BusSearch/useGeoLcation.js'
 import map_marker from '../../assets/img/map-marker-alt.svg'
+import { icon_location } from './MarkerIcon';
+import useGeoLocation from '../BusSearch/useGeoLcation.js'
 
 
+let buslist = []
 
 const _renderMarker = ({ data }) => {
 
     if (data.stationPosition) {
-        let icon = iconYellow
+        buslist.push(data.stopPosition)
+        let icon = iconNum
+        var popColor = 'bg-yellow-400';
+
         // const mapRef = useRef();
         return (
             <Marker
@@ -22,13 +26,12 @@ const _renderMarker = ({ data }) => {
                 icon={icon}
                 key={`marker-${data.stationUID}`}
             >
-                <Popup className="busup flex" position={data.stationPosition} closeButton={true}>
+                <Popup className={`${popColor} rounded-xl busup flex`} position={data.stationPosition} closeButton={true}>
                     <div className="">
                         <h2 className="flex text-white text-base font-semibold w-auto justify-center items-center">{data.stationName}</h2>
-                        <h2 className="flex bg-white text-yellow-400 text-base font-semibold w-15 h-7 justify-center items-center rounded-md mt-1">{data.index}個站牌</h2>
+                        <h2 className="flex text-white text-base font-semibold w-15 h-7 justify-center items-center rounded-md mt-1">{data.index + 1}個站牌</h2>
                     </div>
                 </Popup>
-
             </Marker>
         )
     }
@@ -36,6 +39,17 @@ const _renderMarker = ({ data }) => {
 
 
 function StopMap() {
+   
+    const location = useGeoLocation();
+    const FlyToButton = () => {
+        const map = useMap();
+        const fly = () => {
+            map.flyTo([location.coordinates.lat, location.coordinates.lng], map.getZoom());
+            console.log(location.coordinates.lat, location.coordinates.lng)
+        }
+        return <button className="location" onClick={fly}><img src={location_icon} alt="location" /></button>
+    }
+
 
     let stationData = useSelector((state) => {
         console.log(state.busReducer.stationData)
@@ -66,12 +80,14 @@ function StopMap() {
                     ))
                     : null
             }
-
-            {/* <LocationMarker /> */}
-            <div className="location" ><img src={location_icon} alt='location' /></div>
+            
+            <FlyToButton />
             <div className="tip bg-blue-400 flex w-auto h-9 p-5 rounded-3xl flex-row justify-center items-center">
                 <div className="tracking-wider flex justify-center items-center text-white text-base font-semibold">點擊 <img className="mb-1 mr-1 ml-1" src={map_marker} alt="marker" />查看站牌</div>
             </div>
+            {location.loaded && !location.error && (
+                <Marker icon={icon_location} position={[location.coordinates.lat, location.coordinates.lng]}></Marker>
+            )}
         </MapContainer>
 
     )

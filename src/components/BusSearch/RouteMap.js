@@ -51,7 +51,7 @@ function RouteMap() {
 
   let buslist = [];
 
-  var mapCenterPos = [25.0242987, 121.5441439];
+  // var mapCenterPos = [25.0242987, 121.5441439];
   const polylineOptions = { color: "#3F3F3F", weight: "5" };
 
   const _renderMarker = ({ data }) => {

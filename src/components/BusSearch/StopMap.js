@@ -4,13 +4,10 @@ import {
   Marker,
   Popup,
   useMap,
-  Polyline,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import "../BusSearch/StopMap.css";
-import { iconNum } from "./MarkerIcon";
 import location_icon from "../../assets/img/btn_location.svg";
 import map_marker from "../../assets/img/map-marker-alt.svg";
 import { icon_location, createFilledIcon } from "./MarkerIcon";

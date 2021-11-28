@@ -9,7 +9,7 @@ import {
 import "leaflet/dist/leaflet.css";
 import { useSelector } from "react-redux";
 import "../BusSearch/RouteMap.css";
-import { createFilledIcon, icon_location, iconBus } from "./MarkerIcon";
+import { createNotFilledIcon, icon_location, iconBus } from "./MarkerIcon";
 import location_icon from "../../assets/img/btn_location.svg";
 import useGeoLocation from "../BusSearch/useGeoLcation.js";
 import "../PlanSearch/map.css";
@@ -61,19 +61,19 @@ function RouteMap() {
     let textColor = "text-yellow-400";
 
     if (data.estimateTime === "進站中") {
-      icon = createFilledIcon("yellow", data.index + 1);
+      icon = createNotFilledIcon("yellow", data.index + 1);
       popColor = "bg-yellow-400";
       textColor = "text-yellow-400";
     } else if (data.estimateTime === "3分鐘") {
-      icon = createFilledIcon("yellow-light", data.index + 1);
+      icon = createNotFilledIcon("yellow-light", data.index + 1);
       popColor = "bg-yellow-300";
       textColor = "text-yellow-300";
     } else if (data.estimateTime === "未發車") {
-      icon = createFilledIcon("gray-light", data.index + 1);
+      icon = createNotFilledIcon("gray-light", data.index + 1);
       popColor = "bg-gray-300";
       textColor = "text-gray-300";
     } else {
-      icon = createFilledIcon("gray", data.index + 1);
+      icon = createNotFilledIcon("gray", data.index + 1);
       popColor = "bg-gray-400";
       textColor = "text-gray-400";
     }

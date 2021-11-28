@@ -25,10 +25,12 @@ export const getRouteAllStop = async (_city, _routeName) => {
           }
           goRoute.push(_stopData)
         });
+        _stopData = []
       }
 
       //所有返程站點
-      else if (_result.data[1]) {
+      if (_result.data[1]) {
+        //所有反程站點
         _result.data[1].Stops.forEach(item => {
           _stopData = {
             stopName: item.StopName.Zh_tw,
@@ -46,7 +48,6 @@ export const getRouteAllStop = async (_city, _routeName) => {
     _data = {
       goRoute, backRoute
     }
-
     return _data;
 
   } catch (err) {

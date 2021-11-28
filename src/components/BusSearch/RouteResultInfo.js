@@ -115,7 +115,7 @@ function RouteResultInfo() {
       city,
       routename
     );
-    if (_stopOfRoute && _goRoute) {
+    if (_stopOfRoute && _goRoute && _backRoute) {
       let _goStopData = _stopOfRoute.goRoute;
       let _backStopData = _stopOfRoute.backRoute;
       _goRoute.forEach((item, index) => {
@@ -131,8 +131,7 @@ function RouteResultInfo() {
         };
       }
       );
-
-
+      
       _backRoute.forEach((item, index) => {
         _backStopData[index] = {
           ..._backStopData[index],

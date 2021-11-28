@@ -13,7 +13,6 @@ function RouteMap() {
     return state.busReducer.direction
   });
   let _goBusRealTime = useSelector((state) => {
-    console.log(state.busReducer.goBusRealTime)
     return state.busReducer.goBusRealTime
   });
 
@@ -24,14 +23,7 @@ function RouteMap() {
   let _backStop = useSelector(
     (state) => state.busReducer.backStopEstimatedTime
   );
-  useEffect(() => {
-    console.log(_goStop)
-  }, [_direction])
 
-  // useEffect(() => {
-  //   console.log(_goBusRealTime)
-  //   console.log(_backBusRealTime)
-  // }, [_goBusRealTime])
   let buslist = []
 
   var mapCenterPos = [25.0242987, 121.5441439]
@@ -74,7 +66,6 @@ function RouteMap() {
 
   // }, [_city])
   const _renderBus = ({ data }) => {
-    console.log("Marker" + data)
     if (data.BusPosition) {
       return (
         <Marker
@@ -133,10 +124,11 @@ function RouteMap() {
             }
             {_backBusRealTime ?
               _backBusRealTime.map((item, index) => (
-                <_renderBus key={`renderMarker_go_${index}`} data={item} />
+                <_renderBus key={`renderMarker_back_${index}`} data={item} />
               ))
               : null
             }
+            
           </>
 
       }

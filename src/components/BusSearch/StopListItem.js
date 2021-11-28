@@ -7,16 +7,14 @@ function StopListItem({data}) {
     const statusStyleList = [
         "bg-gray-300 text-white",
         "bg-gray-300 text-black",
-        "bg-yellow-400 text-white",
         "bg-yellow-300 text-white",
+        "bg-yellow-400 text-white",
     ];
-
-    const statusTextList = ["未發車", "5分", "進站中", "3分"]
 
     return (
         <Link to={`/bussearch/route/${city}/${data.routeName}`} className="relative flex justify-between px-5 items-center">
             <div className="grid grid-flow-col auto-cols-max gap-x-5 items-center py-4">
-                <div className={`${statusStyleList[data.status]} px-4 py-1`}>
+                <div className={`${statusStyleList[data.status]} w-20 py-1.5 text-center`}>
                     {data.estimateTime}
                 </div>
                 <div>

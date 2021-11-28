@@ -6,13 +6,11 @@ import {
   Popup,
   useMap,
 } from "react-leaflet";
-import location from "../../assets/img/location.svg";
 import "../PlanSearch/map.css";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import { useEffect, useState } from "react";
-import { iconBlack, iconOrange, iconBlue } from "../BusSearch/MarkerIcon";
-import { Point } from "leaflet";
+import { createNotFilledIcon,createFilledIcon } from "../BusSearch/MarkerIcon";
 
 function PlanMap() {
   const location = useLocation();
@@ -39,7 +37,11 @@ function PlanMap() {
     list.push(
       <Marker
         position={plan[0].pos}
-        icon={clickIdx !== 0 ? iconBlue : iconOrange}
+        icon={
+          clickIdx !== 0
+            ? createNotFilledIcon("blue")
+            : createNotFilledIcon("yellow")
+        }
         key={`marker-${plan[0].label}`}
         eventHandlers={{
           click: () => {
@@ -67,8 +69,8 @@ function PlanMap() {
         position={plan[1].pos}
         icon={
           clickIdx === stepNum - 1 || clickIdx === stepNum
-            ? iconOrange
-            : iconBlue
+            ? createNotFilledIcon("yellow")
+            : createNotFilledIcon("blue")
         }
         key={`marker-${plan[1].label}`}
         eventHandlers={{
@@ -105,7 +107,9 @@ function PlanMap() {
           <Marker
             position={item.start.pos}
             icon={
-              clickIdx === idx || clickIdx === idx - 1 ? iconOrange : iconBlack
+              clickIdx === idx || clickIdx === idx - 1
+                ? createFilledIcon("yellow")
+                : createFilledIcon("gray")
             }
             key={`marker-start-${item.name}`}
             eventHandlers={{
@@ -132,7 +136,9 @@ function PlanMap() {
           <Marker
             position={item.end.pos}
             icon={
-              clickIdx === idx || clickIdx === idx + 1 ? iconOrange : iconBlack
+              clickIdx === idx || clickIdx === idx + 1
+                ? createFilledIcon("yellow")
+                : createFilledIcon("gray")
             }
             key={`marker-end-${item.name}}`}
             eventHandlers={{
@@ -161,7 +167,7 @@ function PlanMap() {
           <Polyline
             key={`line-${idx}`}
             pathOptions={{
-              color: `${clickIdx === idx ? "#F9B835" : "#333"}`,
+              color: `${clickIdx === idx ? "#F9B835" : "#3F3F3F"}`,
               weight: 4,
               smoothFactor: 4,
             }}

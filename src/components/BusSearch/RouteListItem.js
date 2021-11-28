@@ -16,7 +16,7 @@ function RouteListItem({ routeData }) {
       className="relative flex justify-between px-5"
     >
       <div className="grid grid-flow-col auto-cols-max gap-x-5 items-center py-4">
-        <div className={`${statusStyleList[routeData.status]} px-4 py-1`}>
+        <div className={`${statusStyleList[routeData.status]} py-1 w-20 text-center`}>
           {routeData.estimateTime}
         </div>
         <div>

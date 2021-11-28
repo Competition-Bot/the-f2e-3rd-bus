@@ -1,35 +1,15 @@
-.popup .leaflet-popup-content-wrapper{
-    background-color: #F9B835;
-    margin-bottom: 20px;
-    height: 76px;
-    border-radius: 5px;
-    width: auto;
+.leaflet-popup-content-wrapper{
+    background: inherit;
 }
 
-.popup .leaflet-popup-content{
-    margin: 0px;
-    padding: 8px 16px;
-    min-width: 96px;
-    min-height: 76px;
-    
-}
-.popupBlack{
-    display: flex;
-    background-color: #000;
-    margin-bottom: 20px;
-    height: 76px;
-    border-radius: 5px;
-    width: auto;
-}
-
-.popup .leaflet-popup-close-button{
+.leaflet-popup-close-button{
     display: none;
 }
-.popup .leaflet-popup-tip{
+.leaflet-popup-tip{
     display: none;
 }
 
-.marker-cluster-small{
+/* .marker-cluster-small{
     background-image: url(../../assets//img//Marker_num.svg);
     background-color: rgba(1, 1,1, 0);
     background-size: cover;
@@ -65,7 +45,7 @@
 .marker-cluster {
     background-clip: padding-box;
     border-radius: 20px;
-    }
+    } */
 
 .location{
     position: absolute;
@@ -75,4 +55,5 @@
     z-index: 1000;
     bottom: 5%;
     right: 5%;
+    transform: translate(5%,5%);
 }

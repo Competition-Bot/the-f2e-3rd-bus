@@ -6,21 +6,21 @@ import {
   useMap,
   Polyline,
 } from "react-leaflet";
-import MarkerClusterGroup from "react-leaflet-markercluster";
 import "leaflet/dist/leaflet.css";
-import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import "../BusSearch/RouteMap.css";
-import { icon_location, iconBus, createFilledIcon } from "./MarkerIcon";
-import brn_location from "../../assets/img/btn_location.svg";
+import { createFilledIcon, icon_location, iconBus } from "./MarkerIcon";
+import location_icon from "../../assets/img/btn_location.svg";
 import "../PlanSearch/map.css";
 
 function RouteMap() {
   let _direction = useSelector((state) => {
-    console.log(state.busReducer.direction);
     return state.busReducer.direction;
   });
-  let _goBusRealTime = useSelector((state) => state.busReducer.goBusRealTime);
+  let _goBusRealTime = useSelector((state) => {
+    return state.busReducer.goBusRealTime;
+  });
+
   let _backBusRealTime = useSelector(
     (state) => state.busReducer.backBusRealTime
   );
@@ -30,14 +30,7 @@ function RouteMap() {
   let _backStop = useSelector(
     (state) => state.busReducer.backStopEstimatedTime
   );
-  useEffect(() => {
-    console.log(_goStop);
-  }, [_direction]);
 
-  // useEffect(() => {
-  //   console.log(_goBusRealTime)
-  //   console.log(_backBusRealTime)
-  // }, [_goBusRealTime])
   let buslist = [];
 
   var mapCenterPos = [25.0242987, 121.5441439];
@@ -46,60 +39,73 @@ function RouteMap() {
   const _renderMarker = ({ data }) => {
     buslist.push(data.stopPosition);
     let icon;
+    let popColor = "bg-yellow-400";
+    let textColor = "text-yellow-400";
 
     if (data.estimateTime === "進站中") {
-      icon = createFilledIcon("yellow",data.index+1);
+      icon = createFilledIcon("yellow", data.index + 1);
+      popColor = "bg-yellow-400";
+      textColor = "text-yellow-400";
     } else if (data.estimateTime === "3分鐘") {
-      icon = createFilledIcon("yellow-light",data.index+1);
+      icon = createFilledIcon("yellow-light", data.index + 1);
+      popColor = "bg-yellow-300";
+      textColor = "text-yellow-300";
     } else if (data.estimateTime === "未發車") {
-      icon = createFilledIcon("gray-light",data.index+1);
+      icon = createFilledIcon("gray-light", data.index + 1);
+      popColor = "bg-gray-300";
+      textColor = "text-gray-300";
     } else {
-      icon = createFilledIcon("gray",data.index+1);
+      icon = createFilledIcon("gray", data.index + 1);
+      popColor = "bg-gray-400";
+      textColor = "text-gray-400";
     }
 
-    return (
-      <Marker
-        position={data.stopPosition}
-        icon={icon}
-        key={`marker-${data.stationUID}`}
-      >
-        <Popup
-          className="popup flex"
+    if (data.stopPosition) {
+      return (
+        <Marker
           position={data.stopPosition}
-          closeButton={true}
+          icon={icon}
+          key={`marker-${data.stationUID}`}
         >
-          <div className="">
+          <Popup
+            className={`${popColor} rounded-xl`}
+            position={data.stopPosition}
+            closeButton={true}
+          >
             <h2 className="flex text-white text-base font-semibold w-auto justify-center items-center">
               {data.stopName}
             </h2>
-            <h2 className="flex bg-white text-yellow-400 text-base font-semibold w-15 h-7 justify-center items-center rounded-md mt-1">
+            <h2
+              className={`${textColor} flex bg-white text-base font-semibold w-15 h-7 justify-center items-center rounded-md mt-1`}
+            >
               {data.estimateTime}
             </h2>
-          </div>
-        </Popup>
-        <Polyline pathOptions={polylineOptions} positions={buslist}></Polyline>
-      </Marker>
-    );
+          </Popup>
+          <Polyline
+            pathOptions={polylineOptions}
+            positions={buslist}
+          ></Polyline>
+        </Marker>
+      );
+    } else return null;
   };
-  // useEffect(() => {
 
-  // }, [_city])
   const _renderBus = ({ data }) => {
-    console.log("Marker" + data);
-
-    return (
-      <Marker position={data.BosPositon} icon={iconBus}>
-        <Popup
-          className="popup flex"
-          position={data.BosPositon}
-          closeButton={true}
-        >
-          <h2 className="flex text-white text-base font-semibold w-auto justify-center items-center">
-            {data.PlateNumb}
-          </h2>
-        </Popup>
-      </Marker>
-    );
+    if (data.BusPosition) {
+      return (
+        <Marker position={data.BusPosition} icon={iconBus}>
+          <Popup
+            className="bg-white rounded-xl mb-5"
+            position={data.BusPosition}
+            closeButton={true}
+          >
+            <h2 className="flex text-blue-400 text-base font-semibold w-auto justify-center items-center">
+              {data.PlateNumb}
+            </h2>
+          </Popup>
+        </Marker>
+      );
+    }
   };
 
   return (
@@ -126,12 +132,11 @@ function RouteMap() {
                 <_renderMarker key={`renderMaker_go_${index}`} data={item} />
               ))
             : null}
-          {/* {_goBusRealTime ?
-                _goBusRealTime.map((item,index)=>(
-                  <_renderBus key={`renderMarker_go_${index}`} data={item} />
-                ))
-                : null
-               } */}
+          {_goBusRealTime
+            ? _goBusRealTime.map((item, index) => (
+                <_renderBus key={`renderMarker_go_${index}`} data={item} />
+              ))
+            : null}
         </>
       ) : (
         <>
@@ -140,19 +145,17 @@ function RouteMap() {
                 <_renderMarker key={`renderMaker_back_${index}`} data={item} />
               ))
             : null}
-          {/* {_backBusRealTime ?
-                _backBusRealTime.map((item,index)=>(
-                  <_renderBus key={`renderMarker_go_${index}`} data={item} />
-                ))
-                : null
-               } */}
+          {_backBusRealTime
+            ? _backBusRealTime.map((item, index) => (
+                <_renderBus key={`renderMarker_back_${index}`} data={item} />
+              ))
+            : null}
         </>
       )}
 
       {/* </MarkerClusterGroup> */}
-
       <div className="location">
-        <img src={brn_location} alt="location" />
+        <img src={location_icon} alt="location" />
       </div>
     </MapContainer>
   );

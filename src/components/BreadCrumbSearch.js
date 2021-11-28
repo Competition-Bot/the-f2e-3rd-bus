@@ -26,8 +26,12 @@ function SearchBreadCrumb() {
           </NavLink>
           <LineDash className="md:w-auto w-5 text-white" alt="line" />
           <div className="rounded-full w-4 h-4 bg-yellow-400"></div>
-          <div className="text-white md:text-base text-sm">{_routeName}</div>
-          {/* <LineDash className="md:w-auto w-5" alt="line" />
+          <div className="text-white md:text-base text-sm">
+            {_routeName
+              .replace(/[\u4e00-\u9fff\u3400-\u4dff\uf900-\ufaff]/g, "")
+              .replace(/[()-]/g, "")}
+          </div>
+          {/*<LineDash className="md:w-auto w-5" alt="line" />
           <NavLink
             to="/bussearch/route/:routename/detail"
             className="text-white grid grid-flow-col md:gap-3 gap-2 items-center justify-start"
@@ -44,7 +48,7 @@ function SearchBreadCrumb() {
             <CircleArrow alt="circle" />
             <span>{_routeName}</span>
           </NavLink>
-          <LineDash alt="line" className="text-white"/>
+          <LineDash alt="line" className="text-white" />
           <div className="rounded-full w-4 h-4 bg-yellow-400"></div>
           <div className="text-white">班表/票價</div>
         </Route>
@@ -56,7 +60,11 @@ function SearchBreadCrumb() {
             <CircleArrow alt="circle" />
             <span className="md:text-base text-sm">重新搜尋</span>
           </NavLink>
-          <LineDash className="md:w-auto w-5 text-white" alt="line" stroke="#ffffff" />
+          <LineDash
+            className="md:w-auto w-5 text-white"
+            alt="line"
+            stroke="#ffffff"
+          />
           <div className="rounded-full w-4 h-4 bg-yellow-400"></div>
           <div className="text-white md:text-base text-sm">台北教育大學</div>
         </Route>
@@ -73,7 +81,11 @@ function SearchBreadCrumb() {
             <CircleArrow alt="circle" />
             <span className="md:text-base text-sm">重新搜尋</span>
           </NavLink>
-          <LineDash className="md:w-auto w-5 text-white" alt="line" stroke="#ffffff" />
+          <LineDash
+            className="md:w-auto w-5 text-white"
+            alt="line"
+            stroke="#ffffff"
+          />
           <div className="rounded-full w-4 h-4 bg-yellow-400"></div>
           <div className="text-white md:text-base text-sm">路線方案</div>
         </Route>

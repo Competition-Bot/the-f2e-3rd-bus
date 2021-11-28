@@ -19,6 +19,7 @@ function News() {
   ];
 
   const handleChange = (option) => {
+    setcity(option.value)
     if (option.value !== city) {
       setdata(news.filter((item) => item.city === option.value));
     }
@@ -52,7 +53,7 @@ function News() {
               >
                 <a className="relative inline-flex items-center px-2 py-2  text-sm font-medium text-gray-500 hover:bg-gray-50">
                   <span className="sr-only">Previous</span>
-                  <img className=" h-3 w-2" src={Vector_blue_left} />
+                  <img className=" h-3 w-2" src={Vector_blue_left} alt=""/>
                 </a>
                 <a
                   aria-current="page"

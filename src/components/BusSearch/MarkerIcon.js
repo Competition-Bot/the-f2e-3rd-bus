@@ -11,7 +11,8 @@ export const iconYellow = new L.Icon({
 
 export const iconBus = new L.Icon({
   iconUrl: bus,
-  iconSize: new L.Point(50, 50),
+  iconSize: new L.Point(40, 50),
+  iconAnchor: [20, 25],
 });
 
 export const icon_location = new L.Icon({

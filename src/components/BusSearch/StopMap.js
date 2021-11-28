@@ -8,6 +8,7 @@ import location_icon from '../../assets/img/btn_location.svg';
 import map_marker from '../../assets/img/map-marker-alt.svg'
 import { icon_location } from './MarkerIcon';
 import useGeoLocation from '../BusSearch/useGeoLcation.js'
+import { map } from "leaflet";
 
 
 let buslist = []
@@ -15,10 +16,10 @@ let buslist = []
 const _renderMarker = ({ data }) => {
 
     if (data.stationPosition) {
-        buslist.push(data.stopPosition)
+        buslist.push(data.stationPosition)
         let icon = iconNum
         var popColor = 'bg-yellow-400';
-
+        console.log(buslist)
         // const mapRef = useRef();
         return (
             <Marker
@@ -43,18 +44,29 @@ function StopMap() {
     const location = useGeoLocation();
     const FlyToButton = () => {
         const map = useMap();
+        
         const fly = () => {
             map.flyTo([location.coordinates.lat, location.coordinates.lng], map.getZoom());
             console.log(location.coordinates.lat, location.coordinates.lng)
         }
         return <button className="location" onClick={fly}><img src={location_icon} alt="location" /></button>
     }
-
+    
 
     let stationData = useSelector((state) => {
         console.log(state.busReducer.stationData)
         return state.busReducer.stationData
     })
+
+    const ChangeMap = () => {
+        const map = useMap();
+        if(buslist.length > 0){
+            map.fitBounds(buslist)
+          }
+          return null
+    }
+
+  
     return (
 
         <MapContainer
@@ -82,12 +94,14 @@ function StopMap() {
             }
             
             <FlyToButton />
+            <ChangeMap />
             <div className="tip bg-blue-400 flex w-auto h-9 p-5 rounded-3xl flex-row justify-center items-center">
                 <div className="tracking-wider flex justify-center items-center text-white text-base font-semibold">點擊 <img className="mb-1 mr-1 ml-1" src={map_marker} alt="marker" />查看站牌</div>
             </div>
             {location.loaded && !location.error && (
                 <Marker icon={icon_location} position={[location.coordinates.lat, location.coordinates.lng]}></Marker>
             )}
+          
         </MapContainer>
 
     )

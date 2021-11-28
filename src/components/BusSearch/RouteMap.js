@@ -10,7 +10,9 @@ import useGeoLocation from '../BusSearch/useGeoLcation.js'
 import '../PlanSearch/map.css'
 
 
+
 function RouteMap() {
+  
   const location = useGeoLocation();
   const FlyToButton = () => {
     const map = useMap();
@@ -20,6 +22,13 @@ function RouteMap() {
     }
     return <button className="location" onClick={fly}><img src={location_icon} alt="location" /></button>
   }
+  const ChangeMap = () => {
+    const map = useMap();
+    if(buslist.length > 0){
+        map.fitBounds(buslist)
+      }
+      return null
+}
 
   let _direction = useSelector((state) => {
     return state.busReducer.direction
@@ -112,8 +121,6 @@ function RouteMap() {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
 
-
-      {/* <MarkerClusterGroup> */}
       {
         _direction ?
           <>
@@ -147,11 +154,10 @@ function RouteMap() {
             }
 
           </>
-
       }
-
-      {/* </MarkerClusterGroup> */}
+   
       <FlyToButton />
+      <ChangeMap />
       {location.loaded && !location.error && (
         <Marker icon={icon_location} position={[location.coordinates.lat, location.coordinates.lng]}></Marker>
       )}

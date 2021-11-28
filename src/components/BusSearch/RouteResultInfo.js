@@ -37,7 +37,6 @@ function RouteResultInfo() {
     let _clockTime = setInterval(() => {
 
       _setTime(_time + 1)
-      console.log(_time)
       if (_time % 60 === 0) {
         _setUpdate(!_update)
       }
@@ -50,14 +49,9 @@ function RouteResultInfo() {
   }, [_time])
 
   useEffect(() => {
-    console.log('更新')
-    //再呼叫API
-  }, [_update])
-
-  useEffect(() => {
     _handleRouteInfo();
     _handleEstimatedTimeOfRoute();
-  }, []);
+  }, [_update])
 
   useEffect(() => {
     _handleStopAPI();

@@ -60,7 +60,7 @@ export const getCityAllRoute = async (city) => {
 
     let _data = []
     let _routedata = {}
-    let _url = `${baseUrl}/Route/City/${city}?$format=JSON`;
+    let _url = `${baseUrl}/Route/City/${city}?$orderby=RouteName/Zh_tw&$format=JSON`;
     let result = await axios.get(_url);
 
     if (result.data) {

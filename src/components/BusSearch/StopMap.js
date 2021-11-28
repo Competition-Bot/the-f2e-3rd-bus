@@ -48,7 +48,7 @@ function StopMap() {
             }}
             center={[25.0242987, 121.5441439]}
             zoom={15}
-            scrollWheelZoom={false}
+            scrollWheelZoom={true}
         >
 
             <TileLayer
@@ -66,8 +66,8 @@ function StopMap() {
 
             {/* <LocationMarker /> */}
             <div className="location" ><img src={location_icon} alt='location' /></div>
-            <div className="tip bg-blue-400 flex w-auto h-9 p-4 rounded-2xl flex-row justify-center items-center">
-                <div className="flex justify-center items-center text-white">點擊 <img src={map_marker} alt="marker" />查看站牌</div>
+            <div className="tip bg-blue-400 flex w-auto h-9 p-5 rounded-3xl flex-row justify-center items-center">
+                <div className="tracking-wider flex justify-center items-center text-white text-base font-semibold">點擊 <img className="mb-1 mr-1 ml-1" src={map_marker} alt="marker" />查看站牌</div>
             </div>
         </MapContainer>
 

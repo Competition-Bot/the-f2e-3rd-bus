@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import "../BusSearch/RouteMap.css";
 import { iconBlack, iconYellow, iconOrange, icon_location, iconBlack_shadow, iconBus } from './MarkerIcon';
-import brn_location from '../../assets/img/btn_location.svg';
+import location_icon from '../../assets/img/btn_location.svg';
 import '../PlanSearch/map.css'
 
 function RouteMap() {
@@ -42,6 +42,7 @@ function RouteMap() {
     let icon = iconBlack_shadow
     let popColor = 'bg-yellow-400';
     let textColor = 'text-yellow-400';
+
     if (data.estimateTime === '進站中') {
       icon = iconOrange
       popColor = 'bg-yellow-400';
@@ -64,11 +65,9 @@ function RouteMap() {
           icon={icon}
           key={`marker-${data.stationUID}`}
         >
-          <Popup className={`${popColor} rounded-xl mg-3`} position={data.stopPosition} closeButton={true}>
-            <div className="">
+          <Popup className={`${popColor} rounded-xl`} position={data.stopPosition} closeButton={true}>
               <h2 className="flex text-white text-base font-semibold w-auto justify-center items-center">{data.stopName}</h2>
               <h2 className={`${textColor} flex bg-white text-base font-semibold w-15 h-7 justify-center items-center rounded-md mt-1`}>{data.estimateTime}</h2>
-            </div>
           </Popup>
           <Polyline pathOptions={polylineOptions} positions={buslist}></Polyline>
         </Marker>
@@ -85,10 +84,8 @@ function RouteMap() {
           position={data.BusPosition}
           icon={iconBus}
         >
-          <Popup position={data.BusPosition} closeButton={true}>
-            <div className="popup flex">
+          <Popup className="bg-white rounded-xl mb-5" position={data.BusPosition} closeButton={true}>
               <h2 className="flex text-blue-400 text-base font-semibold w-auto justify-center items-center">{data.PlateNumb}</h2>
-            </div>
           </Popup>
         </Marker>
       )
@@ -151,7 +148,7 @@ function RouteMap() {
       }
 
       {/* </MarkerClusterGroup> */}
-
+<div className="location" ><img src={location_icon} alt='location' /></div>
     </MapContainer >
 
   );

@@ -1,3 +1,6 @@
+.leaflet-popup-content-wrapper{
+    background: inherit;
+}
 .leaflet-popup-close-button{
     display: none;
 }
@@ -12,11 +15,3 @@
     right: 50%;
     transform: translate(50%,-5%);
 }
-
-/* .busup .leaflet-popup-content-wrapper{
-    background-color: #1E659C;
-    margin-bottom: 30px;
-    height: 76px;
-    border-radius: 5px;
-    width: auto;
-} */

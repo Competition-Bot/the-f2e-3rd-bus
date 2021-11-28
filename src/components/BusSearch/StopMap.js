@@ -1,7 +1,6 @@
 import { MapContainer, TileLayer, Marker, Popup, useMap, Polyline } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import "leaflet/dist/leaflet.css";
-
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import "../BusSearch/StopMap.css";
@@ -12,32 +11,36 @@ import map_marker from '../../assets/img/map-marker-alt.svg'
 
 
 
-const _renderMarker = () => {
+const _renderMarker = ({ data }) => {
 
-    let icon = iconYellow
-    // const mapRef = useRef();
+    if (data.stationPosition) {
+        let icon = iconYellow
+        // const mapRef = useRef();
+        return (
+            <Marker
+                position={data.stationPosition}
+                icon={icon}
+                key={`marker-${data.stationUID}`}
+            >
+                <Popup className="busup flex" position={data.stationPosition} closeButton={true}>
+                    <div className="">
+                        <h2 className="flex text-white text-base font-semibold w-auto justify-center items-center">{data.stationName}</h2>
+                        <h2 className="flex bg-white text-yellow-400 text-base font-semibold w-15 h-7 justify-center items-center rounded-md mt-1">{data.index}個站牌</h2>
+                    </div>
+                </Popup>
 
-
-    return (
-        <Marker
-            // position={data.stopPosition}
-            icon={icon}
-        // key={`marker-${data.stationUID}`}
-        >
-            <Popup className="busup flex" position={[25.0242987, 121.5441439]} closeButton={true}>
-                <div className="">
-                    <h2 className="flex text-white text-base font-semibold w-auto justify-center items-center">站牌名字</h2>
-                    <h2 className="flex bg-white text-yellow-400 text-base font-semibold w-15 h-7 justify-center items-center rounded-md mt-1">X個站牌</h2>
-                </div>
-            </Popup>
-
-        </Marker>
-    )
+            </Marker>
+        )
+    }
 }
 
 
 function StopMap() {
 
+    let stationData = useSelector((state) => {
+        console.log(state.busReducer.stationData)
+        return state.busReducer.stationData
+    })
     return (
 
         <MapContainer
@@ -56,13 +59,13 @@ function StopMap() {
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
 
-
-            {/* {_goStop ?
-                _goStop.map((item) => (
-                    <_renderMarker data={item} />
-                ))
-                : null
-            } */}
+            {
+                stationData ?
+                    stationData.map((item, index) => (
+                        <_renderMarker key={`renderMaker_${index}`} data={item} />
+                    ))
+                    : null
+            }
 
             {/* <LocationMarker /> */}
             <div className="location" ><img src={location_icon} alt='location' /></div>

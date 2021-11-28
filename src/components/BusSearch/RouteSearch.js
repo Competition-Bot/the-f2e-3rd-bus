@@ -57,6 +57,7 @@ const BusSearchBar = () => {
           options={_routesData}
           onChange={_handleRouteSelected}
           isDisabled={step >= 2 ? false : true}
+          placeholder="請輸入路線號碼"
         />
       </div>
       <Link
@@ -99,6 +100,7 @@ const BusSearchBar = () => {
           options={_routesData}
           onChange={_handleRouteSelected}
           isDisabled={step >= 2 ? false : true}
+          placeholder="請輸入路線號碼"
         />
       </div>
       <Link

@@ -49,6 +49,7 @@ function StopSearch() {
           options={_stationData}
           onChange={_handleStationSelected}
           isDisabled={step >= 2 ? false : true}
+          placeholder="請輸入站牌關鍵字"
         />
       </div>
       <Link
@@ -91,6 +92,7 @@ function StopSearch() {
           options={_stationData}
           onChange={_handleStationSelected}
           isDisabled={step >= 2 ? false : true}
+          placeholder="請輸入站牌關鍵字"
         />
       </div>
       <Link

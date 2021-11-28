@@ -1,0 +1,104 @@
+[
+    {
+        "label": "選擇縣市",
+        "value": "Unselected"
+    },
+    {
+        "label": "台北市",
+        "value": "Taipei"
+    },
+    {
+        "label": "新北市",
+        "value": "NewTaipei"
+    },
+    {
+        "value": "Taoyuan",
+        "label": "桃園市"
+        
+    },
+    {
+        "value": "Keelung",
+        "label": "基隆市"
+        
+    },{
+        "value": "Hsinchu",
+        "label": "新竹市"
+        
+    },
+    {
+        "value":"HsinchuCounty",
+        "label":"新竹縣"
+    },
+    {
+        "value": "Miaoli",
+        "label": "苗栗縣"
+        
+    },{
+        "value": "Taichung",
+        "label": "台中市"
+        
+    },{
+        "value": "Changhua",
+        "label": "彰化縣"
+        
+    },{
+        "value": "Nantou",
+        "label": "南投縣"
+        
+    },{
+        "value": "Yunlin",
+        "label": "雲林縣"
+        
+    },{
+        "value": "Chiayi",
+        "label": "嘉義市"
+        
+    },{
+        "value":  "Tainan",
+        "label": "台南市"
+        
+    },{
+        "value": "Kaohsiung",
+        "label": "高雄市"        
+    },
+    {
+        "value": "Pingtung",
+        "label": "屏東縣"        
+    },
+    {
+        "value": "Yilan",
+        "label": "宜蘭縣"        
+    },
+    {
+        "value": "HualienCounty",
+        "label": "花蓮縣"        
+    },
+    {
+        "value": "TaitungCounty",
+        "label": "台東縣"        
+    },
+    {
+        "value": "Penghu",
+        "label": "澎湖縣"        
+    },
+    {
+        "value": "Green",
+        "label": "綠島縣"        
+    },
+    {
+        "value": "Orchid",
+        "label": "蘭嶼縣"        
+    },
+    {
+        "value": "KinmenCounty",
+        "label": "金門縣"        
+    },
+    {
+        "value": "Matsu",
+        "label": "馬祖縣"        
+    },
+    {
+        "value": "Lienchiang",
+        "label": "連江縣"        
+    }      
+]

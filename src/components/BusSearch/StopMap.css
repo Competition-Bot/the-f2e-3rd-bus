@@ -1,0 +1,17 @@
+.leaflet-popup-content-wrapper{
+    background: inherit;
+}
+.leaflet-popup-close-button{
+    display: none;
+}
+.leaflet-popup-tip{
+    display: none;
+}
+
+.tip{
+    position: absolute;
+    z-index: 1000;
+    bottom: 5%;
+    right: 50%;
+    transform: translate(50%,-5%);
+}

@@ -1,0 +1,11 @@
+.leaflet-control-attribution{
+    display: flex;
+}
+
+.leaflet-popup-content-wrapper {
+    background: inherit;
+}
+
+.leaflet-popup-tip-container{
+    display: none;
+}

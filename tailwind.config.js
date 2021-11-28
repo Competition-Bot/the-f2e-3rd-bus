@@ -1,61 +1,54 @@
+
 module.exports = {
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
       screens: {
-        'sm': '480px',
-        'smDefault' :'640px',
-        'md': '768px',
-        'lg': '1024px',
-        'xl': '1280px'
+        sm: "375px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
       },
       height: {
-        header: "75px",
+        header: "70px",
       },
-      margin: {
-        header: "75px",
+      letterSpacing: {
+        wide: ".03em",
       },
       colors: {
         white: "#ffffff",
         black: "#333333",
-        green: {
-          default: "#0D706D",
-          hover: "#129995",
-          disable: "#8AB6B4",
-          bg: "#E9F2F2",
+        blue: {
+          400: "#1E659C",
+          300: "#E0EBF4",
+          200: "#F0F5FB",
         },
         yellow: {
-          default: "#F8B714",
-          hover: "#FFCA43",
-          disable: "#FEF2D5",
-          bg: "#FEF2D5",
+          400: "#F9B835",
+          300: "#FFD786",
         },
-        red: "#EB5757",
-        gray: { default: "#828282", light: "#C8C8C8", lighter: "#EDEDED" },
-        blue: "#1a73e8"
+        gray: {
+          500: "#828282",
+          400: "#BDBDBD",
+          300: "#E7E7E7",
+          200: "#F9F9F9",
+        },
+      },
+      boxShadow: {
+        header: "0px 5px 8px rgba(0, 0, 0, 0.1)",
+        btn: "2px 3px 7px rgba(0, 0, 0, 0.2)",
+        card: "0px 4px 8px rgba(0, 0, 0, 0.06)",
+        busCircle: "0px 0px 4px #005DC0",
       },
       fontFamily: {
         ch: ["Noto Sans TC", "sans-serif"],
-        en: ["Oswald", "sans-serif"],
-        enNormal: ["Roboto", "sans-serif"],
       },
-      letterSpacing: {
-        normal: ".05em",
-        wide: ".2em",
-        wider: ".275em",
-        widest: ".475em",
-      },
-      dropShadow: {
-        default: "0px 2px 10px rgba(0, 0, 0, 0.25)",
-        deep: "0px 2px 30px rgba(0, 0, 0, 0.3)",
-      },
-    }
+    },
   },
   variants: {
-    extend: {
-      display: ['hover', 'group-hover'],
-    }
+    extend: {},
   },
   plugins: [require("@tailwindcss/forms")],
+  
 };

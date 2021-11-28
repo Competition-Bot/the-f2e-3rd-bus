@@ -26,7 +26,11 @@ function SearchBreadCrumb() {
           </NavLink>
           <LineDash className="md:w-auto w-5" alt="line" />
           <div className="rounded-full w-4 h-4 bg-yellow-400"></div>
-          <div className="text-white md:text-base text-sm">{_routeName}</div>
+          <div className="text-white md:text-base text-sm">
+            {
+              _routeName.replace(/[\u4e00-\u9fff\u3400-\u4dff\uf900-\ufaff]/g,'').replace(/[()-]/g,"")
+            }
+          </div>
           <LineDash className="md:w-auto w-5" alt="line" />
           <NavLink
             to="/bussearch/route/:routename/detail"

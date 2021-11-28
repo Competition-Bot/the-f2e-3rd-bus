@@ -24,7 +24,7 @@ const BusSearchBar = () => {
       for (let i = 0; i < _allRoute.length; i++) {
         const _option = {
           value: _allRoute[i].routeName,
-          label: _allRoute[i].routeName,
+          label: _allRoute[i].routeDes,
         };
   
         _options.push(_option);

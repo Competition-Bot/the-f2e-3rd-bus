@@ -29,19 +29,39 @@ function RouteResultInfo() {
   let _backRoute = useSelector((state) => state.busReducer.backRouteEstimatedTime);
   let _goStopName = useSelector((state) => state.busReducer.goStopName);
   let _backStopName = useSelector((state) => state.busReducer.backStopName);
+  let times = 0
+  const [_time, _setTime] = useState(0);
+  const [_update, _setUpdate] = useState(true);
+
+  useEffect(() => {
+    let _clockTime = setInterval(() => {
+
+      _setTime(_time + 1)
+      if (_time % 60 === 0) {
+        _setUpdate(!_update)
+      }
+    }, 1000)
+
+    //Clean up can be done like this
+    return () => {
+      clearInterval(_clockTime);
+    }
+  }, [_time])
 
   useEffect(() => {
     _handleRouteInfo();
     _handleEstimatedTimeOfRoute();
-  }, []);
+  }, [_update])
 
   useEffect(() => {
-      _handleStopAPI();
+    _handleStopAPI();
   }, [_goRoute])
 
   function _changeRoute() {
-    _setGo(!_go)
-    dispatch(setRouteDirection(!_go));
+    if (_goStopName && _backStopName) {
+      _setGo(!_go)
+      dispatch(setRouteDirection(!_go));
+    }
   }
 
   //呼叫選取的路線詳細資料
@@ -111,7 +131,7 @@ function RouteResultInfo() {
         };
       }
       );
-      
+
 
       _backRoute.forEach((item, index) => {
         _backStopData[index] = {
@@ -141,10 +161,20 @@ function RouteResultInfo() {
     <div className="h-full">
       <div className="lg:px-7 md:px-16 px-3 absolute w-full h-full">
         <div className="px-5">
-          <h2 className="text-white mb-2">{routename}</h2>
+          <h2 className="text-white mb-2">
+            {
+              routename.replace(/[\u4e00-\u9fff\u3400-\u4dff\uf900-\ufaff]/g, '').replace(/[()-]/g, "")
+            }
+          </h2>
           <div className="grid gap-6 grid-flow-col justify-start relative">
-            <a onClick={_changeRoute} className={`tab-line hover:tab-line-hover ${_go ? "tab-line-active" : ''}`}>往{_goStopName}</a>
-            <a onClick={_changeRoute} className={`tab-line hover:tab-line-hover ${!_go ? "tab-line-active" : ''}`}>往{_backStopName}</a>
+            {_goStopName ?
+              <a onClick={_changeRoute} className={`tab-line hover:tab-line-hover ${_go ? "tab-line-active" : ''}`}>往{_goStopName}</a>
+              : null}
+
+            {_backStopName ?
+              <a onClick={_changeRoute} className={`tab-line hover:tab-line-hover ${!_go ? "tab-line-active" : ''}`}>往{_backStopName}</a>
+              : null}
+
             {/* <div className="tab-line text-white absolute right-0">
             {_goStopName} - {_backStopName}
           </div> */}

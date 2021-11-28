@@ -135,7 +135,7 @@ function RouteMap() {
       }}
       center={[25.0242987, 121.5441439]}
       zoom={15}
-      scrollWheelZoom={false}
+      scrollWheelZoom={true}
     >
       <TileLayer
         url="https://api.mapbox.com/styles/v1/cindy1029/ckwev8vay0d4g14p9dip5htx5/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiY2luZHkxMDI5IiwiYSI6ImNrd2Vpd3EyNzA1NWQycXJ1OTh2ZWtpaXUifQ.odRRCORGIXPix4oKd1_R5g"

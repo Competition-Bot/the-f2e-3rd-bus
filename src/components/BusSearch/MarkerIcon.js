@@ -42,7 +42,7 @@ export const createFilledIcon = (type, value = undefined) => {
   }
 
   return new L.DivIcon({
-    className: "relative",
+    className: "",
     html: `<img src=${marker} alt="" />${
       value !== undefined || !isNaN(value)
         ? `<span class="text-white font-bold text-base absolute top-2.5 left-6 transform -translate-x-1/2">
@@ -50,7 +50,7 @@ export const createFilledIcon = (type, value = undefined) => {
         </span>`
         : ""
     }`,
-    iconSize: new L.Point(50, 50),
+    // iconSize: new L.Point(50, 50),
     // iconAnchor: [20, 40],
   });
 };

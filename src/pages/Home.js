@@ -2,8 +2,6 @@ import { Container } from "postcss";
 import Select from "react-select";
 import AllCity from "../Json/City.json";
 import { Link, Switch, Route, NavLink } from "react-router-dom";
-import HomeRouteSearch from "../components/HomeRouteSearch";
-import HomeStopSearch from "../components/HomeStopSearch";
 import NewsItem from "../components/NewsItem";
 import React, { useState,useEffect } from 'react';
 import News from "../Json/News.json"
@@ -48,14 +46,6 @@ let news5 = News.slice(0,5)
               找站牌
             </NavLink>
           </div>
-          <Switch>
-            <Route exact path="/">
-              <HomeRouteSearch />
-            </Route>
-            <Route exact path="/">
-              <HomeStopSearch/>
-            </Route>
-          </Switch>
           <Link
             to="/"
             className="btn shadow-btn mt-7 "

@@ -1,41 +1,41 @@
 import { useDispatch } from "react-redux";
-import { useState} from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { setCity } from "../../actions/busActions";
 import Select from "react-select";
 import { getCityAllRoute } from "../../api/routeApi";
 import AllCity from "../../Json/City.json";
 
 const BusSearchBar = () => {
+  let location = useLocation();
   const dispatch = useDispatch();
 
-  const [_city,_setCity] = useState("");
-  const [_routeName,_setRouteName] = useState("");
+  const [_city, _setCity] = useState("");
+  const [_routeName, _setRouteName] = useState("");
   const [_routesData, _setRoutesData] = useState([]);
 
   const [step, setstep] = useState(1);
 
   async function _handleCitySelected(_cityOption) {
-    _setRoutesData([])
+    _setRoutesData([]);
     let _options = [];
     if (_cityOption.value === "Unselected") return;
     const _allRoute = await getCityAllRoute(_cityOption.value);
-    if(_allRoute){
+    if (_allRoute) {
       for (let i = 0; i < _allRoute.length; i++) {
         const _option = {
           value: _allRoute[i].routeName,
           label: _allRoute[i].routeName,
         };
-  
+
         _options.push(_option);
       }
-  
+
       dispatch(setCity(_cityOption.value));
       _setRoutesData(_options); //useState儲存下一個select選項
       _setCity(_cityOption.value);
       setstep(2);
     }
-    
   }
 
   function _handleRouteSelected(_routeOption) {
@@ -43,7 +43,35 @@ const BusSearchBar = () => {
     setstep(3);
   }
 
-  return (
+  return location.pathname === "/" ? (
+    <>
+      <div className="grid grid-flow-col auto-cols-max gap-x-4">
+        <Select
+          className="w-36"
+          options={AllCity}
+          onChange={_handleCitySelected}
+          defaultValue={AllCity[0]}
+        />
+        <Select
+          className="md:w-60 w-56"
+          options={_routesData}
+          onChange={_handleRouteSelected}
+          isDisabled={step >= 2 ? false : true}
+        />
+      </div>
+      <Link
+        to={`/bussearch/route/${_city}/${_routeName}`}
+        className={`btn justify-self-center mt-6 ${
+          step !== 3 ? "bg-gray-300" : ""
+        }`}
+        onClick={(e) => {
+          if (step !== 3) e.preventDefault();
+        }}
+      >
+        查詢
+      </Link>
+    </>
+  ) : (
     <div className="mt-4 bg-white h-full shadow-card md:pt-8 pt-6 grid auto-rows-max items-start justify-center gap-6">
       <div className="grid grid-rows-2 justify-start gap-x-9 gap-y-4 items-center">
         <div
@@ -74,7 +102,7 @@ const BusSearchBar = () => {
         />
       </div>
       <Link
-        to={`/bussearch/route/${_city}/${_routeName}`}        
+        to={`/bussearch/route/${_city}/${_routeName}`}
         className={`btn justify-self-center mt-10 ${
           step !== 3 ? "bg-gray-300" : ""
         }`}

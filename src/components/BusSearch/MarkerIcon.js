@@ -62,13 +62,7 @@ export const createFilledIcon = (type, value = undefined) => {
     <rect width="50" height="50" fill="white"/>
     </clipPath>
     </defs>
-    </svg>${
-      value !== undefined || !isNaN(value)
-        ? `<span class="text-white font-bold text-base absolute top-2.5 left-6 transform -translate-x-1/2">
-          ${value}
-        </span>`
-        : ""
-    }`,
+    </svg>`,
     iconSize: new L.Point(50, 50),
     iconAnchor: [20, 40],
   });

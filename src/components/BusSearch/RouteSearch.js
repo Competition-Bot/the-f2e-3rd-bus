@@ -1,58 +1,78 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { setCity, setRouteInfo } from "../../actions/busActions";
+import { Link, useLocation } from "react-router-dom";
+import { setCity } from "../../actions/busActions";
 import Select from "react-select";
-import { getCityAllRoute, getRouteInfo } from "../../api/routeApi";
+import { getCityAllRoute } from "../../api/routeApi";
 import AllCity from "../../Json/City.json";
 
 const BusSearchBar = () => {
-  let _routeName = useSelector((state) => state.busReducer.routeName);
-  let _routeUID = useSelector((state) => state.busReducer.routeUID);
-  let _city = useSelector((state) => state.busReducer.city);
-  const [routesData, setRoutesData] = useState([]);
+  let location = useLocation();
   const dispatch = useDispatch();
+
+  const [_city, _setCity] = useState("");
+  const [_routeName, _setRouteName] = useState("");
+  const [_routesData, _setRoutesData] = useState([]);
+
   const [step, setstep] = useState(1);
 
   async function _handleCitySelected(_cityOption) {
-    let options = [];
+    _setRoutesData([]);
+    let _options = [];
     if (_cityOption.value === "Unselected") return;
     const _allRoute = await getCityAllRoute(_cityOption.value);
+    if (_allRoute) {
+      for (let i = 0; i < _allRoute.length; i++) {
+        const _option = {
+          value: _allRoute[i].routeName,
+          label: _allRoute[i].routeName,
+        };
 
-    for (let i = 0; i < _allRoute.length; i++) {
-      const option = {
-        value: _allRoute[i].routeUID,
-        label: _allRoute[i].routeName,
-      };
+        _options.push(_option);
+      }
 
-      options.push(option);
+      dispatch(setCity(_cityOption.value));
+      _setRoutesData(_options); //useState儲存下一個select選項
+      _setCity(_cityOption.value);
+      setstep(2);
     }
-    dispatch(setCity(_cityOption.value));
-    setRoutesData(options); //useState儲存下一個select選項
-
-    setstep(2);
   }
 
-  async function _handleRouteSelected(_routeOption) {
-    const _data = await getRouteInfo(
-      _city,
-      _routeOption.label,
-      _routeOption.value
-    );
-    const _routeData = {
-      routeName: _routeOption.label,
-      routeUID: _routeOption.value,
-      destinationStopName: _data.destinationStopName,
-      departureStopName: _data.departureStopName,
-      trickPrice: _data.trickPrice,
-      bufferZone: _data.bufferZone,
-    };
-    dispatch(setRouteInfo(_routeData));
-
+  function _handleRouteSelected(_routeOption) {
+    _setRouteName(_routeOption.value);
     setstep(3);
   }
 
-  return (
+  return location.pathname === "/" ? (
+    <>
+      <div className="grid lg:grid-flow-col auto-cols-max gap-4">
+        <Select
+          className="w-36"
+          options={AllCity}
+          onChange={_handleCitySelected}
+          defaultValue={AllCity[0]}
+        />
+        <Select
+          className="md:w-60 w-56"
+          options={_routesData}
+          onChange={_handleRouteSelected}
+          isDisabled={step >= 2 ? false : true}
+          placeholder="請輸入路線號碼"
+        />
+      </div>
+      <Link
+        to={`/bussearch/route/${_city}/${_routeName}`}
+        className={`btn justify-self-center mt-6 ${
+          step !== 3 ? "bg-gray-300" : ""
+        }`}
+        onClick={(e) => {
+          if (step !== 3) e.preventDefault();
+        }}
+      >
+        查詢
+      </Link>
+    </>
+  ) : (
     <div className="mt-4 bg-white h-full shadow-card md:pt-8 pt-6 grid auto-rows-max items-start justify-center gap-6">
       <div className="grid grid-rows-2 justify-start gap-x-9 gap-y-4 items-center">
         <div
@@ -77,13 +97,14 @@ const BusSearchBar = () => {
         <div className="text-blue-400 font-medium">輸入公車號碼</div>
         <Select
           className="col-start-2 md:w-60 w-56"
-          options={routesData}
+          options={_routesData}
           onChange={_handleRouteSelected}
           isDisabled={step >= 2 ? false : true}
+          placeholder="請輸入路線號碼"
         />
       </div>
       <Link
-        to={`/bussearch/route/${_routeUID}`}
+        to={`/bussearch/route/${_city}/${_routeName}`}
         className={`btn justify-self-center mt-10 ${
           step !== 3 ? "bg-gray-300" : ""
         }`}

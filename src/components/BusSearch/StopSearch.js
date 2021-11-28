@@ -1,11 +1,70 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
-
 import Select from "react-select";
-function StopSearch() {
-  const [step, setstep] = useState(1);
+import AllCity from "../../Json/City.json";
+import { getCityAllStation } from "../../api/stopApi";
+import { setCity } from "../../actions/busActions";
 
-  return (
+function StopSearch() {
+  let location = useLocation();
+  const [_city, _setCity] = useState("");
+  const [_stationData, _setStationData] = useState([]);
+  const [_stationName, _setStationName] = useState("");
+  const [step, setstep] = useState(1);
+  const dispatch = useDispatch();
+  async function _handleCitySelected(_cityOption) {
+    let _options = [];
+    if (_cityOption.value === "Unselected") return;
+    const _allStation = await getCityAllStation(_cityOption.value);
+    for (let i = 0; i < _allStation.length; i++) {
+      const _option = {
+        value: _allStation[i].stationName,
+        label: _allStation[i].stationDes,
+      };
+      _options.push(_option);
+    }
+    dispatch(setCity(_cityOption.value));
+    _setStationData(_options); //useState儲存下一個select選項
+    _setCity(_cityOption.value);
+    setstep(2);
+  }
+
+  function _handleStationSelected(_stationOption) {
+    _setStationName(_stationOption.value);
+    setstep(3);
+  }
+
+  return location.pathname === "/" ? (
+    <>
+      <div className="grid lg:grid-flow-col auto-cols-max gap-4">
+        <Select
+          className="w-36"
+          options={AllCity}
+          onChange={_handleCitySelected}
+          defaultValue={AllCity[0]}
+        />
+        <Select
+          className="md:w-60 w-56"
+          options={_stationData}
+          onChange={_handleStationSelected}
+          isDisabled={step >= 2 ? false : true}
+          placeholder="請輸入站牌關鍵字"
+        />
+      </div>
+      <Link
+        to={`/bussearch/stop/${_city}/${_stationName}`}
+        className={`btn justify-self-center mt-6 ${
+          step !== 3 ? "bg-gray-300" : ""
+        }`}
+        onClick={(e) => {
+          if (step !== 3) e.preventDefault();
+        }}
+      >
+        查詢
+      </Link>
+    </>
+  ) : (
     <div className="mt-4 bg-white h-full shadow-card md:pt-8 pt-6 grid auto-rows-max items-start justify-center gap-6">
       <div className="grid grid-rows-2 justify-start gap-x-9 gap-y-4 items-center">
         <div
@@ -14,7 +73,12 @@ function StopSearch() {
           1
         </div>
         <div className="text-blue-400 font-medium">選擇縣市</div>
-        <Select className="col-start-2 w-36" />
+        <Select
+          className="col-start-2 w-36"
+          options={AllCity}
+          onChange={_handleCitySelected}
+          defaultValue={AllCity[0]}
+        />
       </div>
       <div className="grid grid-rows-2 justify-start gap-x-9 gap-y-4 items-center">
         <div
@@ -25,11 +89,14 @@ function StopSearch() {
         <div className="text-blue-400 font-medium">輸入站牌關鍵字</div>
         <Select
           className="col-start-2 md:w-60 w-56"
+          options={_stationData}
+          onChange={_handleStationSelected}
           isDisabled={step >= 2 ? false : true}
+          placeholder="請輸入站牌關鍵字"
         />
       </div>
       <Link
-        to="/bussearch/stop/:stopid"
+        to={`/bussearch/stop/${_city}/${_stationName}`}
         className={`btn justify-self-center mt-10 ${
           step !== 3 ? "bg-gray-300" : ""
         }`}

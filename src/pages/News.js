@@ -37,8 +37,8 @@ function News() {
         />
       </div>
       <div className="line"></div>
-      {data.map((news) => (
-        <NewsItem key={news.id} news={news} />
+      {data.map((news, idx) => (
+        <NewsItem key={idx + news.id} news={news} />
       ))}
 
       {/* pagenumber */}

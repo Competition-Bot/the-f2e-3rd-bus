@@ -13,9 +13,9 @@ function PlanResult() {
       <div className="lg:px-7 md:px-16 px-3 absolute w-full h-full">
         <div className="px-3">
           <div className="text-white mb-3 mt-1 grid grid-flow-col auto-cols-max gap-x-6 items-center">
-            <div className="font-medium text-xl">{_pos[0]}</div>
+            <div className="font-medium text-xl">{_pos[0].label}</div>
             <FontAwesomeIcon icon={faExchangeAlt} size="lg" />
-            <div className="font-medium text-xl">{_pos[1]}</div>
+            <div className="font-medium text-xl">{_pos[1].label}</div>
           </div>
           <div className="text-white">
             {_time.type}：{_time.date} {_time.clock}

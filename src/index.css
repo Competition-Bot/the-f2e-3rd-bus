@@ -73,10 +73,12 @@ body {
   /* home */
 
   .home_switch_on {
-    @apply bg-blue-400  text-white font-medium py-1.5 px-3.5 w-max inline-block shadow-btn;
+    @apply bg-blue-400 border-blue-400  text-white font-medium py-1 px-3 w-max inline-block shadow-btn;
+    border-width: 1.75px;
   }
   .home_switch_off {
-    @apply bg-white border border-blue-400 text-blue-400 font-medium py-1.5 px-3.5 w-max inline-block;
+    @apply bg-white border-blue-400 text-blue-400 font-medium py-1 px-3 w-max inline-block;
+    border-width: 1.75px;
   }
 
   /* searchbar */
@@ -125,6 +127,9 @@ body {
   /* pseudo solution */
   .content {
     content: ".";
+  }
+  .home-switch-on-hover {
+    @apply bg-blue-400  text-white;
   }
 }
 

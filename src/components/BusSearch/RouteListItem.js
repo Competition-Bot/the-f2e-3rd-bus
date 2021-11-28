@@ -11,7 +11,7 @@ function RouteListItem({ routeData }) {
   ];
 
   return (
-    <div
+    <a
       key={routeData.routeUID}
       className="relative flex justify-between px-5"
     >
@@ -31,7 +31,7 @@ function RouteListItem({ routeData }) {
           }`}
         >
           <FontAwesomeIcon icon={faWheelchair} color="white" size="sm" className="z-10"/>
-          <span className="text-white mx-1 z-10 text-sm">738-FY</span>
+          <span className="text-white mx-1 z-10 text-sm">{routeData.plateNumb}</span>
           <BusIdBg className="absolute w-full" />
         </div>
         <div className="h-full w-max flex items-center justify-center">
@@ -45,7 +45,7 @@ function RouteListItem({ routeData }) {
           ></div>
         </div>
       </div>
-    </div>
+    </a>
   );
 }
 

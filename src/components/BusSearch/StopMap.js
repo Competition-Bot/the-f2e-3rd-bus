@@ -1,5 +1,4 @@
 import { MapContainer, TileLayer, Marker, Popup, useMap, Polyline } from "react-leaflet";
-import MarkerClusterGroup from "react-leaflet-markercluster";
 import "leaflet/dist/leaflet.css";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";

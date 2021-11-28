@@ -33,7 +33,7 @@ const IconOption = (props) => (
 
 function PlanSearchBar() {
   const [step, setstep] = useState(1);
-  const [inputStart, setinputStart] = useState(options.start[0].value);
+  //const [inputStart, setinputStart] = useState(options.start[0].value);
   const [inputEnd, setinputEnd] = useState(options.end[0].value);
 
   function _handleStartSelected(_startOption) {
@@ -41,7 +41,7 @@ function PlanSearchBar() {
       if (inputEnd === "Unselected") setstep(2);
       else setstep(3);
     } else setstep(1);
-    setinputStart(_startOption.value);
+    //setinputStart(_startOption.value);
   }
 
   function _handleEndSelected(_endOption) {

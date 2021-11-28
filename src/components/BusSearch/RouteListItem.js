@@ -12,6 +12,7 @@ function RouteListItem({ routeData }) {
 
   return (
     <a
+      href="/#"
       key={routeData.routeUID}
       className="relative flex justify-between px-5"
     >

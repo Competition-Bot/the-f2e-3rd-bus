@@ -21,14 +21,18 @@ function PlanMap() {
   let bounds = [];
 
   useEffect(() => {
+    _handleLocation() // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
+
+  function _handleLocation() {
     if (location.pathname.includes("/plansearch/detail/")) {
       const id = location.pathname.replace("/plansearch/detail/", "");
-      setdata(dataList[id]);
-      setstepNum(dataList[id].step.length);
+      setdata(dataList[id]); 
+      setstepNum(dataList[id].step.length); 
     } else {
       setdata(null);
     }
-  }, [location]);
+  }
 
   const _renderDestination = () => {
     let list = [];

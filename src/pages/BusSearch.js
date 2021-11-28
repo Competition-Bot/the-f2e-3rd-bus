@@ -1,7 +1,6 @@
 import { Switch, Route, Redirect } from "react-router";
 import BusSearchBar from "../components/BusSearch/BusSearchBar";
 import RouteResultInfo from "../components/BusSearch/RouteResultInfo";
-import RouteResultFare from "../components/BusSearch/RouteResultFare";
 import StopResultInfo from "../components/BusSearch/StopResultInfo";
 import RouteMap from "../components/BusSearch/RouteMap";
 import StopMap from "../components/BusSearch/StopMap";

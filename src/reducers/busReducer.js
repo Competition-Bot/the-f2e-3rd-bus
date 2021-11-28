@@ -4,6 +4,7 @@ import {
     SET_STOP_ESTIMATEDTIME,
     SET_ROUTE_Info,
     SET_BUS_REALTIME,
+    SET_STATION,
     SET_STATION_POS,
     SET_ROUTE_DIRECTION
 } from '../utils/actionType/BusActionType'
@@ -72,6 +73,11 @@ export const busReducer = (state = initialState, action) => {
                 ...state,
                 goBusRealTime: action.payload.goBusRealTime,
                 backBusRealTime: action.payload.backBusRealTime,
+            }
+        case SET_STATION:
+            return{
+                ...state,
+                stationName: action.payload.stationName
             }
 
         case SET_STATION_POS:

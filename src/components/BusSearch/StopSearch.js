@@ -1,10 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState} from "react";
 import Select from "react-select";
 import AllCity from "../../Json/City.json";
 import { getCityAllStation } from "../../api/stopApi";
-import { setCity } from "../../actions/busActions";
+import { setCity,setStation } from "../../actions/busActions";
 
 function StopSearch() {
   let location = useLocation();
@@ -18,6 +18,7 @@ function StopSearch() {
     dispatch(setCity(_cityOption.value));
     _setCity(_cityOption.value);
     setstep(2);
+    _setStationData([])
   }
 
   function _handleInputStop(v) {
@@ -47,6 +48,7 @@ function StopSearch() {
 
   function _handleStationSelected(_stationOption) {
     _setStationName(_stationOption.value);
+    dispatch(setStation(_stationOption.value))
     setstep(3);
   }
 
@@ -63,6 +65,7 @@ function StopSearch() {
           className="md:w-60 w-56"
           options={_stationData}
           onChange={_handleStationSelected}
+          onInputChange={_handleInputStop}
           isDisabled={step >= 2 ? false : true}
           placeholder="請輸入站牌關鍵字"
         />
@@ -105,8 +108,8 @@ function StopSearch() {
         <Select
           className="col-start-2 md:w-60 w-56"
           options={_stationData}
-          onChange={_handleStationSelected}
           onInputChange={_handleInputStop}
+          onChange={_handleStationSelected}
           isDisabled={step >= 2 ? false : true}
           placeholder="請輸入站牌關鍵字"
         />

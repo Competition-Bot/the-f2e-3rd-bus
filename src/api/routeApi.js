@@ -54,7 +54,6 @@ export const getRouteAllStop = async (_city, _routeName) => {
     alert("查無路線所有站牌資料!");
   }
 }
-var reg = /[u4E00-u9FA5]/g;
 //城市所有路線
 export const getCityAllRoute = async (city) => {
   try {

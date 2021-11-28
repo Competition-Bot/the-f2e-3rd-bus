@@ -118,7 +118,7 @@ function StopResultInfo() {
             _listData.map((item, i) => <StopListItem key={i} data={item} />)
           ) : (
             <div className="mt-10 mx-auto">
-              <img src={img_loading} />
+              <img className="w-24" src={img_loading} />
             </div>
           )}
         </div>

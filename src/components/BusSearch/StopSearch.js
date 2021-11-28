@@ -7,30 +7,43 @@ import { getCityAllStation } from '../../api/stopApi'
 import { setCity } from "../../actions/busActions";
 
 function StopSearch() {
-  const [_city, _setCity] = useState("");
+  const [_city, _setCity] = useState();
   const [_stationData, _setStationData] = useState([]);
   const [_stationName, _setStationName] = useState("");
   const [step, setstep] = useState(1);
   const dispatch = useDispatch();
-  async function _handleCitySelected(_cityOption) {
-    
-    let _options = [];
-    if (_cityOption.value === "Unselected") return;
-    const _allStation = await getCityAllStation(_cityOption.value);
-    for (let i = 0; i < _allStation.length; i++) {
-      const _option = {
-        value: _allStation[i].stationName,
-        label: _allStation[i].stationDes,
-      };
-      _options.push(_option);
-    }
+
+  function _handleCitySelected(_cityOption) {
     dispatch(setCity(_cityOption.value));
-    _setStationData(_options); //useState儲存下一個select選項
     _setCity(_cityOption.value);
     setstep(2);
-
   }
- 
+
+  function _handleInputStop(v) {
+    var reg = /^[\u4E00-\u9FA5]+$/
+    if (reg.test(v)) {
+      _hanldeSearchStopodCity(v)
+    } else {
+      return
+    }
+  }
+
+  async function _hanldeSearchStopodCity(v) {
+    let _options = [];
+    if (!_city) return;
+    const _allStation = await getCityAllStation(_city,v);
+    if (_allStation) {
+      for (let i = 0; i < _allStation.length; i++) {
+        const _option = {
+          value: _allStation[i].stationName,
+          label: _allStation[i].stationDes,
+        };
+        _options.push(_option);
+      }
+      _setStationData(_options)
+    }
+  }
+
   function _handleStationSelected(_stationOption) {
     _setStationName(_stationOption.value);
     setstep(3);
@@ -63,14 +76,14 @@ function StopSearch() {
           className="col-start-2 md:w-60 w-56"
           options={_stationData}
           onChange={_handleStationSelected}
+          onInputChange={_handleInputStop}
           isDisabled={step >= 2 ? false : true}
         />
       </div>
       <Link
         to={`/bussearch/stop/${_city}/${_stationName}`}
-        className={`btn justify-self-center mt-10 ${
-          step !== 3 ? "bg-gray-300" : ""
-        }`}
+        className={`btn justify-self-center mt-10 ${step !== 3 ? "bg-gray-300" : ""
+          }`}
         onClick={(e) => {
           if (step !== 3) e.preventDefault();
         }}

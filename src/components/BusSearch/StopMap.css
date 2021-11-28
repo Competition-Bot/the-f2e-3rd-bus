@@ -1,0 +1,22 @@
+.leaflet-popup-close-button{
+    display: none;
+}
+.leaflet-popup-tip{
+    display: none;
+}
+
+.tip{
+    position: absolute;
+    z-index: 1000;
+    bottom: 5%;
+    right: 50%;
+    transform: translate(50%,-5%);
+}
+
+/* .busup .leaflet-popup-content-wrapper{
+    background-color: #1E659C;
+    margin-bottom: 30px;
+    height: 76px;
+    border-radius: 5px;
+    width: auto;
+} */

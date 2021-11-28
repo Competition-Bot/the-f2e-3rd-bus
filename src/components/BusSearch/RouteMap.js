@@ -61,7 +61,7 @@ function RouteMap() {
         icon={icon}
         key={`marker-${data.stationUID}`}
       >
-        <Popup className={`${popColor} rounded-xl`} position={data.stopPosition} closeButton={true}>
+        <Popup className={`${popColor} rounded-xl mg-3`} position={data.stopPosition} closeButton={true}>
           <div className="">
             <h2 className="flex text-white text-base font-semibold w-auto justify-center items-center">{data.stopName}</h2>
             <h2 className={`${textColor} flex bg-white text-base font-semibold w-15 h-7 justify-center items-center rounded-md mt-1`}>{data.estimateTime}</h2>

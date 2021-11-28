@@ -4,17 +4,20 @@ import "leaflet/dist/leaflet.css";
 
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import "../BusSearch/RouteMap.css";
+import "../BusSearch/StopMap.css";
 import { iconBlack, iconYellow, icon_location, iconBlack_shadow } from './MarkerIcon';
 import location_icon from '../../assets/img/btn_location.svg';
 import useGeoLocation from '../BusSearch/useGeoLcation.js'
+import map_marker from '../../assets/img/map-marker-alt.svg'
+
+
 
 const _renderMarker = () => {
 
     let icon = iconYellow
     // const mapRef = useRef();
 
-   
+
     return (
         <Marker
             // position={data.stopPosition}
@@ -34,23 +37,6 @@ const _renderMarker = () => {
 
 
 function StopMap() {
-
- 
-    // function LocationMarker() {
-    //     const [position, setPosition] = useState(null);
-
-    //     const map = useMap();
-    //     useEffect(() => {
-    //         map.locate().on("locationfound", function (e) {
-    //             setPosition(e.latlng);
-    //             map.flyTo(e.latlng, map.getZoom());
-    //         });
-    //     }, [map]);
-
-    //     return position === null ? null : (
-    //         <Marker position={position} icon={icon_location}></Marker>
-    //     );
-    // }
 
     return (
 
@@ -80,6 +66,9 @@ function StopMap() {
 
             {/* <LocationMarker /> */}
             <div className="location" ><img src={location_icon} alt='location' /></div>
+            <div className="tip bg-blue-400 flex w-auto h-9 p-4 rounded-2xl flex-row justify-center items-center">
+                <div className="flex justify-center items-center text-white">點擊 <img src={map_marker} alt="marker" />查看站牌</div>
+            </div>
         </MapContainer>
 
     )

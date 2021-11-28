@@ -4,13 +4,19 @@ import "leaflet/dist/leaflet.css";
 
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import "../BusSearch/RouteMap.css";
+import "../BusSearch/StopMap.css";
 import { iconBlack, iconYellow, icon_location, iconBlack_shadow } from './MarkerIcon';
-import location from '../../assets/img/btn_location.svg';
+import location_icon from '../../assets/img/btn_location.svg';
+import useGeoLocation from '../BusSearch/useGeoLcation.js'
+import map_marker from '../../assets/img/map-marker-alt.svg'
+
+
 
 const _renderMarker = () => {
 
     let icon = iconYellow
+    // const mapRef = useRef();
+
 
     return (
         <Marker
@@ -18,7 +24,7 @@ const _renderMarker = () => {
             icon={icon}
         // key={`marker-${data.stationUID}`}
         >
-            <Popup className="popup flex" position={[25.0242987, 121.5441439]} closeButton={true}>
+            <Popup className="busup flex" position={[25.0242987, 121.5441439]} closeButton={true}>
                 <div className="">
                     <h2 className="flex text-white text-base font-semibold w-auto justify-center items-center">站牌名字</h2>
                     <h2 className="flex bg-white text-yellow-400 text-base font-semibold w-15 h-7 justify-center items-center rounded-md mt-1">X個站牌</h2>
@@ -32,23 +38,6 @@ const _renderMarker = () => {
 
 function StopMap() {
 
- 
-    // function LocationMarker() {
-    //     const [position, setPosition] = useState(null);
-
-    //     const map = useMap();
-    //     useEffect(() => {
-    //         map.locate().on("locationfound", function (e) {
-    //             setPosition(e.latlng);
-    //             map.flyTo(e.latlng, map.getZoom());
-    //         });
-    //     }, [map]);
-
-    //     return position === null ? null : (
-    //         <Marker position={position} icon={icon_location}></Marker>
-    //     );
-    // }
-
     return (
 
         <MapContainer
@@ -59,7 +48,7 @@ function StopMap() {
             }}
             center={[25.0242987, 121.5441439]}
             zoom={15}
-            scrollWheelZoom={false}
+            scrollWheelZoom={true}
         >
 
             <TileLayer
@@ -76,7 +65,10 @@ function StopMap() {
             } */}
 
             {/* <LocationMarker /> */}
-            <div className="location" ><img src={location} alt='location' /></div>
+            <div className="location" ><img src={location_icon} alt='location' /></div>
+            <div className="tip bg-blue-400 flex w-auto h-9 p-5 rounded-3xl flex-row justify-center items-center">
+                <div className="tracking-wider flex justify-center items-center text-white text-base font-semibold">點擊 <img className="mb-1 mr-1 ml-1" src={map_marker} alt="marker" />查看站牌</div>
+            </div>
         </MapContainer>
 
     )

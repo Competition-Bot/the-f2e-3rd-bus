@@ -36,10 +36,13 @@ module.exports = {
         },
       },
       boxShadow: {
-        header: "0px 5px 10px rgba(0, 0, 0, 0.1)",
+        header: "0px 5px 8px rgba(0, 0, 0, 0.1)",
         btn: "2px 3px 7px rgba(0, 0, 0, 0.2)",
         card: "0px 4px 8px rgba(0, 0, 0, 0.06)",
         busCircle: "0px 0px 4px #005DC0",
+      },
+      fontFamily: {
+        ch: ["Noto Sans TC", "sans-serif"],
       },
     },
   },

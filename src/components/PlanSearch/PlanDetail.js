@@ -6,32 +6,37 @@ import { useParams, useHistory } from "react-router";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-
-
 function PlanDetail() {
   let history = useHistory();
   const { planresultid } = useParams();
   let _planlist = useSelector((state) => state.planReducer.planlist);
-  const [data, setdata] = useState(null)
+  const [data, setdata] = useState(null);
 
   useEffect(() => {
     if (planresultid >= _planlist.length) {
       history.push("/plansearch");
+    } else {
+      setdata(_planlist[planresultid]);
     }
-    else {
-      setdata(_planlist[planresultid])
-    }
-  }, [planresultid])
+  }, [planresultid, _planlist, history]);
 
   const _renderPlanInfo = () => {
     let list = [];
     data.step.forEach((item, idx) => {
-      if (idx !== 0) list.push(<AngleRight key={"angle"+idx} stroke="white" height="14" width="8" />);
+      if (idx !== 0)
+        list.push(
+          <AngleRight
+            key={"angle" + idx}
+            stroke="white"
+            height="14"
+            width="8"
+          />
+        );
       if (item.type === "walk") {
         list.push(
-          <div 
-          className="flex items-center h-10 pt-2 w-max"
-          key={"plandeInfo"+idx}
+          <div
+            className="flex items-center h-10 pt-2 w-max"
+            key={"plandeInfo" + idx}
           >
             <FontAwesomeIcon
               icon={faWalking}
@@ -44,15 +49,11 @@ function PlanDetail() {
         );
       } else if (item.type === "bus") {
         list.push(
-          <div 
-          className="flex items-center h-10 w-max"
-          key={"plandeInfo"+idx}
+          <div
+            className="flex items-center h-10 w-max"
+            key={"plandeInfo" + idx}
           >
-            <FontAwesomeIcon
-              icon={faBus}
-              size="lg"
-              color="#ffffff"
-            />
+            <FontAwesomeIcon icon={faBus} size="lg" color="#ffffff" />
             <span className="ml-2 text-white text-xl">{item.name}</span>
           </div>
         );
@@ -64,10 +65,13 @@ function PlanDetail() {
 
   const _renderPlanDetail = () => {
     let list = [];
-    data.step.forEach((item,idx) => {
+    data.step.forEach((item, idx) => {
       if (item.type === "walk") {
         list.push(
-          <div key={"plandetail"+idx} className="relative grid grid-flow-col auto-cols-max gap-4">
+          <div
+            key={"plandetail" + idx}
+            className="relative grid grid-flow-col auto-cols-max gap-4"
+          >
             <div className="h-full w-max flex items-center justify-center">
               <div className="border-l-2 border-blue-300 h-full absolute z-0"></div>
               <div className="rounded-full w-4 h-4 bg-blue-300 z-10"></div>
@@ -79,7 +83,7 @@ function PlanDetail() {
                 color="#333333"
                 className="mr-2"
               />
-              <div>步行到{item.destination.label}</div>
+              <div>步行到{item.end.label}</div>
               <div className="py-1.5 px-3 bg-gray-300 font-medium absolute right-0">
                 約{item.time}分鐘
               </div>
@@ -89,7 +93,10 @@ function PlanDetail() {
         );
       } else if (item.type === "bus") {
         list.push(
-          <div key={"plandetail"+idx} className="relative grid grid-flow-col auto-cols-max gap-4">
+          <div
+            key={"plandetail" + idx}
+            className="relative grid grid-flow-col auto-cols-max gap-4"
+          >
             <div className="h-full w-max flex items-center justify-center">
               <div className="border-l-2 border-blue-300 h-full absolute z-0"></div>
               <div className="rounded-full w-4 h-4 bg-blue-300 z-10"></div>
@@ -102,11 +109,19 @@ function PlanDetail() {
                   className="mr-2"
                   color="#1E659C"
                 />
-                <div className="text-blue-400 font-medium mr-2">{item.name}</div>
-                <div>從 <span className="text-blue-400">{item.start.label}</span> 到 <span className="text-blue-400">{item.end.label}</span></div>
+                <div className="text-blue-400 font-medium mr-2">
+                  {item.name}
+                </div>
+                <div>
+                  從 <span className="text-blue-400">{item.start.label}</span>{" "}
+                  到 <span className="text-blue-400">{item.end.label}</span>
+                </div>
               </div>
               <div className="flex items-center mt-4">
-                <Link to={`/bussearch/route/${item.city}/${item.name}`} className="btn hover:btn-hover">
+                <Link
+                  to={`/bussearch/route/${item.city}/${item.name}`}
+                  className="btn hover:btn-hover"
+                >
                   查看公車動態
                 </Link>
                 <div className="py-1.5 px-3 bg-gray-300 font-medium absolute right-0">
@@ -123,17 +138,18 @@ function PlanDetail() {
     return list;
   };
 
-
   return (
     <div className="h-full">
-      {data === null ? null :
-        (<div className="lg:px-7 md:px-16 px-3 absolute w-full h-full">
+      {data === null ? null : (
+        <div className="lg:px-7 md:px-16 px-3 absolute w-full h-full">
           <div className="px-3">
             <div className="grid grid-flow-col auto-cols-max gap-x-5 items-center my-2">
               {_renderPlanInfo()}
             </div>
             <div className="flex justify-between">
-              <div className="text-white">{data.time[0]} - {data.time[1]}</div>
+              <div className="text-white">
+                {data.time[0]} - {data.time[1]}
+              </div>
               <div className="grid gap-4 auto-cols-max grid-flow-col">
                 <div className="text-white">TWD${data.price}</div>
                 <div className="text-white">約{data.time[2]}分鐘</div>
@@ -163,8 +179,8 @@ function PlanDetail() {
               </div>
             </div>
           </div>
-        </div>)
-      }
+        </div>
+      )}
 
       <div className="bg-blue-400 w-full h-48 -mt-1"></div>
     </div>

@@ -1,31 +1,38 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import StopListItem from "./StopListItem";
 import { useEffect, useState } from "react";
-import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from "react-redux";
-import { getEstimatedTimeOfStop, getSearchStation, getRouteDirection, getStationAllRoute } from '../../api/stopApi';
-import { setStationPos } from '../../actions/busActions'
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+  getEstimatedTimeOfStop,
+  getSearchStation,
+  getRouteDirection,
+  getStationAllRoute,
+} from "../../api/stopApi";
+import { setStationPos } from "../../actions/busActions";
+import img_loading from "../../assets/img/loading.png";
+
 function StopResultInfo() {
   const { city, stopname } = useParams();
   const [_code, _setCode] = useState(0);
   const [_sameStationInfo, _setSameStationInfo] = useState();
   const [_stationStopsData, _setStationStopsData] = useState();
   const [_listData, _setListData] = useState();
-  //let _stationData = useSelector((state)=>state.busReducer.stationData)
   const dispatch = useDispatch();
   useEffect(() => {
     _handleSearch();
-  }, [stopname])
+  }, [stopname]);
 
   useEffect(() => {
-    if(_stationStopsData) {
-      _setListData(_stationStopsData[_code].stops)
+    if (_stationStopsData) {
+      _setListData(_stationStopsData[_code].stops);
     }
-  }, [_code])
+  }, [_code]);
 
   async function _handleSearch() {
     const _sameStation = await getSearchStation(city, stopname);
-    _setSameStationInfo(_sameStation)
-    dispatch(setStationPos(_sameStation))
+    _setSameStationInfo(_sameStation);
+    dispatch(setStationPos(_sameStation));
     // [{
     //   bearing: 方位,
     //   stationName: 站點名,
@@ -35,48 +42,54 @@ function StopResultInfo() {
 
   useEffect(() => {
     _handleStationAllRoute();
-  }, [_sameStationInfo])
+  }, [_sameStationInfo]);
 
   async function _handleStationAllRoute() {
-    let _data = []
-    let _pushData = {}
+    let _data = [];
+    let _pushData = {};
     if (_sameStationInfo) {
       for (let i in _sameStationInfo) {
-        const _stationAllRoute = await getStationAllRoute(city, _sameStationInfo[i].stationUID);
+        const _stationAllRoute = await getStationAllRoute(
+          city,
+          _sameStationInfo[i].stationUID
+        );
 
         if (_stationAllRoute) {
-          let _stopsData = [] //所有站牌資料
-          let _stop = {}
+          let _stopsData = []; //所有站牌資料
+          let _stop = {};
           // _stop = {stopID , stopName, routeName, routeUID}
 
           for (let i in _stationAllRoute) {
-            const _routeDir = await getRouteDirection(city, _stationAllRoute[i].routeName)
-            // _routeDir = {_goDirection,_backDirection}  
-            const _stopEstimated = await getEstimatedTimeOfStop( //呼叫 單個站的預估站到站時間
+            const _routeDir = await getRouteDirection(
+              city,
+              _stationAllRoute[i].routeName
+            );
+            // _routeDir = {_goDirection,_backDirection}
+            const _stopEstimated = await getEstimatedTimeOfStop(
+              //呼叫 單個站的預估站到站時間
               city,
               _stationAllRoute[i].routeName,
               _stationAllRoute[i].stopID,
               _routeDir.goDirection,
               _routeDir.backDirection
-            )
-            // _stopEstimated = {_goDirection,_backDirection}  
+            );
+            // _stopEstimated = {_goDirection,_backDirection}
             _stop = {
               ..._stationAllRoute[i],
               ..._stopEstimated,
-            }
-            _stopsData.push(_stop)
+            };
+            _stopsData.push(_stop);
           }
           _pushData = {
             stationUID: _sameStationInfo[i].stationUID,
             stops: _stopsData,
-          }
-          _data.push(_pushData)
+          };
+          _data.push(_pushData);
         }
       }
-      _setStationStopsData(_data)
-      _setListData(_data[0].stops)
+      _setStationStopsData(_data);
+      _setListData(_data[0].stops);
     }
-
   }
 
   return (
@@ -85,32 +98,34 @@ function StopResultInfo() {
         <div className="px-5">
           <h2 className="text-white mb-2">公車動態</h2>
           <div className="grid gap-6 grid-flow-col justify-start">
-            {
-              _sameStationInfo ?
-                _sameStationInfo.map((station) => (
-                  <a onClick={()=>_setCode(station.index)} key={station.stationUID} className="tab-line hover:tab-line-hover">{station.code}</a>
+            {_sameStationInfo
+              ? _sameStationInfo.map((station) => (
+                  <a
+                    onClick={() => _setCode(station.index)}
+                    key={station.stationUID}
+                    className={`tab-line hover:tab-line-hover ${
+                      _code === station.index ? "tab-line-active" : ""
+                    }`}
+                  >
+                    {station.code}
+                  </a>
                 ))
-                : null
-            }
-            {/* <a className="tab-line hover:tab-line-hover tab-line-active">站牌１</a>
-            <a className="tab-line hover:tab-line-hover">站牌２</a>
-            <a className="tab-line hover:tab-line-hover">站牌３</a>
-            <a className="tab-line hover:tab-line-hover">站牌４</a> */}
+              : null}
           </div>
         </div>
         <div className="mt-4 pb-28 bg-white h-full shadow-card grid auto-rows-max overflow-scroll">
-          {_listData ?
-            _listData.map((item,i)=>(
-              <StopListItem key={i} data={item} />
-            ))
-            : <div>等我一下下</div>
-          }
-
+          {_listData ? (
+            _listData.map((item, i) => <StopListItem key={i} data={item} />)
+          ) : (
+            <div className="mt-10 mx-auto">
+              <img src={img_loading} alt="等我一下下" />
+            </div>
+          )}
         </div>
       </div>
       <div className="bg-blue-400 w-full h-48 -mt-1"></div>
     </div>
-  )
+  );
 }
 
 export default StopResultInfo;

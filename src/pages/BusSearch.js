@@ -38,9 +38,10 @@ function BusSearch() {
           <Route exact path="/bussearch/route/:city/:routename">
             <RouteResultInfo />
           </Route>
-          <Route path="/bussearch/route/:routename/detail">
+          {/* <Route path="/bussearch/route/:routename/detail">
             <RouteResultFare />
           </Route>
+          */}
           <Route path="/bussearch/stop/:city/:stopname">
             <StopResultInfo />
           </Route>

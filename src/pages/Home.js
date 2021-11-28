@@ -1,9 +1,9 @@
-import { Link, Switch, Route, NavLink } from "react-router-dom";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import { Link } from "react-router-dom";
 
 import React, { useState, useEffect } from "react";
 import getNews from "../api/newsApi";
 
-import line_blue from "../assets/img/line_blue.png";
 import HomeImage from "../assets/img/HomeImage.png";
 import Vector_blue from "../assets/img/Vector_blue.png";
 
@@ -34,7 +34,6 @@ function Home() {
           </div>
           <div className="grid grid-flow-col gap-2 auto-cols-max my-7 items-center">
             <a
-              href
               className={`home_switch_on hover:home-switch-on-hover ${
                 byRoute ? "" : "home_switch_off"
               }`}
@@ -44,7 +43,6 @@ function Home() {
             </a>
             <Line stroke="#1E659C" />
             <a
-              href
               className={`home_switch_on hover:home-switch-on-hover ${
                 !byRoute ? "" : "home_switch_off"
               }`}

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import StopListItem from "./StopListItem";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -100,7 +101,6 @@ function StopResultInfo() {
             {_sameStationInfo
               ? _sameStationInfo.map((station) => (
                   <a
-                    href
                     onClick={() => _setCode(station.index)}
                     key={station.stationUID}
                     className={`tab-line hover:tab-line-hover ${
@@ -118,7 +118,7 @@ function StopResultInfo() {
             _listData.map((item, i) => <StopListItem key={i} data={item} />)
           ) : (
             <div className="mt-10 mx-auto">
-              <img className="w-24" src={img_loading} />
+              <img src={img_loading} alt="等我一下下" />
             </div>
           )}
         </div>

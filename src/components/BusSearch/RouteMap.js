@@ -9,7 +9,7 @@ import {
 import "leaflet/dist/leaflet.css";
 import { useSelector } from "react-redux";
 import "../BusSearch/RouteMap.css";
-import { createFilledIcon, icon_location, iconBus } from "./MarkerIcon";
+import { createFilledIcon, icon_location, iconBus,iconMarker } from "./MarkerIcon";
 import location_icon from "../../assets/img/btn_location.svg";
 import useGeoLocation from "../BusSearch/useGeoLcation.js";
 import "../PlanSearch/map.css";
@@ -69,7 +69,7 @@ function RouteMap() {
       popColor = "bg-yellow-300";
       textColor = "text-yellow-300";
     } else if (data.estimateTime === "未發車") {
-      icon = createFilledIcon("gray-light", data.index + 1);
+      icon = createFilledIcon("gray-light");
       popColor = "bg-gray-300";
       textColor = "text-gray-300";
     } else {

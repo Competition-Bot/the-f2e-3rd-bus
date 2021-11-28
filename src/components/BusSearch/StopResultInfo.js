@@ -9,7 +9,7 @@ import {
   getStationAllRoute,
 } from "../../api/stopApi";
 import { setStationPos } from "../../actions/busActions";
-import { ReactComponent as Loading } from "../../assets/img/loading.svg";
+import img_loading from "../../assets/img/loading.png";
 
 function StopResultInfo() {
   const { city, stopname } = useParams();
@@ -118,7 +118,7 @@ function StopResultInfo() {
             _listData.map((item, i) => <StopListItem key={i} data={item} />)
           ) : (
             <div className="mt-10 mx-auto">
-              <Loading />
+              <img src={img_loading} />
             </div>
           )}
         </div>

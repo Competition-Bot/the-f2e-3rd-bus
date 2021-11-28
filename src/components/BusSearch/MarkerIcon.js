@@ -41,13 +41,13 @@ export const createFilledIcon = (type, value = undefined) => {
       break;
   }
 
-  return new L.DivIcon({
+  return new L.Icon({
     className: "",
-    html: `<img src=${marker} alt="" />${
+    iconUrl: `<div className="relative"><img src=${marker} alt="" />${
       value !== undefined || !isNaN(value)
         ? `<span class="text-white font-bold text-base absolute top-2.5 left-6 transform -translate-x-1/2">
           ${value}
-        </span>`
+        </span></div>`
         : ""
     }`,
     // iconSize: new L.Point(50, 50),

@@ -1,0 +1,47 @@
+[
+    {
+        "id": "558",
+        "Language": "Zh_tw",
+        "Department": "新北市政府交通局",
+        "Title": "847區試辦加開班次",
+        "NewsCategory": 1,
+        "Description": "自110年11月1日起847區路線增加試辦07：00、17：00及19：00班次，歡迎民眾多加利用搭乘。",
+        "ContactName": "新北市交通局",
+        "ContactPhone": "",
+        "PublishTime": "2021-11-26T17:00:00+08:00",
+        "StartTime": "2010-10-10T00:00:00+08:00",
+        "EndTime": "2022-01-01T00:00:00+08:00",
+        "SrcUpdateTime": "2021-11-27T01:05:20+08:00",
+        "UpdateTime": "2021-11-27T02:03:37+08:00"
+      },
+      {
+        "id": "543",
+        "Language": "Zh_tw",
+        "Department": "新北市政府交通局",
+        "Title": "林口公車轉運站10/15起試營運 新闢、調整公車路線看這邊!",
+        "NewsCategory": 1,
+        "Description": "林口公車轉運站10/15起試營運 新闢、調整公車路線看這邊!",
+        "ContactName": "新北市交通局",
+        "ContactPhone": "",
+        "PublishTime": "2021-10-12T18:00:00+08:00",
+        "StartTime": "2010-10-10T00:00:00+08:00",
+        "EndTime": "2021-12-01T00:00:00+08:00",
+        "SrcUpdateTime": "2021-11-27T01:05:20+08:00",
+        "UpdateTime": "2021-11-27T02:03:37+08:00"
+      },
+      {
+        "id": "277",
+        "Language": "Zh_tw",
+        "Department": "新北市政府交通局",
+        "Title": "新北市新闢跳蛙公車路線公告",
+        "NewsCategory": 3,
+        "Description": "1.新闢「瑞芳-南港轉運站」跳蛙公車自110年11月1日起實施。\r\n2.新闢「土城-南天母廣場」跳蛙公車自110年11月1日起實施。\r\n",
+        "ContactName": "新北市交通局",
+        "ContactPhone": "",
+        "PublishTime": "2021-09-01T16:00:00+08:00",
+        "StartTime": "2010-10-10T00:00:00+08:00",
+        "EndTime": "2030-12-31T00:00:00+08:00",
+        "SrcUpdateTime": "2021-11-27T01:05:20+08:00",
+        "UpdateTime": "2021-11-27T02:03:37+08:00"
+      }
+]

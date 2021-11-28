@@ -10,7 +10,7 @@ function NewsItem({ news }) {
                 <span className="flex items-center justify-between py-4">
                     {/* <span className=" text-gray-400 pr-5">2021/11/17</span> */}
                     <span className="truncate">
-                        <span className="text-blue-400  w-20 pr-5" >桃園</span>
+                        <span className="text-blue-400  w-20 pr-5" >{news.city}</span>
                         <span className="pr-5 ">{news.Title}</span>
                     </span>
                     <img className=" h-3 w-2" src={Vector_blue} />

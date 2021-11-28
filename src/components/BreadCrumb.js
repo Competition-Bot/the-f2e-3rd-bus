@@ -70,9 +70,10 @@ const Breadcrumbs = ({ breadcrumbs }) => (
       breadcrumb
     }) => (
       <span className="flex items-center group" key={match.url}>
-        <img className=" w-8 h-px mr-5" src={line_black}/>
+        
         <div className="bg-blue-400  group-hover:bg-opacity-75 w-3.5 h-3.5 rounded-full mr-2.5"></div>
         <NavLink className="text-blue-400 group-hover:text-opacity-75 mr-5" to={match.url}>{breadcrumb}</NavLink>
+        <img className=" w-8 h-px mr-5" src={line_black}/>
       </span>
     ))}
   </div>

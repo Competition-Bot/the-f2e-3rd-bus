@@ -51,7 +51,7 @@ export const createFilledIcon = (type, value = undefined) => {
         : ""
     }`,
     iconSize: new L.Point(50, 50),
-    iconAnchor: [20, 40],
+    // iconAnchor: [20, 40],
   });
 };
 

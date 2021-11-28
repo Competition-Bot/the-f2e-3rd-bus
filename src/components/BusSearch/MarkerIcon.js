@@ -49,7 +49,13 @@ export const createFilledIcon = (type, value = undefined) => {
   }
 
   return new L.Icon({
-    iconUrl: `<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_871_9053)"><g filter="url(#filter0_d_871_9053)"><path d="M23.4584 44.193C12.107 27.7368 10 26.0479 10 20C10 11.7157 16.7157 5 25 5C33.2843 5 40 11.7157 40 20C40 26.0479 37.893 27.7368 26.5416 44.193C25.7966 45.2691 24.2033 45.269 23.4584 44.193Z" fill="${color}"/></g></g><defs>
+    iconUrl: `<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_871_9053)">
+    <g filter="url(#filter0_d_871_9053)">
+    <path d="M23.4584 44.193C12.107 27.7368 10 26.0479 10 20C10 11.7157 16.7157 5 25 5C33.2843 5 40 11.7157 40 20C40 26.0479 37.893 27.7368 26.5416 44.193C25.7966 45.2691 24.2033 45.269 23.4584 44.193Z" fill="#1E659C"/>
+    </g>
+    </g>
+    <defs>
     <filter id="filter0_d_871_9053" x="6" y="5" width="38" height="48" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
     <feFlood flood-opacity="0" result="BackgroundImageFix"/>
     <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>

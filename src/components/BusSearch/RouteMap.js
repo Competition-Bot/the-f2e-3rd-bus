@@ -11,9 +11,27 @@ import { useSelector } from "react-redux";
 import "../BusSearch/RouteMap.css";
 import { createFilledIcon, icon_location, iconBus } from "./MarkerIcon";
 import location_icon from "../../assets/img/btn_location.svg";
+import useGeoLocation from "../BusSearch/useGeoLcation.js";
 import "../PlanSearch/map.css";
 
 function RouteMap() {
+  const location = useGeoLocation();
+  const FlyToButton = () => {
+    const map = useMap();
+    const fly = () => {
+      map.flyTo(
+        [location.coordinates.lat, location.coordinates.lng],
+        map.getZoom()
+      );
+      console.log(location.coordinates.lat, location.coordinates.lng);
+    };
+    return (
+      <button className="location" onClick={fly}>
+        <img src={location_icon} alt="location" />
+      </button>
+    );
+  };
+
   let _direction = useSelector((state) => {
     return state.busReducer.direction;
   });
@@ -124,7 +142,6 @@ function RouteMap() {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
 
-      {/* <MarkerClusterGroup> */}
       {_direction ? (
         <>
           {_goStop
@@ -153,10 +170,13 @@ function RouteMap() {
         </>
       )}
 
-      {/* </MarkerClusterGroup> */}
-      <div className="location">
-        <img src={location_icon} alt="location" />
-      </div>
+      <FlyToButton />
+      {location.loaded && !location.error && (
+        <Marker
+          icon={icon_location}
+          position={[location.coordinates.lat, location.coordinates.lng]}
+        ></Marker>
+      )}
     </MapContainer>
   );
 }

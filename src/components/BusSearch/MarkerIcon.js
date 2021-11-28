@@ -1,13 +1,6 @@
 import L from "leaflet";
-import yellow from "../../assets/img/Marker_Y.svg";
 import bus from "../../assets/img/Icon_bus.svg";
 import location from "../../assets/img/location.svg";
-
-export const iconYellow = new L.Icon({
-  iconUrl: yellow,
-  iconSize: new L.Point(30, 50),
-  iconAnchor: [15, 40],
-});
 
 export const iconBus = new L.Icon({
   iconUrl: bus,

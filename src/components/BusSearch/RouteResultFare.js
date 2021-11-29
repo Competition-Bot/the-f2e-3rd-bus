@@ -6,7 +6,6 @@ function RouteResultFare() {
   let _goStopName = useSelector((state) => state.busReducer.goStopName);
   let _backStopName = useSelector((state) => state.busReducer.backStopName);
 
-
   return (
     <div className="h-full">
       <div className="lg:px-7 md:px-16 px-3 absolute w-full h-full">

@@ -9,7 +9,7 @@ import {
 import "leaflet/dist/leaflet.css";
 import { useSelector } from "react-redux";
 import "../BusSearch/RouteMap.css";
-import { createFilledIcon, icon_location, iconBus,iconMarker } from "./MarkerIcon";
+import { createFilledIcon, icon_location, iconBus} from "./MarkerIcon";
 import location_icon from "../../assets/img/btn_location.svg";
 import useGeoLocation from "../BusSearch/useGeoLcation.js";
 import "../PlanSearch/map.css";

@@ -14,23 +14,25 @@ import location_icon from "../../assets/img/btn_location.svg";
 import useGeoLocation from "../BusSearch/useGeoLcation.js";
 import "../PlanSearch/map.css";
 
+
 function RouteMap() {
+  
   const location = useGeoLocation();
   const FlyToButton = () => {
     const map = useMap();
     const fly = () => {
-      map.flyTo(
-        [location.coordinates.lat, location.coordinates.lng],
-        map.getZoom()
-      );
-      console.log(location.coordinates.lat, location.coordinates.lng);
-    };
-    return (
-      <button className="location" onClick={fly}>
-        <img src={location_icon} alt="location" />
-      </button>
-    );
-  };
+      map.flyTo([location.coordinates.lat, location.coordinates.lng], map.getZoom());
+      console.log(location.coordinates.lat, location.coordinates.lng)
+    }
+    return <button className="location" onClick={fly}><img src={location_icon} alt="location" /></button>
+  }
+  const ChangeMap = () => {
+    const map = useMap();
+    if(buslist.length > 0){
+        map.fitBounds(buslist)
+      }
+      return null
+}
 
   let _direction = useSelector((state) => {
     return state.busReducer.direction;
@@ -171,6 +173,7 @@ function RouteMap() {
       )}
 
       <FlyToButton />
+      <ChangeMap />
       {location.loaded && !location.error && (
         <Marker
           icon={icon_location}

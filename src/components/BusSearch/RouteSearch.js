@@ -1,11 +1,11 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { setCity } from "../../actions/busActions";
+import { setCity, setStopEstimatedTime, setBusRealTime } from "../../actions/busActions";
 import Select from "react-select";
 import { getCityAllRoute } from "../../api/routeApi";
 import AllCity from "../../Json/City.json";
-
+import {useEffect} from 'react'
 const BusSearchBar = () => {
   let location = useLocation();
   const dispatch = useDispatch();
@@ -15,6 +15,22 @@ const BusSearchBar = () => {
   const [_routesData, _setRoutesData] = useState([]);
 
   const [step, setstep] = useState(1);
+
+  useEffect(() => {
+    console.log('render')
+    dispatch(
+      setStopEstimatedTime(
+        undefined,
+        undefined
+      )
+    );
+    dispatch(
+      setBusRealTime(
+        undefined,
+        undefined,
+      )
+    );
+  }, [])
 
   async function _handleCitySelected(_cityOption) {
     _setRoutesData([]);

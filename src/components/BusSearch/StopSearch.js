@@ -1,10 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useState} from "react";
+import { useState, useEffect} from "react";
 import Select from "react-select";
 import AllCity from "../../Json/City.json";
 import { getCityAllStation } from "../../api/stopApi";
-import { setCity,setStation } from "../../actions/busActions";
+import { setCity,setStation, setStationPos } from "../../actions/busActions";
 
 function StopSearch() {
   let location = useLocation();
@@ -13,6 +13,12 @@ function StopSearch() {
   const [_stationName, _setStationName] = useState("");
   const [step, setstep] = useState(1);
   const dispatch = useDispatch();
+  useEffect(() => {
+    console.log('render')
+    dispatch(
+      setStationPos(null)
+    )
+  }, [])
 
   function _handleCitySelected(_cityOption) {
     dispatch(setCity(_cityOption.value));

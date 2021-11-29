@@ -8,6 +8,8 @@ import map_marker from '../../assets/img/map-marker-alt.svg'
 import { icon_location ,createFilledIcon } from './MarkerIcon';
 import useGeoLocation from '../BusSearch/useGeoLcation.js'
 import { map } from "leaflet";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 let buslist = [];
 
@@ -79,7 +81,7 @@ const _renderMarker = ({ data }) => {
 
 
 function StopMap() {
-   
+    let params = useParams()
     const location = useGeoLocation();
     const FlyToButton = () => {
         const map = useMap();
@@ -90,7 +92,9 @@ function StopMap() {
         }
         return <button className="location" onClick={fly}><img src={location_icon} alt="location" /></button>
     }
-    
+    useEffect(() => {
+     console.log(params)
+    }, [params])
 
     let stationData = useSelector((state) => {
         console.log(state.busReducer.stationData)

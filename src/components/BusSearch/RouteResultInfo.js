@@ -19,7 +19,7 @@ import {
 function RouteResultInfo() {
   const dispatch = useDispatch();
   const [_go, _setGo] = useState(true)
-  const [_getEstimateData, _setEstimateData] = useState(false)
+  //const [_getEstimateData, _setEstimateData] = useState(false)
   const { city, routename } = useParams();
 
   let _goRoute = useSelector((state) => {
@@ -29,16 +29,30 @@ function RouteResultInfo() {
   let _backRoute = useSelector((state) => state.busReducer.backRouteEstimatedTime);
   let _goStopName = useSelector((state) => state.busReducer.goStopName);
   let _backStopName = useSelector((state) => state.busReducer.backStopName);
-  let times = 0
   const [_time, _setTime] = useState(0);
   const [_update, _setUpdate] = useState(true);
 
   useEffect(() => {
+    clockTime() // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_time]) 
+
+  useEffect(() => {
+    _handleRouteInfo();
+    _handleEstimatedTimeOfRoute();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_update])
+
+  useEffect(() => {
+    _handleStopAPI();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_goRoute])
+
+  function clockTime() {
     let _clockTime = setInterval(() => {
 
       _setTime(_time + 1)
       if (_time % 60 === 0) {
-        _setUpdate(!_update)
+        _setUpdate(!_update)// eslint-disable-next-line react-hooks/exhaustive-deps
       }
     }, 1000)
 
@@ -46,16 +60,7 @@ function RouteResultInfo() {
     return () => {
       clearInterval(_clockTime);
     }
-  }, [_time])
-
-  useEffect(() => {
-    _handleRouteInfo();
-    _handleEstimatedTimeOfRoute();
-  }, [_update])
-
-  useEffect(() => {
-    _handleStopAPI();
-  }, [_goRoute])
+  }
 
   function _changeRoute() {
     if (_goStopName && _backStopName) {
@@ -97,7 +102,7 @@ function RouteResultInfo() {
           _estimatedRouteData.backRoute
         )
       );
-      _setEstimateData(true);
+      //_setEstimateData(true);
     }
     if (_realTimeData) {
       dispatch(
@@ -131,7 +136,7 @@ function RouteResultInfo() {
         };
       }
       );
-      
+
       _backRoute.forEach((item, index) => {
         _backStopData[index] = {
           ..._backStopData[index],

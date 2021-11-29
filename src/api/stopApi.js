@@ -57,7 +57,7 @@ export const getSearchStation = async (_city, _stationName) => {
         let _url = `${baseUrl}/Station/City/${_city}?$filter=StationName/Zh_tw eq '${_stationName}'&$format=JSON`;
         let _result = await axios.get(_url);
 
-        _result.data.forEach((item,index) => {
+        _result.data.forEach((item, index) => {
             switch (item.Bearing) {
                 case "E":
                     _bearing = "向東"
@@ -96,7 +96,7 @@ export const getSearchStation = async (_city, _stationName) => {
                     item.StationPosition.PositionLon
                 ],
                 index: index,
-                code: `站牌${index+1}`
+                code: `站牌${index + 1}`
             }
             _data.push(_stationData)
         })
@@ -111,10 +111,9 @@ export const getSearchStation = async (_city, _stationName) => {
 export const getStationAllRoute = async (_city, _stationUID) => {
     let _data = [] // 最後回傳所有資料
     let _stopData = {} // 單個站牌資料
-    let Stops = [] // 暫存Stops用
 
     let _url = `${baseUrl}/Station/City/${_city}?$filter=StationUID eq '${_stationUID}'&$format=JSON`;
-    
+
     let _result = await axios.get(_url);
     _result.data[0].Stops.forEach((item) => {
         _stopData = {
@@ -149,53 +148,27 @@ export const getRouteDirection = async (_city, _routeName) => {
 
 
 //城市所有站牌
-export const getCityAllStation = async (city,value) => {
+export const getCityAllStation = async (city, value) => {
     try {
         let _data = []
+        let _stopName = []
         let _stopData = {}
-        let _bearing = ""
         let _url = `${baseUrl}/Station/City/${city}?$filter=contains(StationName/Zh_tw,'${value}')&$format=JSON`;
         let _result = await axios.get(_url);
-        if(_result.data)
-            {
+        if (_result.data) {
             _result.data.forEach((item) => {
-                switch (item.Bearing) {
-                    case "E":
-                        _bearing = "向東"
-                        break;
-                    case "W":
-                        _bearing = "向西"
-                        break;
-                    case "S":
-                        _bearing = "向南"
-                        break;
-                    case "N":
-                        _bearing = "向北"
-                        break;
-                    case "SE":
-                        _bearing = "向東南"
-                        break;
-                    case "NE":
-                        _bearing = "向東北"
-                        break;
-                    case "SW":
-                        _bearing = "向西南"
-                        break;
-                    case "NW":
-                        _bearing = "向西北"
-                        break;
-    
-                    default:
-                        break;
+                const found = _stopName.find(e => e === item.StationName.Zh_tw)
+                if (!found) {
+                    _stopData = {
+                        stationDes: item.StationName.Zh_tw,
+                        stationName: item.StationName.Zh_tw,
+                    }
+                    _data.push(_stopData)
+                    _stopName.push(item.StationName.Zh_tw)
                 }
-                _stopData = {
-                    stationDes: item.StationName.Zh_tw + "  (" + _bearing + ")",
-                    stationName: item.StationName.Zh_tw,
-                }
-                _data.push(_stopData)
             })
             return _data;
-        }   
+        }
 
     } catch (err) {
         console.log(err)

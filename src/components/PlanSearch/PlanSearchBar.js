@@ -33,7 +33,7 @@ const IconOption = (props) => (
 
 function PlanSearchBar() {
   const [step, setstep] = useState(1);
-  const [inputStart, setinputStart] = useState(options.start[0].value);
+  //const [inputStart, setinputStart] = useState(options.start[0].value);
   const [inputEnd, setinputEnd] = useState(options.end[0].value);
 
   function _handleStartSelected(_startOption) {
@@ -41,7 +41,7 @@ function PlanSearchBar() {
       if (inputEnd === "Unselected") setstep(2);
       else setstep(3);
     } else setstep(1);
-    setinputStart(_startOption.value);
+    //setinputStart(_startOption.value);
   }
 
   function _handleEndSelected(_endOption) {
@@ -60,7 +60,7 @@ function PlanSearchBar() {
           <h2 className="text-white">路線規劃</h2>
         </div>
         <div className="mt-5 bg-white h-full shadow-card md:pt-8 pt-6 grid auto-rows-max items-start justify-center gap-6">
-          <div className="grid grid-rows-2 justify-start gap-x-6 gap-y-4 items-center">
+          <div className="grid grid-rows-2 justify-start md:gap-x-6 gap-x-1 gap-y-4 items-center">
             <div
               className={`step-circle ${
                 step === 1 ? "step-circle-active" : ""
@@ -77,7 +77,7 @@ function PlanSearchBar() {
               onChange={_handleStartSelected}
             />
           </div>
-          <div className="grid grid-rows-2 justify-start gap-x-6 gap-y-4 items-center">
+          <div className="grid grid-rows-2 justify-start md:gap-x-6 gap-x-1 gap-y-4 items-center">
             <div
               className={`step-circle ${
                 step === 2 ? "step-circle-active" : ""
@@ -94,7 +94,7 @@ function PlanSearchBar() {
               onChange={_handleEndSelected}
             />
           </div>
-          <div className="grid grid-rows-2 justify-start gap-x-6 gap-y-4 items-center">
+          <div className="grid grid-rows-2 justify-start md:gap-x-6 gap-x-1 gap-y-4 items-center">
             <div
               className={`step-circle step-circle-dash ${
                 step === 3 ? "step-circle-dash-active" : ""

@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 
 import line_black from "../assets/img/line_black.png";
-import Vector_blue_left from "../assets/img/Vector_blue_left.png";
+//import Vector_blue_left from "../assets/img/Vector_blue_left.png";
 
 // function Breadcrumb({ breadcrumbs, location: { pathname } }) {
 //   console.log(breadcrumbs);

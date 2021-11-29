@@ -70,7 +70,7 @@ function PlanDetail() {
         list.push(
           <div
             key={"plandetail" + idx}
-            className="relative grid grid-flow-col auto-cols-max gap-4"
+            className="relative grid grid-flow-col auto-cols-max gap-4 lg:max-w-none max-w-82"
           >
             <div className="h-full w-max flex items-center justify-center">
               <div className="border-l-2 border-blue-300 h-full absolute z-0"></div>
@@ -95,7 +95,7 @@ function PlanDetail() {
         list.push(
           <div
             key={"plandetail" + idx}
-            className="relative grid grid-flow-col auto-cols-max gap-4"
+            className="relative grid grid-flow-col auto-cols-max gap-4 lg:max-w-none max-w-82"
           >
             <div className="h-full w-max flex items-center justify-center">
               <div className="border-l-2 border-blue-300 h-full absolute z-0"></div>
@@ -157,7 +157,7 @@ function PlanDetail() {
             </div>
           </div>
           <div className="mt-4 pt-4 pb-28 px-4 bg-white h-full shadow-card grid auto-rows-max">
-            <div className="relative grid grid-flow-col auto-cols-max gap-4">
+            <div className="relative grid grid-flow-col auto-cols-max gap-4 lg:max-w-none max-w-82">
               <div className="h-full w-max flex items-center justify-center">
                 <div className="border-l-2 border-blue-300 h-full absolute z-0"></div>
                 <div className="rounded-full w-4 h-4 bg-blue-300 z-10"></div>
@@ -168,7 +168,7 @@ function PlanDetail() {
               </div>
             </div>
             {_renderPlanDetail()}
-            <div className="relative grid grid-flow-col auto-cols-max gap-4">
+            <div className="relative grid grid-flow-col auto-cols-max gap-4 lg:max-w-none max-w-82">
               <div className="h-full w-max flex items-center justify-center">
                 <div className="border-l-2 border-blue-300 h-full absolute z-0"></div>
                 <div className="rounded-full w-4 h-4 bg-blue-300 z-10"></div>

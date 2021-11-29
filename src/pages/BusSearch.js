@@ -16,7 +16,7 @@ function BusSearch() {
   };
 
   return (
-    <div className="search content-full">
+    <div className="search content-full md:min-h-600">
       <BreadCrumbSearch />
       <div
         className={`z-10 relative w-full h-full bg-blue-200 lg:order-none order-2 overflow-hidden lg:row-auto ${

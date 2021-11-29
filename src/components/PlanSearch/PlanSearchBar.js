@@ -60,7 +60,7 @@ function PlanSearchBar() {
           <h2 className="text-white">路線規劃</h2>
         </div>
         <div className="mt-5 bg-white h-full shadow-card md:pt-8 pt-6 grid auto-rows-max items-start justify-center gap-6">
-          <div className="grid grid-rows-2 justify-start md:gap-x-6 gap-x-3 gap-y-4 items-center">
+          <div className="grid grid-rows-2 justify-start md:gap-x-6 gap-x-1 gap-y-4 items-center">
             <div
               className={`step-circle ${
                 step === 1 ? "step-circle-active" : ""
@@ -77,7 +77,7 @@ function PlanSearchBar() {
               onChange={_handleStartSelected}
             />
           </div>
-          <div className="grid grid-rows-2 justify-start md:gap-x-6 gap-x-3 gap-y-4 items-center">
+          <div className="grid grid-rows-2 justify-start md:gap-x-6 gap-x-1 gap-y-4 items-center">
             <div
               className={`step-circle ${
                 step === 2 ? "step-circle-active" : ""
@@ -94,7 +94,7 @@ function PlanSearchBar() {
               onChange={_handleEndSelected}
             />
           </div>
-          <div className="grid grid-rows-2 justify-start md:gap-x-6 gap-x-3 gap-y-4 items-center">
+          <div className="grid grid-rows-2 justify-start md:gap-x-6 gap-x-1 gap-y-4 items-center">
             <div
               className={`step-circle step-circle-dash ${
                 step === 3 ? "step-circle-dash-active" : ""

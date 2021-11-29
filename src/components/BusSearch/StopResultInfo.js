@@ -20,14 +20,20 @@ function StopResultInfo() {
   const [_listData, _setListData] = useState();
   const dispatch = useDispatch();
   useEffect(() => {
-    _handleSearch();
+    _handleSearch(); 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stopname]);
 
   useEffect(() => {
+    _handleSetStopsData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_code]);
+
+  function  _handleSetStopsData(){
     if (_stationStopsData) {
       _setListData(_stationStopsData[_code].stops);
     }
-  }, [_code]);
+  }
 
   async function _handleSearch() {
     const _sameStation = await getSearchStation(city, stopname);
@@ -42,6 +48,7 @@ function StopResultInfo() {
 
   useEffect(() => {
     _handleStationAllRoute();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [_sameStationInfo]);
 
   async function _handleStationAllRoute() {
@@ -87,7 +94,7 @@ function StopResultInfo() {
           _data.push(_pushData);
         }
       }
-      _setStationStopsData(_data);
+      _setStationStopsData(_data); 
       _setListData(_data[0].stops);
     }
   }
@@ -96,7 +103,7 @@ function StopResultInfo() {
     <div className="h-full">
       <div className="lg:px-7 md:px-16 px-3 absolute w-full h-full">
         <div className="px-5">
-          <h2 className="text-white mb-2">公車動態</h2>
+          <h2 className="text-white mb-2">{stopname}</h2>
           <div className="grid gap-6 grid-flow-col justify-start">
             {_sameStationInfo
               ? _sameStationInfo.map((station) => (

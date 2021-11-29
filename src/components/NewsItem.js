@@ -13,7 +13,7 @@ function NewsItem({ news }) {
                         <span className="text-blue-400  w-20 pr-5" >{news.city}</span>
                         <span className="pr-5 hover:text-blue-400">{news.Title}</span>
                     </span>
-                    <img className=" h-3 w-2" src={Vector_blue} />
+                    <img alt="" className=" h-3 w-2" src={Vector_blue} />
                 </span>
             </ul>
         </Link>

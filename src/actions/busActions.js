@@ -5,9 +5,18 @@ import {
     SET_STOP_ESTIMATEDTIME,
     SET_BUS_REALTIME,
     SET_STATION_POS,
-    SET_ROUTE_DIRECTION
+    SET_ROUTE_DIRECTION,
+    SET_STATION
 } from '../utils/actionType/BusActionType'
 
+export function setStation(_name) {
+    return {
+        type: SET_STATION,
+        payload: {
+            stationName: _name
+        }
+    }
+}
 
 export function setCity(_city) {
 

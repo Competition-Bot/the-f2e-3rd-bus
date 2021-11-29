@@ -172,11 +172,11 @@ function RouteResultInfo() {
           </h2>
           <div className="grid gap-6 grid-flow-col justify-start relative">
             {_goStopName ?
-              <a href="/#" onClick={_changeRoute} className={`tab-line hover:tab-line-hover ${_go ? "tab-line-active" : ''}`}>往{_goStopName}</a>
+              <a onClick={_changeRoute} className={`tab-line hover:tab-line-hover ${_go ? "tab-line-active" : ''}`}>往{_goStopName}</a>
               : null}
 
             {_backStopName ?
-              <a href="/#" onClick={_changeRoute} className={`tab-line hover:tab-line-hover ${!_go ? "tab-line-active" : ''}`}>往{_backStopName}</a>
+              <a onClick={_changeRoute} className={`tab-line hover:tab-line-hover ${!_go ? "tab-line-active" : ''}`}>往{_backStopName}</a>
               : null}
 
             {/* <div className="tab-line text-white absolute right-0">

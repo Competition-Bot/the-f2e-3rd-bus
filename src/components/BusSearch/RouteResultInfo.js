@@ -33,8 +33,18 @@ function RouteResultInfo() {
   const [_update, _setUpdate] = useState(true);
 
   useEffect(() => {
-    clockTime() // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [_time]) 
+    let _clockTime = setInterval(() => {
+      _setTime(_time + 1)
+      if (_time % 60 === 0) {
+        _setUpdate(!_update)// eslint-disable-next-line react-hooks/exhaustive-deps
+      }
+    }, 1000)
+
+    //Clean up can be done like this
+    return () => {
+      clearInterval(_clockTime);
+    }
+  }, [_time])
 
   useEffect(() => {
     _handleRouteInfo();
@@ -46,21 +56,6 @@ function RouteResultInfo() {
     _handleStopAPI();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [_goRoute])
-
-  function clockTime() {
-    let _clockTime = setInterval(() => {
-
-      _setTime(_time + 1)
-      if (_time % 60 === 0) {
-        _setUpdate(!_update)// eslint-disable-next-line react-hooks/exhaustive-deps
-      }
-    }, 1000)
-
-    //Clean up can be done like this
-    return () => {
-      clearInterval(_clockTime);
-    }
-  }
 
   function _changeRoute() {
     if (_goStopName && _backStopName) {

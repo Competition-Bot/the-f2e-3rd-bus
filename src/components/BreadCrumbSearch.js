@@ -57,7 +57,7 @@ return (
       </Route>
       <Route exact path="/bussearch/stop/:city/:stopname">
         <NavLink
-          to="/bussearch"
+          to="/bussearch/stop"
           className="text-white grid grid-flow-col md:gap-3 gap-2 items-center justify-start"
         >
           <CircleArrow alt="circle" />

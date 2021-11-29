@@ -34,7 +34,6 @@ function RouteResultInfo() {
 
   useEffect(() => {
     let _clockTime = setInterval(() => {
-      console.log(_time)
       _setTime(_time + 1)
       if (_time % 60 === 0) {
         _setUpdate(!_update)// eslint-disable-next-line react-hooks/exhaustive-deps

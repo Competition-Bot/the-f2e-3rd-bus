@@ -49,7 +49,7 @@ body {
   }
   .content-full {
     height: calc(100vh - theme("height.header"));
-    /* min-height: 600px; */
+    min-height: 600px;
   }
 }
 
@@ -165,7 +165,7 @@ body {
   .max-w-628 {
     max-width: 628px;
   }
-  .min-h-600 {
-    min-height: 600px;
+  .max-w-82 {
+    max-width: 82%;
   }
 }
